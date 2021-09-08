@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="UkTransmitter.Wpf.FrontEnd.Loader.LoaderControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:handyControls="https://handyorg.github.io/handycontrol"
+             xmlns:Converters="clr-namespace:UkTransmitter.Wpf.FrontEnd.Converters"
+             Background="Transparent"
+             mc:Ignorable="d">
+
+    <Border 
+        Background="WhiteSmoke"
+        BorderThickness="2"
+        Visibility="{Binding IsLoadingState, Converter= {Converters:BooleanToVisibilityConverter} }">
+        
+        <handyControls:CircleProgressBar
+            Value="{Binding LoadingValue}"
+            Maximum="100"
+            Minimum="0"
+            Foreground="#FF563380" />
+        
+    </Border>
+
+</UserControl>

@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{46F7E4C8-4C6C-4A4A-BAE2-C0C710E68626}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UkTransmitter.DIContainer</RootNamespace>
+    <AssemblyName>UkTransmitter.DIContainer</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.4.4.1\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor, Version=5.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Windsor.5.1.1\lib\net45\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configuration\DependencyFabric.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UkTransmitter.AuthModule\UkTransmitter.AuthModule.csproj">
+      <Project>{BC22221A-9EEE-42C0-BB75-6958F6863F51}</Project>
+      <Name>UkTransmitter.AuthModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UkTransmitter.EmailModule\UkTransmitter.EmailModule.csproj">
+      <Project>{F4486F19-D545-4B40-B8C9-8A20323EB1FA}</Project>
+      <Name>UkTransmitter.EmailModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UkTransmitter.FileModule\UkTransmitter.FileModule.csproj">
+      <Project>{66FB9A78-CAA0-49BB-A377-3D7D348578E7}</Project>
+      <Name>UkTransmitter.FileModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UkTransmitter.Infrastructure\UkTransmitter.Infrastructure.csproj">
+      <Project>{81C9F97E-3B68-42F7-8040-2D4710203AD8}</Project>
+      <Name>UkTransmitter.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UkTransmitter.LogModule\UkTransmitter.LogModule.csproj">
+      <Project>{1D860FA0-574B-4DE7-9929-EB1DA26D7C7C}</Project>
+      <Name>UkTransmitter.LogModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UkTransmitter.SpeechModule\UkTransmitter.SpeechModule.csproj">
+      <Project>{B83D7098-58E9-4D70-9345-D9EE0C23A7A1}</Project>
+      <Name>UkTransmitter.SpeechModule</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

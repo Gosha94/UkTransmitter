@@ -1,0 +1,90 @@
+﻿<Window x:Class="UkTransmitter.Wpf.FrontEnd.ApplicationPages.Main.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mainContentControl="clr-namespace:UkTransmitter.Wpf.FrontEnd.ApplicationPages.Main.MainContentControl"
+        xmlns:Loader="clr-namespace:UkTransmitter.Wpf.FrontEnd.Loader"
+        xmlns:handyControls="https://handyorg.github.io/handycontrol"
+        mc:Ignorable="d"
+        Title="UkTransmitter" Height="450" Width="800"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    
+    <Grid Background="#FF222222">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Header -->
+        
+        <Border
+            Background="#273747"
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            >
+            
+            <Button
+                HorizontalAlignment="Right"
+                Margin="3"
+                Content="X"
+                Style="{StaticResource ButtonDanger}"
+                Command="{Binding CloseApplicationCommand}"
+                />
+            
+        </Border>
+        
+        <!-- End Header -->
+        
+        
+        <Loader:LoaderControl            
+            Grid.Column="1"
+            Grid.Row="1"            
+            Grid.RowSpan="3"
+            DataContext="{Binding Loader}" />
+        
+        <StackPanel
+            VerticalAlignment="Stretch"            
+            Grid.RowSpan="3"
+            Grid.Column="0"
+            Grid.Row="1"/>
+
+        <handyControls:SideMenu
+            Grid.Column="0"
+            Grid.Row="1"
+            Grid.RowSpan="3"
+            BorderThickness="0"
+            handyControls:Theme.Skin="Dark"
+            IsEnabled="{Binding ContentIsBusy}" >
+            
+            <handyControls:SideMenuItem
+                Header="Send Data To Uk"
+                Style="{StaticResource SideMenuItemBaseStyle}"
+                Command="{Binding GoToSendDataCommand}"
+                CommandParameter="{Binding Header, RelativeSource={RelativeSource Self}}"
+                />
+
+            <handyControls:SideMenuItem
+                Header="Graphs"
+                Style="{StaticResource SideMenuItemBaseStyle}"
+                Command="{Binding GoToGraphsCommand}"
+                CommandParameter="{Binding Header, RelativeSource={RelativeSource Self}}"
+                />
+
+        </handyControls:SideMenu>
+
+        <mainContentControl:MainContentControl Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Content="{Binding CurrentPageViewModel}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+
+    </Grid>
+
+</Window>
+
+    

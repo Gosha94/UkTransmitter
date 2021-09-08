@@ -1,0 +1,14 @@
+﻿<basePage:BaseUserControl 
+    x:Class="UkTransmitter.Wpf.FrontEnd.ApplicationPages.SendData.SendDataPageControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:basePage="clr-namespace:UkTransmitter.Wpf.FrontEnd.ApplicationPages.BasePage"
+    mc:Ignorable="d">
+
+    <Grid>
+        <Label Content=" This is SendData Control!" Foreground="YellowGreen" FontSize="36" Style="{StaticResource BaseStyle}"/>        
+    </Grid>
+
+</basePage:BaseUserControl>

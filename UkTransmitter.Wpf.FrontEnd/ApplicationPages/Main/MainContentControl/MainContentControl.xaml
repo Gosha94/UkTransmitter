@@ -1,0 +1,29 @@
+﻿<basePage:BaseUserControl
+    x:Class="UkTransmitter.Wpf.FrontEnd.ApplicationPages.Main.MainContentControl.MainContentControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:basePage="clr-namespace:UkTransmitter.Wpf.FrontEnd.ApplicationPages.BasePage"
+    xmlns:Auth="clr-namespace:UkTransmitter.Wpf.FrontEnd.ApplicationPages.Auth"
+    xmlns:SendData="clr-namespace:UkTransmitter.Wpf.FrontEnd.ApplicationPages.SendData"
+    xmlns:Graph="clr-namespace:UkTransmitter.Wpf.FrontEnd.ApplicationPages.Graph"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+
+        <DataTemplate DataType="{x:Type Auth:AuthPageViewModel}">
+            <Auth:AuthPageControl />
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type SendData:SendDataPageViewModel}">
+            <SendData:SendDataPageControl />
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type Graph:GraphPageViewModel}">
+            <Graph:GraphPageControl />
+        </DataTemplate>
+        
+    </UserControl.Resources>
+    
+</basePage:BaseUserControl>

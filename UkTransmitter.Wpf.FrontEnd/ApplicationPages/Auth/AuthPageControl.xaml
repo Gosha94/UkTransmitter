@@ -1,0 +1,124 @@
+﻿<basePage:BaseUserControl
+    x:Class="UkTransmitter.Wpf.FrontEnd.ApplicationPages.Auth.AuthPageControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:basePage="clr-namespace:UkTransmitter.Wpf.FrontEnd.ApplicationPages.BasePage"    
+    mc:Ignorable="d"
+    Width="400" Height="400">
+
+    <Grid Margin="4" Background="Transparent">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1 *"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.5*"/>
+        </Grid.RowDefinitions>
+
+        <Border
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="3">
+            
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding AuthStatus}" Value="true">
+                        <Setter Property="Background" Value="ForestGreen"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding AuthStatus}" Value="false">
+                        <Setter Property="Background" Value="Tomato"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding IsAuthMessageReceived}" Value="true">
+                        <Setter Property="Visibility" Value="Visible" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding IsAuthMessageReceived}" Value="false">
+                        <Setter Property="Visibility" Value="Hidden" />
+                    </DataTrigger>
+                </Style.Triggers>
+                </Style>
+            </Border.Style>
+
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Content="{Binding AuthMessage}"
+                Background="Transparent"
+                Foreground="Black"
+                FontWeight="Bold"
+                FontSize="14"
+                Style="{StaticResource BaseStyle}" />
+
+        </Border>
+        
+        <Label
+            Content="Login:"
+            Background="Transparent"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Left"
+            FontSize="24"
+            Grid.Row="1"
+            Grid.Column="0"
+            Foreground="WhiteSmoke"
+            Style="{StaticResource BaseStyle}" />
+        
+        <Label
+            Content="Password:"
+            Background="Transparent"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Left"
+            FontSize="24"
+            Grid.Row="2"
+            Grid.Column="0"
+            Foreground="WhiteSmoke"
+            Style="{StaticResource BaseStyle}" />        
+
+        <TextBox
+            FontSize="20"
+            Grid.Row="1"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Margin="40"
+            Background="Transparent"
+            Foreground="WhiteSmoke"
+            BorderThickness="1"
+            Style="{StaticResource TextBoxExtend}"
+            />
+        
+        <PasswordBox
+            FontSize="20"
+            Grid.Row="2"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Margin="40"
+            Background="Transparent"
+            Foreground="WhiteSmoke"
+            />
+
+        <Button
+            FontSize="14"
+            Grid.Row="3"
+            Content="Авторизоваться"
+            Foreground="WhiteSmoke"
+            FontWeight="Bold"
+            Grid.Column="1"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            BorderThickness="1"
+            Margin="0.5"
+            Background="Transparent"
+            Command="{Binding LogInCommand}"
+            />
+
+    </Grid>
+    
+</basePage:BaseUserControl>
