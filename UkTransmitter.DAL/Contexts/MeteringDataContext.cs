@@ -3,12 +3,12 @@ using UkSender.CommonLibrary.Models;
 
 namespace UkSender.DAL
 {
-    public class MSSQLContext : DbContext
+    public class MeteringDataContext : DbContext
     {
         /// <summary>
         /// Контекст-подключение к БД, связано с подключением в App.config
         /// </summary>
-        public MSSQLContext() : base(@"data source=.\SQLSERVER;Initial Catalog=UkSender; Integrated Security = True;")
+        public MeteringDataContext() : base(@"data source=.\SQLSERVER;Initial Catalog=UkSender; Integrated Security = True;")
         { }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace UkSender.DAL
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            Database.SetInitializer<MSSQLContext>(null);
+            Database.SetInitializer<MeteringDataContext>(null);
             base.OnModelCreating(modelBuilder);
         }
     }

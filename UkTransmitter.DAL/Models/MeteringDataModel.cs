@@ -4,6 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UkSender.CommonLibrary.Models
 {
+    /// <summary>
+    /// Модель счетчика в БД
+    /// </summary>
     #if DEBUG
     [Table("dataUk.MeteringData_Test")]
     #endif
@@ -14,10 +17,14 @@ namespace UkSender.CommonLibrary.Models
     {
         [Key]
         public int Id { get; set; }
+
         public int MeteringDeviceType { get; set; }
+
         public string Value { get; set; }
-        [Column(TypeName = "datetime2")]
+        
+        [Column(TypeName = "datetime2")]        
         public DateTime CombineDtm { get; set; }
+
         [Column(TypeName = "datetime2")]
         public DateTime SendDtm { get; set; }
     }

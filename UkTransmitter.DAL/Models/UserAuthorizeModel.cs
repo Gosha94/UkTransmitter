@@ -3,6 +3,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UkSender.CommonLibrary.Models
 {
+
+    /// <summary>
+    /// Модель данных авторизации пользователей в БД
+    /// </summary>
     [Table("tUsers", Schema = "dataUk")]
     public class UserAuthorizeModel
     {

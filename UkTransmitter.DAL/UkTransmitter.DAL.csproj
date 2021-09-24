@@ -54,9 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Config\ConnectionStringModel.cs" />
-    <Compile Include="Contexts\MSSQLContext.cs" />
-    <Compile Include="Contexts\PostgreContext.cs" />
+    <Compile Include="Contexts\MeteringDataContext.cs" />
     <Compile Include="DataAccess\DbLoader.cs" />
     <Compile Include="Models\ConnectionStringModel.cs" />
     <Compile Include="Models\DataForUkModel.cs" />
@@ -65,9 +63,7 @@
     <Compile Include="Models\UserAuthorizeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\Dto\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

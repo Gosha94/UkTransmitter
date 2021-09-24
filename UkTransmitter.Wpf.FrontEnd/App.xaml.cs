@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using UkTransmitter.DIContainer.Configuration;
+using UkTransmitter.Infrastructure.ModuleContracts;
 using UkTransmitter.Wpf.FrontEnd.ApplicationPages.Main;
 
 namespace UkTransmitter.Wpf.FrontEnd
@@ -14,10 +15,17 @@ namespace UkTransmitter.Wpf.FrontEnd
         {
             base.OnStartup(e);
 
+            //var diFabric = new DependencyFabric();
+            //diFabric.RegisterAllScopesInApp();
+
+            //IAuthService authServ = diFabric.GetAuthService();
+            //authServ.GoAuth();
+
             var mainPage = new MainWindow();
             var dataContext = new MainWindowViewModel();
             mainPage.DataContext = dataContext;
             mainPage.Show();
+
         }
     }
 }

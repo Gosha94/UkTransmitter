@@ -8,11 +8,7 @@ namespace UkTransmitter.BackEnd
     {
         static void Main()
         {
-            var diFabric = new DependencyFabric();
-            diFabric.RegisterAllScopesInApp();
-
-            IAuthService authServ = diFabric.GetAuthService();
-            authServ.GoAuth();
+            
 
             Console.WriteLine();
             Console.ReadKey();

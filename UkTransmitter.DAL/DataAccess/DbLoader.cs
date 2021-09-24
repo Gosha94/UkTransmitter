@@ -11,12 +11,12 @@ namespace UkSender.DAL.DataAccess
         
         #region Свойство строки подключения
 
-        private static string _postgreConnectionString;
-        public static string PostgreConnectionString
-        {
-            get => _postgreConnectionString;
-            set { _postgreConnectionString = value; }
-        }
+        //private static string _postgreConnectionString;
+        //public static string PostgreConnectionString
+        //{
+        //    get => _postgreConnectionString;
+        //    set { _postgreConnectionString = value; }
+        //}
 
         #endregion
 
@@ -40,7 +40,7 @@ namespace UkSender.DAL.DataAccess
         {
             try
             {
-                using (MSSQLContext selectConStrContext = new MSSQLContext())
+                using (MeteringDataContext selectConStrContext = new MeteringDataContext())
                 {
                     // Делаем выборку
                     return selectConStrContext.ConnectionString.Where(x => x.ConnectionName == connectName).First();
@@ -61,7 +61,7 @@ namespace UkSender.DAL.DataAccess
         {
             try
             {
-                using (MSSQLContext db = new MSSQLContext())
+                using (MeteringDataContext db = new MeteringDataContext())
                 {
                     //db.Database.Connection.Open();
 
@@ -94,7 +94,7 @@ namespace UkSender.DAL.DataAccess
         {
             try
             {
-                using (MSSQLContext context = new MSSQLContext())
+                using (MeteringDataContext context = new MeteringDataContext())
                 {
                     var emailData = context.EmailData.First();
                     //LogWriter.LogWrite(" Данные для отправки email получены из БД.", "log.txt");
@@ -139,7 +139,7 @@ namespace UkSender.DAL.DataAccess
         {
             try
             {
-                using (MSSQLContext selectCont = new MSSQLContext())
+                using (MeteringDataContext selectCont = new MeteringDataContext())
                 {
                     var result = selectCont
                                     .MeteringData
@@ -174,7 +174,7 @@ namespace UkSender.DAL.DataAccess
         {
             try
             {
-                using (MSSQLContext lastSendContext = new MSSQLContext())
+                using (MeteringDataContext lastSendContext = new MeteringDataContext())
                 {
                     var maxDtm = lastSendContext
                                     .MeteringData
@@ -211,7 +211,7 @@ namespace UkSender.DAL.DataAccess
         {
             try
             {
-                using (MSSQLContext insertCont = new MSSQLContext())
+                using (MeteringDataContext insertCont = new MeteringDataContext())
                 {
                     // Заполняем DbSet
                     meteringData.ForEach(x => insertCont.MeteringData.Add(x));
