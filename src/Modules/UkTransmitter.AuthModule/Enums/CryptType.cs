@@ -1,4 +1,4 @@
-﻿namespace UkSender.CommonLibrary.Enums
+﻿namespace UkTransmitter.AuthModule.Enums
 {
     internal enum CryptType
     {

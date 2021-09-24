@@ -57,6 +57,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\UkTransmitter.Core\UkTransmitter.Core.csproj">
+      <Project>{81C9F97E-3B68-42F7-8040-2D4710203AD8}</Project>
+      <Name>UkTransmitter.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UkTransmitter.AuthModule\UkTransmitter.AuthModule.csproj">
       <Project>{BC22221A-9EEE-42C0-BB75-6958F6863F51}</Project>
       <Name>UkTransmitter.AuthModule</Name>
@@ -68,10 +72,6 @@
     <ProjectReference Include="..\UkTransmitter.FileModule\UkTransmitter.FileModule.csproj">
       <Project>{66FB9A78-CAA0-49BB-A377-3D7D348578E7}</Project>
       <Name>UkTransmitter.FileModule</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\UkTransmitter.Infrastructure\UkTransmitter.Infrastructure.csproj">
-      <Project>{81C9F97E-3B68-42F7-8040-2D4710203AD8}</Project>
-      <Name>UkTransmitter.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\UkTransmitter.LogModule\UkTransmitter.LogModule.csproj">
       <Project>{1D860FA0-574B-4DE7-9929-EB1DA26D7C7C}</Project>

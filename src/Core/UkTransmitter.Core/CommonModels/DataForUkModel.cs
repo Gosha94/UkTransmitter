@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UkSender.CommonLibrary.Models
+namespace UkTransmitter.Core.CommonModels
 {
     public class DataForUkModel
     {

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace UkSender.CommonLibrary.Models
+namespace UkTransmitter.Core.CommonModels
 {
 
     #if DEBUG

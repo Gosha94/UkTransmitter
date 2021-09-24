@@ -1,10 +1,9 @@
 ﻿using Castle.Windsor;
 using Castle.MicroKernel.Registration;
+using UkTransmitter.LogModule.Service;
 using UkTransmitter.AuthModule.Service;
-using UkTransmitter.EmailModule.Service;
 using UkTransmitter.FileModule.Service;
 using UkTransmitter.SpeechModule.Service;
-using UkTransmitter.LogModule.Service;
 using UkTransmitter.Infrastructure.ModuleContracts;
 
 namespace UkTransmitter.DIContainer.Configuration

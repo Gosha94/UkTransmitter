@@ -8,7 +8,7 @@ namespace UkTransmitter.AuthModule.Service
     /// </summary>
     public sealed class AuthService : IAuthService
     {
-        
+
         #region Private Methods
 
         #endregion
@@ -22,13 +22,6 @@ namespace UkTransmitter.AuthModule.Service
         #endregion
 
         #region Public API
-
-        #endregion
-
-        #region Private Methods
-
-        #endregion
-
         public void GoAuth()
         {
             Debug.WriteLine("IAuthService is Registered as AuthService");
@@ -39,5 +32,10 @@ namespace UkTransmitter.AuthModule.Service
             Debug.WriteLine("Hello, call Auth is successfull!");
         }
 
+        #endregion
+
+        #region Private Methods
+
+        #endregion
     }
 }

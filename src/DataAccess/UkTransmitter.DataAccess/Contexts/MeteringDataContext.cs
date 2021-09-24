@@ -1,7 +1,6 @@
 ﻿using System.Data.Entity;
-using UkSender.CommonLibrary.Models;
 
-namespace UkSender.DAL
+namespace UkTransmitter.DataAccess.Contexts
 {
     public class MeteringDataContext : DbContext
     {

@@ -1,4 +1,4 @@
-﻿namespace UkSender.CommonLibrary.StateModels
+﻿namespace UkTransmitter.AuthModule.StateModels
 {
     /// <summary>
     /// Класс отражает текущее состояние авторизации пользователя

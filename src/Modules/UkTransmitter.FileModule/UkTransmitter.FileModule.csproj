@@ -55,9 +55,9 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\UkTransmitter.Infrastructure\UkTransmitter.Infrastructure.csproj">
+    <ProjectReference Include="..\..\Core\UkTransmitter.Core\UkTransmitter.Core.csproj">
       <Project>{81C9F97E-3B68-42F7-8040-2D4710203AD8}</Project>
-      <Name>UkTransmitter.Infrastructure</Name>
+      <Name>UkTransmitter.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
