@@ -2,7 +2,8 @@
 using System.Linq;
 using System.Data.Entity.Core;
 using System.Collections.Generic;
-using UkSender.CommonLibrary.Models;
+using UkTransmitter.Core.CommonModels;
+using UkTransmitter.DataAccess.Contexts;
 
 namespace UkSender.DAL.DataAccess
 {

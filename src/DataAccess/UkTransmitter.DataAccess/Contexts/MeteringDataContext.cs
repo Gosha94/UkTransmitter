@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using UkTransmitter.Core.CommonModels;
 
 namespace UkTransmitter.DataAccess.Contexts
 {

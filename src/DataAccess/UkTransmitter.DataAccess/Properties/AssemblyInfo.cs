@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Общие сведения об этой сборке предоставляются следующим набором
 // набора атрибутов. Измените значения этих атрибутов для изменения сведений,
 // связанные со сборкой.
-[assembly: AssemblyTitle("UkTransmitter.DAL")]
+[assembly: AssemblyTitle("UkTransmitter.DataAccess")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("UkTransmitter.DAL")]
+[assembly: AssemblyProduct("UkTransmitter.DataAccess")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Следующий GUID служит для идентификации библиотеки типов, если этот проект будет видимым для COM
-[assembly: Guid("c8ce401e-478d-45f8-be78-2cfd7a559e6e")]
+[assembly: Guid("55481dd9-42dc-49a6-82b0-c3ce9f729763")]
 
 // Сведения о версии сборки состоят из указанных ниже четырех значений:
 //

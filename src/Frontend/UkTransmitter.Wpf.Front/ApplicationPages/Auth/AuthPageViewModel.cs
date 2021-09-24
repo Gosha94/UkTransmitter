@@ -1,6 +1,7 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
+using UkTransmitter.Core.ModuleContracts;
 using UkTransmitter.DIContainer.Configuration;
-using UkTransmitter.Infrastructure.ModuleContracts;
 using UkTransmitter.Wpf.FrontEnd.Infrastructure;
 
 namespace UkTransmitter.Wpf.FrontEnd.ApplicationPages.Auth

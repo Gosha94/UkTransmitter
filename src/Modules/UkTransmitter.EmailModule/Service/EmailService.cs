@@ -1,4 +1,4 @@
-﻿using UkTransmitter.Infrastructure.ModuleContracts;
+﻿using UkTransmitter.Core.ModuleContracts;
 
 namespace UkTransmitter.EmailModule.Service
 {

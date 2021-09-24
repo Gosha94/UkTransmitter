@@ -61,23 +61,23 @@
       <Project>{81C9F97E-3B68-42F7-8040-2D4710203AD8}</Project>
       <Name>UkTransmitter.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\UkTransmitter.AuthModule\UkTransmitter.AuthModule.csproj">
+    <ProjectReference Include="..\..\Modules\UkTransmitter.AuthModule\UkTransmitter.AuthModule.csproj">
       <Project>{BC22221A-9EEE-42C0-BB75-6958F6863F51}</Project>
       <Name>UkTransmitter.AuthModule</Name>
     </ProjectReference>
-    <ProjectReference Include="..\UkTransmitter.EmailModule\UkTransmitter.EmailModule.csproj">
+    <ProjectReference Include="..\..\Modules\UkTransmitter.EmailModule\UkTransmitter.EmailModule.csproj">
       <Project>{F4486F19-D545-4B40-B8C9-8A20323EB1FA}</Project>
       <Name>UkTransmitter.EmailModule</Name>
     </ProjectReference>
-    <ProjectReference Include="..\UkTransmitter.FileModule\UkTransmitter.FileModule.csproj">
+    <ProjectReference Include="..\..\Modules\UkTransmitter.FileModule\UkTransmitter.FileModule.csproj">
       <Project>{66FB9A78-CAA0-49BB-A377-3D7D348578E7}</Project>
       <Name>UkTransmitter.FileModule</Name>
     </ProjectReference>
-    <ProjectReference Include="..\UkTransmitter.LogModule\UkTransmitter.LogModule.csproj">
+    <ProjectReference Include="..\..\Modules\UkTransmitter.LogModule\UkTransmitter.LogModule.csproj">
       <Project>{1D860FA0-574B-4DE7-9929-EB1DA26D7C7C}</Project>
       <Name>UkTransmitter.LogModule</Name>
     </ProjectReference>
-    <ProjectReference Include="..\UkTransmitter.SpeechModule\UkTransmitter.SpeechModule.csproj">
+    <ProjectReference Include="..\..\Modules\UkTransmitter.SpeechModule\UkTransmitter.SpeechModule.csproj">
       <Project>{B83D7098-58E9-4D70-9345-D9EE0C23A7A1}</Project>
       <Name>UkTransmitter.SpeechModule</Name>
     </ProjectReference>

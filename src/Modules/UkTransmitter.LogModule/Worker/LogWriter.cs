@@ -8,7 +8,9 @@ namespace UkSender.CommonLibrary.Helpers
     /// </summary>
     internal sealed class LogWriter
     {
+#pragma warning disable CS0414 // Полю "LogWriter.fileForLogsName" присвоено значение, но оно ни разу не использовано.
         private string fileForLogsName = "log.txt";
+#pragma warning restore CS0414 // Полю "LogWriter.fileForLogsName" присвоено значение, но оно ни разу не использовано.
         //private string 
 
         // TODO Ситуации для логирования

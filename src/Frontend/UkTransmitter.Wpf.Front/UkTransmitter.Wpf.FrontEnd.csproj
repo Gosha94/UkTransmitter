@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\PropertyChanged.Fody.3.4.0\build\PropertyChanged.Fody.props" Condition="Exists('..\packages\PropertyChanged.Fody.3.4.0\build\PropertyChanged.Fody.props')" />
+  <Import Project="..\..\..\packages\PropertyChanged.Fody.3.4.0\build\PropertyChanged.Fody.props" Condition="Exists('..\..\..\packages\PropertyChanged.Fody.3.4.0\build\PropertyChanged.Fody.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DBB40551-E799-4E20-BAA4-BEC972BFB4B9}</ProjectGuid>
+    <ProjectGuid>{210C8D4B-19DB-4C3F-B4BD-811DDCE7ABE1}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>UkTransmitter.Wpf.FrontEnd</RootNamespace>
     <AssemblyName>UkTransmitter.Wpf.FrontEnd</AssemblyName>
@@ -38,29 +38,55 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HandyControl, Version=3.2.0.0, Culture=neutral, PublicKeyToken=45be8712787a1e5b, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\HandyControl.3.2.0\lib\net472\HandyControl.dll</HintPath>
+    </Reference>
+    <Reference Include="PropertyChanged, Version=3.4.0.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\PropertyChanged.Fody.3.4.0\lib\net40\PropertyChanged.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="ApplicationPages\Auth\AuthPageControl.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="ApplicationPages\Graph\GraphPageControl.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="ApplicationPages\Main\MainContentControl\MainContentControl.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="ApplicationPages\Main\MainWindow.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="ApplicationPages\SendData\SendDataPageControl.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Loader\LoaderControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -70,6 +96,7 @@
       <DependentUpon>AuthPageControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ApplicationPages\Auth\AuthPageViewModel.cs" />
+    <Compile Include="ApplicationPages\BasePage\BaseUserControl.cs" />
     <Compile Include="ApplicationPages\Graph\GraphPageControl.xaml.cs">
       <DependentUpon>GraphPageControl.xaml</DependentUpon>
     </Compile>
@@ -81,7 +108,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ApplicationPages\Main\MainWindowViewModel.cs" />
-    <Compile Include="ApplicationPages\BasePage\BaseUserControl.cs" />
     <Compile Include="ApplicationPages\SendData\SendDataPageControl.xaml.cs">
       <DependentUpon>SendDataPageControl.xaml</DependentUpon>
     </Compile>
@@ -91,16 +117,12 @@
     <Compile Include="Infrastructure\BaseViewModel.cs" />
     <Compile Include="Infrastructure\ICustomViewModel.cs" />
     <Compile Include="Infrastructure\RelayCommand.cs" />
-    <Page Include="Loader\LoaderControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Loader\LoaderControl.xaml.cs">
       <DependentUpon>LoaderControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Loader\LoaderControlViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="PageManager\Enum\ApplicationPage.cs" />
     <Compile Include="PageManager\PageFabric\ViewAndVmResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -133,18 +155,22 @@
     <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\UkTransmitter.DIContainer\UkTransmitter.DIContainer.csproj">
+    <ProjectReference Include="..\..\Core\UkTransmitter.Core\UkTransmitter.Core.csproj">
+      <Project>{81C9F97E-3B68-42F7-8040-2D4710203AD8}</Project>
+      <Name>UkTransmitter.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DI\UkTransmitter.DIContainer\UkTransmitter.DIContainer.csproj">
       <Project>{46F7E4C8-4C6C-4A4A-BAE2-C0C710E68626}</Project>
       <Name>UkTransmitter.DIContainer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\Fody.6.5.2\build\Fody.targets" Condition="Exists('..\packages\Fody.6.5.2\build\Fody.targets')" />
+  <Import Project="..\..\..\packages\Fody.6.5.3\build\Fody.targets" Condition="Exists('..\..\..\packages\Fody.6.5.3\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Fody.6.5.2\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.6.5.2\build\Fody.targets'))" />
-    <Error Condition="!Exists('..\packages\PropertyChanged.Fody.3.4.0\build\PropertyChanged.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\PropertyChanged.Fody.3.4.0\build\PropertyChanged.Fody.props'))" />
+    <Error Condition="!Exists('..\..\..\packages\Fody.6.5.3\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Fody.6.5.3\build\Fody.targets'))" />
+    <Error Condition="!Exists('..\..\..\packages\PropertyChanged.Fody.3.4.0\build\PropertyChanged.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\PropertyChanged.Fody.3.4.0\build\PropertyChanged.Fody.props'))" />
   </Target>
 </Project>

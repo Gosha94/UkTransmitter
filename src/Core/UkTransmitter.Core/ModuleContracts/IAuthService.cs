@@ -1,4 +1,4 @@
-﻿namespace UkTransmitter.Infrastructure.ModuleContracts
+﻿namespace UkTransmitter.Core.ModuleContracts
 {
     /// <summary>
     /// Интерфейс службы аутентификации для изоляции сторонних библиотек

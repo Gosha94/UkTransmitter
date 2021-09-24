@@ -4,7 +4,8 @@ using UkTransmitter.LogModule.Service;
 using UkTransmitter.AuthModule.Service;
 using UkTransmitter.FileModule.Service;
 using UkTransmitter.SpeechModule.Service;
-using UkTransmitter.Infrastructure.ModuleContracts;
+using UkTransmitter.EmailModule.Service;
+using UkTransmitter.Core.ModuleContracts;
 
 namespace UkTransmitter.DIContainer.Configuration
 {
