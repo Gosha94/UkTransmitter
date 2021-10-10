@@ -22,6 +22,7 @@ namespace UkTransmitter.AuthModule.Service
         #endregion
 
         #region Public API
+
         public void GoAuth()
         {
             Debug.WriteLine("IAuthService is Registered as AuthService");

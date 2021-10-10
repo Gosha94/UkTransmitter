@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{81C9F97E-3B68-42F7-8040-2D4710203AD8}</ProjectGuid>
+    <ProjectGuid>{24AD11D8-D68D-43B0-94E5-9E88B503239F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UkTransmitter.Core</RootNamespace>
-    <AssemblyName>UkTransmitter.Core</AssemblyName>
+    <RootNamespace>UkTransmitter.JsonParser</RootNamespace>
+    <AssemblyName>UkTransmitter.JsonParser</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -32,7 +32,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -42,17 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommonModels\ConnectionStringModel.cs" />
-    <Compile Include="CommonModels\DataForUkModel.cs" />
-    <Compile Include="CommonModels\EmailModel.cs" />
-    <Compile Include="CommonModels\JsonConfigurationModels\CryptoDataModel.cs" />
-    <Compile Include="CommonModels\MeteringDataModel.cs" />
-    <Compile Include="CommonModels\UserAuthorizeModel.cs" />
-    <Compile Include="ModuleContracts\IAuthService.cs" />
-    <Compile Include="ModuleContracts\IEmailService.cs" />
-    <Compile Include="ModuleContracts\IFileService.cs" />
-    <Compile Include="ModuleContracts\ILogService.cs" />
-    <Compile Include="ModuleContracts\ISpeechService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using UkTransmitter.Core.ModuleContracts;
 using UkTransmitter.DIContainer.Configuration;
 using UkTransmitter.Wpf.FrontEnd.Infrastructure;
@@ -18,7 +17,7 @@ namespace UkTransmitter.Wpf.FrontEnd.ApplicationPages.Auth
         public AuthPageViewModel(DependencyFabric _dependencyFabric)
         {
             _authService =  _dependencyFabric.GetAuthService();
-            _logService =   _dependencyFabric.GetLogService();
+            _logService  =  _dependencyFabric.GetLogService();
         }
 
         private void CallAuthService()
