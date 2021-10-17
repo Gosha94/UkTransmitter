@@ -42,7 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommonModels\ConnectionStringModel.cs" />
     <Compile Include="CommonModels\DataForUkModel.cs" />
     <Compile Include="CommonModels\EmailModel.cs" />
     <Compile Include="CommonModels\MeteringDataModel.cs" />

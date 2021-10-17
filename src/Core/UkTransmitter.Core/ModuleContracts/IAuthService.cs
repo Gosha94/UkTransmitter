@@ -5,8 +5,8 @@
     /// </summary>
     public interface IAuthService
     {
-        void GoAuth();
 
-        void SendCall();
+        bool CheckUserRegistration();
+        
     }
 }
