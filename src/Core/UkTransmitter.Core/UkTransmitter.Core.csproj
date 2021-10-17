@@ -45,7 +45,6 @@
     <Compile Include="CommonModels\ConnectionStringModel.cs" />
     <Compile Include="CommonModels\DataForUkModel.cs" />
     <Compile Include="CommonModels\EmailModel.cs" />
-    <Compile Include="CommonModels\JsonConfigurationModels\CryptoDataModel.cs" />
     <Compile Include="CommonModels\MeteringDataModel.cs" />
     <Compile Include="CommonModels\UserAuthorizeModel.cs" />
     <Compile Include="ModuleContracts\IAuthService.cs" />

@@ -41,8 +41,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UkTransmitter.Wpf.FrontEnd"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UkTransmitter.DataAccess", "src\DataAccess\UkTransmitter.DataAccess\UkTransmitter.DataAccess.csproj", "{55481DD9-42DC-49A6-82B0-C3CE9F729763}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UkTransmitter.JsonParser", "src\DataAccess\UkTransmitter.JsonParser\UkTransmitter.JsonParser.csproj", "{24AD11D8-D68D-43B0-94E5-9E88B503239F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,10 +83,6 @@ Global
 		{55481DD9-42DC-49A6-82B0-C3CE9F729763}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55481DD9-42DC-49A6-82B0-C3CE9F729763}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55481DD9-42DC-49A6-82B0-C3CE9F729763}.Release|Any CPU.Build.0 = Release|Any CPU
-		{24AD11D8-D68D-43B0-94E5-9E88B503239F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{24AD11D8-D68D-43B0-94E5-9E88B503239F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{24AD11D8-D68D-43B0-94E5-9E88B503239F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{24AD11D8-D68D-43B0-94E5-9E88B503239F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -111,7 +105,6 @@ Global
 		{81C9F97E-3B68-42F7-8040-2D4710203AD8} = {60DAA985-E2C8-4B79-B168-903DD341C09E}
 		{210C8D4B-19DB-4C3F-B4BD-811DDCE7ABE1} = {F68A92BE-71C2-46BE-A123-E335890470A7}
 		{55481DD9-42DC-49A6-82B0-C3CE9F729763} = {F68F9C59-2247-41E5-B981-7CABE40147EC}
-		{24AD11D8-D68D-43B0-94E5-9E88B503239F} = {F68F9C59-2247-41E5-B981-7CABE40147EC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {192BCC2E-8384-4D04-9085-02695CC6B552}
