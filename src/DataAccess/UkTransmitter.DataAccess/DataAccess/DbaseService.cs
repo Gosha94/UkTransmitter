@@ -7,19 +7,8 @@ using UkTransmitter.DataAccess.Contexts;
 
 namespace UkSender.DAL.DataAccess
 {
-    public static class DbLoader
+    public sealed class DbaseService
     {
-        
-        #region Свойство строки подключения
-
-        //private static string _postgreConnectionString;
-        //public static string PostgreConnectionString
-        //{
-        //    get => _postgreConnectionString;
-        //    set { _postgreConnectionString = value; }
-        //}
-
-        #endregion
 
         #region Публичные Задачи        
 
@@ -37,7 +26,7 @@ namespace UkSender.DAL.DataAccess
         /// </summary>
         /// <param name="connectName"></param>
         /// <returns></returns>
-        public static ConnectionStringModel GetConnectStringFromDb(string connectName)
+        public ConnectionStringModel GetConnectStringFromDb(string connectName)
         {
             try
             {
@@ -167,11 +156,7 @@ namespace UkSender.DAL.DataAccess
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public static MeteringDataModel GetLastSendDataToUkFromDbase()
+        public MeteringDataModel GetLastSendDataToUkFromDbase()
         {
             try
             {

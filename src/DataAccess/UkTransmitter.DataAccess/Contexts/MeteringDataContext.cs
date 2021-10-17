@@ -5,10 +5,11 @@ namespace UkTransmitter.DataAccess.Contexts
 {
     public class MeteringDataContext : DbContext
     {
-        /// <summary>
-        /// Контекст-подключение к БД, связано с подключением в App.config
-        /// </summary>
+
         public MeteringDataContext() : base(@"data source=.\SQLSERVER;Initial Catalog=UkSender; Integrated Security = True;")
+        { }
+
+        public MeteringDataContext(string connectionString) : base(connectionString)
         { }
 
         /// <summary>
