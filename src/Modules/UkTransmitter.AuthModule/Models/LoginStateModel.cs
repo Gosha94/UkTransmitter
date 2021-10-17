@@ -5,13 +5,6 @@
     /// </summary>
     internal sealed class LoginStateModel
     {
-        /// <summary>
-        /// Конструктор по умолчанию
-        /// </summary>
-        public LoginStateModel()
-        {
-            this.IsCurrentUserRight = false;
-        }
 
         private bool _isCurrentUserRight;
 
@@ -19,6 +12,14 @@
         {
             get => _isCurrentUserRight;
             set { _isCurrentUserRight = value; }
+        }
+
+        /// <summary>
+        /// Конструктор по умолчанию
+        /// </summary>
+        public LoginStateModel()
+        {
+            this.IsCurrentUserRight = false;
         }
     }
 }
