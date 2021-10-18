@@ -1,4 +1,5 @@
 ﻿using JsonConfigParser.Api.PublicAPI;
+using JsonConfigParser.Core.Contracts;
 using JsonConfigParser.Core.FileConfigs;
 
 namespace UkTransmitter.DataAccess.Services
@@ -10,17 +11,13 @@ namespace UkTransmitter.DataAccess.Services
     internal sealed class MsSqlConnectionService
     {
         private JsonParsingApi _parsingApi;
-        private JsonDBaseConfiguration _configuration;
+        private IFileConfiguration _configuration;
 
         public string ConnectionString { get; private set; }
 
         public MsSqlConnectionService()
         {
             this._parsingApi = new JsonParsingApi();
-            
-            this._configuration = new JsonDBaseConfiguration();
-            
-            this.ConnectionString = this._parsingApi.GetDbaseConfigurationData(this._configuration);
         }
 
         #region Public API
@@ -30,7 +27,29 @@ namespace UkTransmitter.DataAccess.Services
         /// </summary>
         /// <returns>Строка подключения к БД</returns>
         public string GetConnectionString()
-            => this.ConnectionString;
+        {
+            this._configuration = new JsonDBaseConfiguration();
+            SetConnectionString();
+            return this.ConnectionString;
+        }
+
+        public string GetSecretData()
+        {
+            this._configuration = new JsonSaltFileConfiguration();
+            SetConnectionString();
+            return this.ConnectionString;
+        }
+
+
+
+        #endregion
+
+        #region Private Methods
+
+        private void SetConnectionString()
+        {
+            this.ConnectionString = this._parsingApi.GetDbaseConfigurationData(this._configuration);
+        }
 
         #endregion
 

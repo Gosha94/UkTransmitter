@@ -18,6 +18,8 @@ namespace UkTransmitter.DataAccess.Repos
         private readonly UserAuthContext _dbaseAuthContext;
         private readonly MsSqlConnectionService _connectionService;
 
+        private InputUserAuthModel _inputDataModel;
+
         public UserAuthRepository()
         {
             this._cryptoController = new CryptoApiController();
@@ -33,10 +35,38 @@ namespace UkTransmitter.DataAccess.Repos
         /// <param name="inputUserModel"></param>
         /// <returns></returns>
         public bool FindEqualModelInDatabase(InputUserAuthModel inputUserModel)
-            => this._dbaseAuthContext
-                .UserAuthorizeDataRows
-                .Where(x => x.Login == inputUserModel.InsertedLogin && x.Pwd == inputUserModel.InsertedPwd)
-                .Any();
+        {
+            this._inputDataModel = inputUserModel;
+            return CheckModelExistingInDataBase();
+        }
+
+        #region Private Methods
+
+        private bool CheckModelExistingInDataBase()
+        {
+            // TODO Здесь принимаем ириски того, что таблица с данными авторизации небольшая, пока будем перебирать ее полностью,
+            // затем дешифровать, далее необходимо Переделать на хранение ХЕШ-СУММЫ и сравнивать, вот же дурная башка !!!
+            var userDataListFromDbase = this._dbaseAuthContext.UserAuthorizeDataRows.ToList();
+            
+            bool resultOfCheck = false;
+
+            foreach (var item in userDataListFromDbase)
+            {
+                var clearLogin = this._cryptoController.GetDeclassifiedData(item.Login);
+                var clearPwd = this._cryptoController.GetDeclassifiedData(item.Pwd);
+
+                if (clearLogin == this._inputDataModel.InsertedLogin && clearPwd == this._inputDataModel.InsertedPwd)
+                {
+                    resultOfCheck = true;
+                    break;
+                }
+            }
+            
+            return resultOfCheck;
+        }
+
+        #endregion
+
 
         #region IDisposable Implementation
 
