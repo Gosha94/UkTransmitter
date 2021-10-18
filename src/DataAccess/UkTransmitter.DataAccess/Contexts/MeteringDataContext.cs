@@ -11,19 +11,9 @@ namespace UkTransmitter.DataAccess.Contexts
         { }
 
         /// <summary>
-        /// Модель для записи показаний в БД
+        /// Строки с показаниями счетчиков в БД
         /// </summary>
-        public DbSet<WriteableMeteringDataModel> MeteringData { get; set; }
-
-        /// <summary>
-        /// Модель данных авторизации пользователя
-        /// </summary>
-        public DbSet<ReadableUserAuthorizeModel> UsersAuthorizeData { get; set; }
-        
-        /// <summary>
-        /// Модель данных для отправки письма
-        /// </summary>
-        public DbSet<ReadableEmailModel> EmailData { get; set; }
+        public DbSet<WriteableMeteringDataModel> MeteringDataRows { get; set; }
 
         /// <summary>
         /// Метод очистки миграций
@@ -34,5 +24,6 @@ namespace UkTransmitter.DataAccess.Contexts
             Database.SetInitializer<MeteringDataContext>(null);
             base.OnModelCreating(modelBuilder);
         }
+
     }
 }
