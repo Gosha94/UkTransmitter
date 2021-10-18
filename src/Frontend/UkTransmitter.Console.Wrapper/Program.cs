@@ -17,7 +17,7 @@ namespace UkTransmitter.Console.Wrapper
                 InsertedPwd = "1111"
             };
 
-            CustomAuthService customAuthService = new CustomAuthService(repos, inputTestModel);
+            AuthService customAuthService = new AuthService(repos, inputTestModel);
             var res = customAuthService.IsUserCorrect();
             System.Console.WriteLine();
         }

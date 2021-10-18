@@ -7,7 +7,7 @@ namespace UkTransmitter.AuthModule.Service
     /// <summary>
     /// Служба авторизации, для контроля входа в приложение
     /// </summary>
-    public sealed class CustomAuthService : IAuthService
+    public sealed class AuthService : IAuthService
     {
         
         private InputUserAuthModel _inputUserData;
@@ -16,7 +16,7 @@ namespace UkTransmitter.AuthModule.Service
 
         #region Constructor
 
-        public CustomAuthService(IReadOnlyRepository<InputUserAuthModel> customRepositoryFromDi, InputUserAuthModel inputUserModel)
+        public AuthService(IReadOnlyRepository<InputUserAuthModel> customRepositoryFromDi, InputUserAuthModel inputUserModel)
         {
             this._inputUserData = inputUserModel;
             this._userDataRepository = customRepositoryFromDi;

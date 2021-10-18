@@ -32,7 +32,7 @@ namespace UkTransmitter.DIContainer.Configuration
         /// </summary>
         public void RegisterAllScopesInApp()
         {
-            this._dependencyContainer.Register(Component.For<IAuthService>().ImplementedBy<CustomAuthService>());
+            this._dependencyContainer.Register(Component.For<IAuthService>().ImplementedBy<AuthService>());
             this._dependencyContainer.Register(Component.For<IEmailService>().ImplementedBy<EmailService>());
             this._dependencyContainer.Register(Component.For<IFileService>().ImplementedBy<FileService>());
             this._dependencyContainer.Register(Component.For<ILogService>().ImplementedBy<LogService>());
