@@ -5,5 +5,11 @@
     /// </summary>
     public interface IEmailService
     {
+
+        /// <summary>
+        /// Подключаемая служба логирования
+        /// </summary>
+        ILogService LogService { get; }
+
     }
 }

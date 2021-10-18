@@ -5,5 +5,11 @@
     /// </summary>
     public interface ISpeechService
     {
+
+        /// <summary>
+        /// Подключаемая служба логирования
+        /// </summary>
+        ILogService LogService { get; }
+
     }
 }

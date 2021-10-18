@@ -6,5 +6,10 @@
     public interface IFileService
     {
 
+        /// <summary>
+        /// Подключаемая служба логирования
+        /// </summary>
+        ILogService LogService { get; }
+
     }
 }
