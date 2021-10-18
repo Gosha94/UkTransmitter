@@ -10,9 +10,11 @@ namespace UkTransmitter.Core.CommonModels
     [Table("tUsers", Schema = "dataUk")]
     public class ReadableUserAuthorizeModel
     {
+
         [Key]
         public int Id           { get; set; }
         public string Login     { get; set; }
         public string Pwd       { get; set; }
+
     }
 }

@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonModels\DataForUkModel.cs" />
+    <Compile Include="CommonModels\InputUserAuthModel.cs" />
     <Compile Include="CommonModels\ReadableEmailModel.cs" />
     <Compile Include="CommonModels\WriteableMeteringDataModel.cs" />
     <Compile Include="CommonModels\ReadableUserAuthorizeModel.cs" />

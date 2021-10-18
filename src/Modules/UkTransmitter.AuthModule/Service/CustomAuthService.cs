@@ -1,4 +1,5 @@
 ﻿using UkTransmitter.Core.Contracts;
+using UkTransmitter.Core.CommonModels;
 using UkTransmitter.Core.ModuleContracts;
 
 namespace UkTransmitter.AuthModule.Service
@@ -9,19 +10,14 @@ namespace UkTransmitter.AuthModule.Service
     public sealed class CustomAuthService : IAuthService
     {
 
-        private IReadOnlyRepository<> _userDataRepository;
-
-        /*
-         Порядок работы службы:
-            1) Шифруем связку Логин-Пароль, введенную юзером            
-            2) Ищем в БД среди связок Логин-Пароль требуемую, по 100% совпадению
-            3) Возвращаем результат поиска, он же модель успеха/провала авторизации
-         */
+        private InputUserAuthModel _inputUserData;
+        private IReadOnlyRepository<InputUserAuthModel> _userDataRepository;
 
         #region Constructor
 
-        public CustomAuthService(IReadOnlyRepository customRepositoryFromDi)
+        public CustomAuthService(IReadOnlyRepository<InputUserAuthModel> customRepositoryFromDi, InputUserAuthModel inputUserModel)
         {
+            this._inputUserData = inputUserModel;
             this._userDataRepository = customRepositoryFromDi;
         }
 
@@ -30,13 +26,19 @@ namespace UkTransmitter.AuthModule.Service
         #region Public API
 
         public bool IsUserCorrect()
-        {
-            throw new System.NotImplementedException();
-        }
+            => this._userDataRepository.FindEqualModelInDatabase(this._inputUserData);
 
         #endregion
 
         #region Private Methods
+
+        /// <summary>
+        /// Метод шифрует данные пользователя для дальнейшей проверки
+        /// </summary>
+        private void EncryptInputUserModel()
+        {
+
+        }
 
         #endregion
     }

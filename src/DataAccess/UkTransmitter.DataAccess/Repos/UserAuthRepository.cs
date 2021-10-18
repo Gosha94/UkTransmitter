@@ -3,6 +3,7 @@ using UkTransmitter.Core.Contracts;
 using UkTransmitter.Core.CommonModels;
 using UkTransmitter.DataAccess.Contexts;
 using UkTransmitter.DataAccess.Services;
+using System.Linq;
 
 namespace UkTransmitter.DataAccess.Repos
 {
@@ -10,7 +11,7 @@ namespace UkTransmitter.DataAccess.Repos
     /// <summary>
     /// Репозиторий обрабатывает пользовательские данные
     /// </summary>
-    public class UserAuthRepository : IReadOnlyRepository<ReadableUserAuthorizeModel>
+    public class UserAuthRepository : IReadOnlyRepository<InputUserAuthModel>
     {
         private readonly UserAuthContext _dbaseAuthContext;
         private readonly MsSqlConnectionService _connectionService;
@@ -23,10 +24,16 @@ namespace UkTransmitter.DataAccess.Repos
             this._dbaseAuthContext = new UserAuthContext(connString);
         }
 
-        public bool FindEqualModelInDatabase(ReadableUserAuthorizeModel userModel)
-        {
-            throw new System.NotImplementedException();
-        }
+        /// <summary>
+        /// Метод производит поиск совпадений модели вводимых пользователем данных с данными в БД
+        /// </summary>
+        /// <param name="inputUserModel"></param>
+        /// <returns></returns>
+        public bool FindEqualModelInDatabase(InputUserAuthModel inputUserModel)
+            => this._dbaseAuthContext
+                .UserAuthorizeDataRows
+                .Where(x => x.Login == inputUserModel.InsertedLogin && x.Pwd == inputUserModel.InsertedPwd)
+                .Any();
 
         #region IDisposable Implementation
 
