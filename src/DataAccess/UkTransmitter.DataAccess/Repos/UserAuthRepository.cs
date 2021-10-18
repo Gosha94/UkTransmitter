@@ -8,17 +8,17 @@ using UkTransmitter.DataAccess.Services;
 
 namespace UkTransmitter.DataAccess.Repos
 {
-    
+
     /// <summary>
     /// Репозиторий обрабатывает пользовательские данные
     /// </summary>
     public class UserAuthRepository : IReadOnlyRepository<InputUserAuthModel>
     {
-        private CryptoApiController _cryptoController;
         private readonly UserAuthContext _dbaseAuthContext;
         private readonly MsSqlConnectionService _connectionService;
 
         private InputUserAuthModel _inputDataModel;
+        private CryptoApiController _cryptoController;
 
         public UserAuthRepository()
         {
@@ -52,6 +52,7 @@ namespace UkTransmitter.DataAccess.Repos
 
             foreach (var item in userDataListFromDbase)
             {
+
                 var clearLogin = this._cryptoController.GetDeclassifiedData(item.Login);
                 var clearPwd = this._cryptoController.GetDeclassifiedData(item.Pwd);
 
@@ -61,7 +62,7 @@ namespace UkTransmitter.DataAccess.Repos
                     break;
                 }
             }
-            
+
             return resultOfCheck;
         }
 

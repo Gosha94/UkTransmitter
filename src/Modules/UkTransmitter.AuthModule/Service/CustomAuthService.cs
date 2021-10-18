@@ -31,8 +31,5 @@ namespace UkTransmitter.AuthModule.Service
 
         #endregion
 
-        #region Private Methods
-
-        #endregion
     }
 }
