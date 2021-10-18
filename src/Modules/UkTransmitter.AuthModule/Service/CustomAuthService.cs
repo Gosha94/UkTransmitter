@@ -1,4 +1,5 @@
-﻿using UkTransmitter.Core.Contracts;
+﻿using AesCryptoLib.Api.PublicApi;
+using UkTransmitter.Core.Contracts;
 using UkTransmitter.Core.CommonModels;
 using UkTransmitter.Core.ModuleContracts;
 
@@ -9,8 +10,9 @@ namespace UkTransmitter.AuthModule.Service
     /// </summary>
     public sealed class CustomAuthService : IAuthService
     {
-
+        
         private InputUserAuthModel _inputUserData;
+        private CryptoApiController _cryptoController;
         private IReadOnlyRepository<InputUserAuthModel> _userDataRepository;
 
         #region Constructor
@@ -19,6 +21,8 @@ namespace UkTransmitter.AuthModule.Service
         {
             this._inputUserData = inputUserModel;
             this._userDataRepository = customRepositoryFromDi;
+            this._cryptoController = new CryptoApiController();
+
         }
 
         #endregion
@@ -37,7 +41,7 @@ namespace UkTransmitter.AuthModule.Service
         /// </summary>
         private void EncryptInputUserModel()
         {
-
+            this._cryptoController.
         }
 
         #endregion
