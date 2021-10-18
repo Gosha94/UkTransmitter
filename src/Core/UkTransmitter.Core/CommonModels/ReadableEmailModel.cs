@@ -12,7 +12,7 @@ namespace UkTransmitter.Core.CommonModels
         [Table("email.tEmailData")]
     #endif
 
-    public class EmailModel
+    public class ReadableEmailModel
     {
         [Key]
         public int Id                 { get; set; }

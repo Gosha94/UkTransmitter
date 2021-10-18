@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+﻿using UkTransmitter.Core.Contracts;
 using UkTransmitter.Core.ModuleContracts;
 
 namespace UkTransmitter.AuthModule.Service
@@ -9,6 +9,8 @@ namespace UkTransmitter.AuthModule.Service
     public sealed class CustomAuthService : IAuthService
     {
 
+        private IReadOnlyRepository<> _userDataRepository;
+
         /*
          Порядок работы службы:
             1) Шифруем связку Логин-Пароль, введенную юзером            
@@ -16,29 +18,20 @@ namespace UkTransmitter.AuthModule.Service
             3) Возвращаем результат поиска, он же модель успеха/провала авторизации
          */
 
-
-        #region Private Methods
-
-        #endregion
-
-        #region Public Methods
-
-        #endregion
-
         #region Constructor
+
+        public CustomAuthService(IReadOnlyRepository customRepositoryFromDi)
+        {
+            this._userDataRepository = customRepositoryFromDi;
+        }
 
         #endregion
 
         #region Public API
 
-        public void GoAuth()
+        public bool IsUserCorrect()
         {
-            Debug.WriteLine("IAuthService is Registered as AuthService");
-        }
-
-        public void SendCall()
-        {
-            Debug.WriteLine("Hello, call Auth is successfull!");
+            throw new System.NotImplementedException();
         }
 
         #endregion

@@ -6,7 +6,11 @@
     public interface IAuthService
     {
 
-        bool CheckUserRegistration();
+        /// <summary>
+        /// Метод проверки существования юзера в БД
+        /// </summary>
+        /// <returns></returns>
+        bool IsUserCorrect();
         
     }
 }

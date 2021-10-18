@@ -13,7 +13,7 @@ namespace UkTransmitter.Core.CommonModels
     #if !DEBUG
     [Table("dataUk.MeteringData")]
     #endif
-    public class MeteringDataModel
+    public class WriteableMeteringDataModel
     {
         [Key]
         public int Id { get; set; }

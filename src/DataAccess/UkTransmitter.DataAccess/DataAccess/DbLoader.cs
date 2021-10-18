@@ -58,7 +58,7 @@ namespace UkSender.DAL.DataAccess
         /// Метод получения данных авторизации пользователей из БД
         /// </summary>
         /// <returns></returns>
-        public static List<UserAuthorizeModel> GetAllUserDataFromDb()
+        public static List<ReadableUserAuthorizeModel> GetAllUserDataFromDb()
         {
             try
             {
@@ -70,7 +70,7 @@ namespace UkSender.DAL.DataAccess
 
                     if (result is null)
                     {
-                        return new List<UserAuthorizeModel>();
+                        return new List<ReadableUserAuthorizeModel>();
                     }
                     else
                     { return result; }
@@ -79,9 +79,9 @@ namespace UkSender.DAL.DataAccess
             catch (EntityCommandExecutionException)
             {
                 //LogWriter.LogWrite("Ошибка выполнения запроса в MSSQL, просьба проверить поля таблиц, сущности в коде.", "log.txt");
-                return new List<UserAuthorizeModel>()
+                return new List<ReadableUserAuthorizeModel>()
                 {
-                    new UserAuthorizeModel()
+                    new ReadableUserAuthorizeModel()
                     {
                         Id    = 0,
                         Login = "Error",
@@ -91,7 +91,7 @@ namespace UkSender.DAL.DataAccess
             }
         }
 
-        public static EmailModel GetEmailDataFromDb()
+        public static ReadableEmailModel GetEmailDataFromDb()
         {
             try
             {
@@ -106,7 +106,7 @@ namespace UkSender.DAL.DataAccess
             {
                 //LogWriter.LogWrite("Структура модели БД изменена, просьба проверить поля таблиц, сущности в коде.", "log.txt");
 
-                return new EmailModel()
+                return new ReadableEmailModel()
                 {
                     Id = 1,
                     FromAddress = "BqY4pvpeQHV5t0ozfiD+6WxOrRtncZrEYoW7jIZ5cWRfDQlVxj1FhcgrB5hVx6f6cL6Ga6jH4ro3dlfvBcVD",
@@ -122,7 +122,7 @@ namespace UkSender.DAL.DataAccess
             {
                 //LogWriter.LogWrite("Неизвестная ошибка при получении учетных данных Email из БД!", "log.txt");
 
-                return new EmailModel()
+                return new ReadableEmailModel()
                 {
                     Id = 1,
                     FromAddress = "BqY4pvpeQHV5t0ozfiD+6WxOrRtncZrEYoW7jIZ5cWRfDQlVxj1FhcgrB5hVx6f6cL6Ga6jH4ro3dlfvBcVD",
@@ -136,7 +136,7 @@ namespace UkSender.DAL.DataAccess
             }
         }
 
-        public static List<MeteringDataModel> GetMeteringDataForGraph()
+        public static List<WriteableMeteringDataModel> GetMeteringDataForGraph()
         {
             try
             {
@@ -152,9 +152,9 @@ namespace UkSender.DAL.DataAccess
 
             catch (NotSupportedException)
             {
-                List<MeteringDataModel> errorData = new List<MeteringDataModel>()
+                List<WriteableMeteringDataModel> errorData = new List<WriteableMeteringDataModel>()
                 {
-                    new MeteringDataModel()
+                    new WriteableMeteringDataModel()
                     {
                          MeteringDeviceType = 10,
                          Value = "-999",
@@ -171,7 +171,7 @@ namespace UkSender.DAL.DataAccess
         /// 
         /// </summary>
         /// <returns></returns>
-        public static MeteringDataModel GetLastSendDataToUkFromDbase()
+        public static WriteableMeteringDataModel GetLastSendDataToUkFromDbase()
         {
             try
             {
@@ -181,7 +181,7 @@ namespace UkSender.DAL.DataAccess
                                     .MeteringData
                                     .Max(x => x.SendDtm);
                     //LogWriter.LogWrite("Дата сдачи показаний счетчиков считана из БД.", "log.txt");
-                    return new MeteringDataModel()
+                    return new WriteableMeteringDataModel()
                     {
                         MeteringDeviceType = 100,
                         Value = "999",
@@ -194,7 +194,7 @@ namespace UkSender.DAL.DataAccess
             catch (EntityCommandExecutionException)
             {
                 //LogWriter.LogWrite("Проблема получения из БД даты сдачи показаний, проверьте структуру таблицы.", "log.txt");
-                return new MeteringDataModel()
+                return new WriteableMeteringDataModel()
                 {
                     MeteringDeviceType = 100,
                     Value = "999",
@@ -208,7 +208,7 @@ namespace UkSender.DAL.DataAccess
 
         #region Insert методы
 
-        public static bool InsertMeteringDataToDbase(List<MeteringDataModel> meteringData)
+        public static bool InsertMeteringDataToDbase(List<WriteableMeteringDataModel> meteringData)
         {
             try
             {
