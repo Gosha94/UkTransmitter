@@ -52,7 +52,6 @@
     <Compile Include="Enums\LogType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\LogService.cs" />
-    <Compile Include="Worker\LogWriter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

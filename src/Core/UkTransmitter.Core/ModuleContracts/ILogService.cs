@@ -5,5 +5,7 @@
     /// </summary>
     public interface ILogService
     {
+
+        void WriteIntoLog();
     }
 }
