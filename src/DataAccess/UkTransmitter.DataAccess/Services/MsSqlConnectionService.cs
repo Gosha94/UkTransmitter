@@ -17,6 +17,7 @@ namespace UkTransmitter.DataAccess.Services
         public MsSqlConnectionService()
         {
             this._parsingApi = new JsonParsingApi();
+            
             this._configuration = new JsonDBaseConfiguration();
             
             this.ConnectionString = this._parsingApi.GetDbaseConfigurationData(this._configuration);

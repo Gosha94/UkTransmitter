@@ -22,7 +22,7 @@ namespace UkTransmitter.Wpf.FrontEnd.ApplicationPages.Auth
 
         private void CallAuthService()
         {
-            _authService.SendCall();
+            //_authService.SendCall();
         }
 
         public string Title { get => "AuthPage"; }

@@ -34,17 +34,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AesCryptoLib">
+      <HintPath>..\..\..\..\..\Libs\AesCryptoLib\src\API\AesCryptoLib.Api\bin\Release\AesCryptoLib.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="JsonConfigParser.Api">
+    <Reference Include="JsonConfigParser.Api, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Libs\JsonConfigParser\src\API\JsonConfigParser.Api\bin\Release\JsonConfigParser.Api.dll</HintPath>
     </Reference>
-    <Reference Include="JsonConfigParser.Core">
-      <HintPath>..\..\..\..\..\Libs\JsonConfigParser\src\Core\JsonConfigParser.Core\bin\Release\JsonConfigParser.Core.dll</HintPath>
+    <Reference Include="JsonConfigParser.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Libs\JsonConfigParser\src\API\JsonConfigParser.Api\bin\Release\JsonConfigParser.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -66,14 +71,14 @@
     <Compile Include="Services\MsSqlConnectionService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\Core\UkTransmitter.Core\UkTransmitter.Core.csproj">
       <Project>{81C9F97E-3B68-42F7-8040-2D4710203AD8}</Project>
       <Name>UkTransmitter.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

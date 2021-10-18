@@ -1,26 +1,29 @@
 ﻿using System;
+using System.Linq;
+using AesCryptoLib.Api.PublicApi;
 using UkTransmitter.Core.Contracts;
 using UkTransmitter.Core.CommonModels;
 using UkTransmitter.DataAccess.Contexts;
 using UkTransmitter.DataAccess.Services;
-using System.Linq;
 
 namespace UkTransmitter.DataAccess.Repos
 {
-
+    
     /// <summary>
     /// Репозиторий обрабатывает пользовательские данные
     /// </summary>
     public class UserAuthRepository : IReadOnlyRepository<InputUserAuthModel>
     {
+        private CryptoApiController _cryptoController;
         private readonly UserAuthContext _dbaseAuthContext;
         private readonly MsSqlConnectionService _connectionService;
 
         public UserAuthRepository()
         {
+            this._cryptoController = new CryptoApiController();
             this._connectionService = new MsSqlConnectionService();
-            var connString = this._connectionService.GetConnectionString();
 
+            var connString = this._connectionService.GetConnectionString();
             this._dbaseAuthContext = new UserAuthContext(connString);
         }
 

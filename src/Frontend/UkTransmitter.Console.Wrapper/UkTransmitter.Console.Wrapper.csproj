@@ -4,16 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BC22221A-9EEE-42C0-BB75-6958F6863F51}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UkTransmitter.AuthModule</RootNamespace>
-    <AssemblyName>UkTransmitter.AuthModule</AssemblyName>
+    <ProjectGuid>{8491418C-FB72-4E3E-A2AC-9ACF9D860F19}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>UkTransmitter.Console.Wrapper</RootNamespace>
+    <AssemblyName>UkTransmitter.Console.Wrapper</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -41,19 +43,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums\CryptType.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\CustomAuthService.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="Worker\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\UkTransmitter.Core\UkTransmitter.Core.csproj">
       <Project>{81C9F97E-3B68-42F7-8040-2D4710203AD8}</Project>
       <Name>UkTransmitter.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\DataAccess\UkTransmitter.DataAccess\UkTransmitter.DataAccess.csproj">
+      <Project>{55481DD9-42DC-49A6-82B0-C3CE9F729763}</Project>
+      <Name>UkTransmitter.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Modules\UkTransmitter.AuthModule\UkTransmitter.AuthModule.csproj">
+      <Project>{BC22221A-9EEE-42C0-BB75-6958F6863F51}</Project>
+      <Name>UkTransmitter.AuthModule</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

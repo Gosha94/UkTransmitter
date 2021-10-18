@@ -1,5 +1,4 @@
-﻿using AesCryptoLib.Api.PublicApi;
-using UkTransmitter.Core.Contracts;
+﻿using UkTransmitter.Core.Contracts;
 using UkTransmitter.Core.CommonModels;
 using UkTransmitter.Core.ModuleContracts;
 
@@ -12,7 +11,7 @@ namespace UkTransmitter.AuthModule.Service
     {
         
         private InputUserAuthModel _inputUserData;
-        private CryptoApiController _cryptoController;
+        
         private IReadOnlyRepository<InputUserAuthModel> _userDataRepository;
 
         #region Constructor
@@ -21,8 +20,6 @@ namespace UkTransmitter.AuthModule.Service
         {
             this._inputUserData = inputUserModel;
             this._userDataRepository = customRepositoryFromDi;
-            this._cryptoController = new CryptoApiController();
-
         }
 
         #endregion
@@ -35,14 +32,6 @@ namespace UkTransmitter.AuthModule.Service
         #endregion
 
         #region Private Methods
-
-        /// <summary>
-        /// Метод шифрует данные пользователя для дальнейшей проверки
-        /// </summary>
-        private void EncryptInputUserModel()
-        {
-            this._cryptoController.
-        }
 
         #endregion
     }

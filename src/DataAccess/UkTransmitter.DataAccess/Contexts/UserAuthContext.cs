@@ -5,8 +5,7 @@ namespace UkTransmitter.DataAccess.Contexts
 {
     public class UserAuthContext : DbContext
     {
-        public UserAuthContext(string connectionString) 
-            : base(connectionString)
+        public UserAuthContext(string connectionString) : base(connectionString)
         { }
 
         /// <summary>
