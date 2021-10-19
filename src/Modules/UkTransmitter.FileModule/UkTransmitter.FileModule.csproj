@@ -44,7 +44,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\FileService.cs" />
     <Compile Include="Worker\CatalogHepler.cs" />
-    <Compile Include="Worker\DirectoryChecker.cs" />
     <Compile Include="Worker\WordSaver.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -54,6 +53,7 @@
     <Content Include="OfficeApiLibs\Microsoft.Office.Interop.Word.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Config\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

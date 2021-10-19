@@ -7,15 +7,14 @@ namespace UkTransmitter.FileModule.Service
     /// </summary>
     public sealed class FileService : IFileService
     {
-        #region Private Methods
-
-        #endregion
-
-        #region Public Methods
-
-        #endregion
+        public ILogService LogService { get; set; }
 
         #region Constructor
+        
+        public FileService()
+        {
+
+        }
 
         #endregion
 
@@ -26,5 +25,6 @@ namespace UkTransmitter.FileModule.Service
         #region Private Methods
 
         #endregion
+
     }
 }
