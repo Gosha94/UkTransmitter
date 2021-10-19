@@ -6,6 +6,11 @@
     public interface ILogService
     {
 
-        void WriteIntoLog();
+        /// <summary>
+        /// Запись сообщения об ошибке в Лог
+        /// </summary>
+        /// <param name="message">Сообщение</param>
+        void WriteIntoLog(string message);
+
     }
 }
