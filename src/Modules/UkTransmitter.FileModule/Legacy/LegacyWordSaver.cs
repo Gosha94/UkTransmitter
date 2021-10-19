@@ -1,11 +1,12 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using UkTransmitter.FileModule.Models;
 using Word = Microsoft.Office.Interop.Word;
 
 namespace UkSender.FrontEnd.Workers
 {
-    class WordSaver
+    internal sealed class LegacyWordSaver
     {
         private Word.Application wordApp;        
         private Word.Document wordDocument;
@@ -19,18 +20,18 @@ namespace UkSender.FrontEnd.Workers
         Object trueObj = true;
         Object falseObj = false;
 
-        public WordSaver( string pathToNewWordFile, string[] dataInForm, int monthForFileName )
+        public LegacyWordSaver(FillingAttachmentDto fillAttachDto /*string pathToNewWordFile, string[] dataInForm, int monthForFileName*/ )
         {
             try
             {
-                if ( !Directory.Exists( pathToNewWordFile ) )
+                if ( !Directory.Exists(fillAttachDto.PathNewAttachmentFile) )
                 {
-                    CreateWordDirectory(pathToNewWordFile);
-                    FullingTemplateDataFromForm( pathToNewWordFile, monthForFileName, dataInForm );
+                    CreateWordDirectory(fillAttachDto.PathNewAttachmentFile);
+                    FillingTemplateDataFromForm(fillAttachDto.PathNewAttachmentFile, fillAttachDto.CurrentMonth, fillAttachDto.ReceivedFromUserMeteringDataArray);
                 }
                 else
                 {
-                    FullingTemplateDataFromForm(pathToNewWordFile, monthForFileName, dataInForm);
+                    FillingTemplateDataFromForm(fillAttachDto.PathNewAttachmentFile, fillAttachDto.CurrentMonth, fillAttachDto.ReceivedFromUserMeteringDataArray);
                 }
             }
 
@@ -44,7 +45,7 @@ namespace UkSender.FrontEnd.Workers
             Directory.CreateDirectory( path );
         }
 
-        private void FullingTemplateDataFromForm( string pathNewFile, int month, string[] meteringData )
+        private void FillingTemplateDataFromForm( string pathNewFile, int month, string[] meteringData )
         {
             // Создаём объект документа
             wordDocument = null;

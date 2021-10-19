@@ -41,10 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\AttachFileConfiguration.cs" />
+    <Compile Include="Models\FillingAttachmentDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\FileService.cs" />
-    <Compile Include="Worker\CatalogHepler.cs" />
-    <Compile Include="Worker\WordSaver.cs" />
+    <Compile Include="Legacy\LegacyWordSaver.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Templates\AttachmentTemplate.dot" />
@@ -52,10 +53,7 @@
   <ItemGroup>
     <Content Include="OfficeApiLibs\Microsoft.Office.Interop.Word.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Config\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\Core\UkTransmitter.Core\UkTransmitter.Core.csproj">
       <Project>{81C9F97E-3B68-42F7-8040-2D4710203AD8}</Project>

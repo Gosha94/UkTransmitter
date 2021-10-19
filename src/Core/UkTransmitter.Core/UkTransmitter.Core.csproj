@@ -47,6 +47,7 @@
     <Compile Include="CommonModels\ReadableEmailModel.cs" />
     <Compile Include="CommonModels\WriteableMeteringDataModel.cs" />
     <Compile Include="CommonModels\ReadableUserAuthorizeModel.cs" />
+    <Compile Include="Contracts\IAttachmentConfiguration.cs" />
     <Compile Include="Contracts\IReadOnlyRepository.cs" />
     <Compile Include="Contracts\IWritableRepository.cs" />
     <Compile Include="ModuleContracts\IAuthService.cs" />

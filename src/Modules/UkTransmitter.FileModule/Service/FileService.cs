@@ -1,19 +1,25 @@
-﻿using UkTransmitter.Core.ModuleContracts;
+﻿using UkTransmitter.Core.Contracts;
+using UkTransmitter.Core.ModuleContracts;
 
 namespace UkTransmitter.FileModule.Service
 {
+
     /// <summary>
     /// Служба по работе с файловой системой
     /// </summary>
     public sealed class FileService : IFileService
     {
-        public ILogService LogService { get; set; }
+
+        public IAttachmentConfiguration AttachmentConfiguration { get; private set; }
+        public ILogService LogService { get; private set; }
+
 
         #region Constructor
-        
-        public FileService()
-        {
 
+        public FileService(IAttachmentConfiguration attachConfigFromDi, ILogService logServiceFromDi)
+        {
+            this.AttachmentConfiguration = attachConfigFromDi;
+            this.LogService = logServiceFromDi;
         }
 
         #endregion
