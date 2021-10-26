@@ -7,7 +7,7 @@ namespace UkTransmitter.FileModule.Config
     /// <summary>
     /// Класс-конфигурация файла для отправки в УК
     /// </summary>
-    internal sealed class AttachFileConfiguration : IAttachmentConfiguration
+    internal sealed class AttachmentConfiguration : IAttachmentConfiguration
     {
 
         private string _applicationStartDirectory;
@@ -28,7 +28,7 @@ namespace UkTransmitter.FileModule.Config
         /// <summary>
         /// Конструктор по умолчанию
         /// </summary>
-        public AttachFileConfiguration()
+        public AttachmentConfiguration()
         {
             SetPathsFromStaticConfig();
         }
@@ -42,6 +42,7 @@ namespace UkTransmitter.FileModule.Config
         /// </summary>
         private void SetPathsFromStaticConfig()
         {
+
             this._applicationStartDirectory = AppDomain.CurrentDomain.BaseDirectory;
 
             this.PathToMainCatalog = this._applicationStartDirectory + this._mainCatalogName;

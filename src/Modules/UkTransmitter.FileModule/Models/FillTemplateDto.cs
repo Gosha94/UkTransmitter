@@ -1,10 +1,12 @@
-﻿namespace UkTransmitter.FileModule.Models
+﻿using System;
+
+namespace UkTransmitter.FileModule.Models
 {
 
     /// <summary>
     /// Модель DTO без логики, с данными заполнения файла-вложения
     /// </summary>
-    public sealed class FillingAttachmentDto
+    internal sealed class FillTemplateDto
     {
 
         /// <summary>
@@ -13,10 +15,10 @@
         public string PathNewAttachmentFile { get; set; }
 
         /// <summary>
-        /// Свойство определяет текущий месяц
+        /// Свойство определяет текущую дату
         /// </summary>
-        public int CurrentMonth { get; set; }
-
+        public DateTime CurrentDate { get; } = DateTime.Now;
+        
         /// <summary>
         /// Свойство определяет массив данных с показаниями счетчиков
         /// </summary>
