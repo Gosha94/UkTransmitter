@@ -14,12 +14,15 @@ namespace UkTransmitter.FileModule.Config
 
         private readonly string _mainCatalogName = "MeteringData\\";
         private readonly string _attachCatalogName = "Attachments\\";
+        private readonly string _attachExtension = ".doc";
 
         #region Public Properties
 
         public string PathToMainCatalog { get; private set; }
 
         public string PathToAttachmentsCatalog { get; private set; }
+
+        public string AttachmentExtension { get => this._attachExtension; }
 
         #endregion
 

@@ -6,7 +6,7 @@ namespace UkTransmitter.FileModule.Models
     /// <summary>
     /// Модель DTO без логики, с данными заполнения файла-вложения
     /// </summary>
-    internal sealed class FillTemplateDto
+    public sealed class DataForFillTemplateDto
     {
 
         /// <summary>

@@ -17,5 +17,10 @@
         /// </summary>
         string PathToAttachmentsCatalog { get; }
 
+        /// <summary>
+        /// Свойство описывает Расширение финального файла с Показаниями для УК 
+        /// </summary>
+        string AttachmentExtension { get; }
+
     }
 }

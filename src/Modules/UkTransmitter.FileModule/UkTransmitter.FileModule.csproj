@@ -48,7 +48,7 @@
   <ItemGroup>
     <Compile Include="Config\AttachmentConfiguration.cs" />
     <Compile Include="Config\TemplateConfiguration.cs" />
-    <Compile Include="Models\FillTemplateDto.cs" />
+    <Compile Include="Models\DataForFillTemplateDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\FileService.cs" />
     <Compile Include="Legacy\LegacyWordSaver.cs" />
