@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using System.Text;
 using UkTransmitter.Core.Contracts;
 using UkTransmitter.FileModule.Models;
 using Word = Microsoft.Office.Interop.Word;
@@ -57,9 +58,14 @@ namespace UkSender.FrontEnd.Workers
             this._dataForFillTemplateDto = dataForFillTemplateDtofromOutside;
 
             CreateWordDirectory();
-            FillingTemplateFromDto();
-            SaveDoc(pathNewFile, month);
-            ExitWord();
+            FillingTemplateFromDtoLegacy();
+            var combinedMontYearFileName = CombineCurrentMonthAndYearForAttachmentFileName();
+            SaveAttachmentLegacy
+            (
+                this._dataForFillTemplateDto.PathNewAttachmentFile,
+                combinedMontYearFileName
+            );
+            ExitWordLegacy();
         }
 
         #endregion
@@ -90,7 +96,7 @@ namespace UkSender.FrontEnd.Workers
         /// <summary>
         /// Метод заполняет Шаблон Word данными из Dto объекта
         /// </summary>
-        private void FillingTemplateFromDto()
+        private void FillingTemplateFromDtoLegacy()
         {
             var pathNewFile         = this._dataForFillTemplateDto.PathNewAttachmentFile;
             var month               = this._dataForFillTemplateDto.CurrentDate.Month;
@@ -98,52 +104,62 @@ namespace UkSender.FrontEnd.Workers
             var meteringDataArr     = this._dataForFillTemplateDto.ReceivedFromUserMeteringDataArray;
 
             // Создаём объект документа
-            _wordDocument = null;
+            this._wordDocument = null;
 
             // Создаем объект Word - равносильно запуску Word
-            _wordApp = new Word.Application();
-            
+            this._wordApp = new Word.Application();
+
             // Делаем его невидимым
-            _wordApp.Visible = false;
+            this._wordApp.Visible = false;
 
             // Путь до шаблона документа
             string source = CombinePathToWordTemplate() + this._templateConfig.TemplateFileName;
 
             // Открываем шаблон как новый документ
-            _wordDocument = _wordApp.Documents.Open(source);
-            _wordDocument.Activate();
+            this._wordDocument = this._wordApp.Documents.Open(source);
+            this._wordDocument.Activate();
 
             // Добавляем информацию
             // wBookmarks содержит все закладки
-            _wordBookmarks = _wordDocument.Bookmarks;
+            this._wordBookmarks = this._wordDocument.Bookmarks;
 
             int i = 0;
 
-            foreach (Word.Bookmark mark in _wordBookmarks)
+            foreach (Word.Bookmark mark in this._wordBookmarks)
             {
-                _wordRange = mark.Range;
-                _wordRange.Text = meteringDataArr[i];
+                this._wordRange = mark.Range;
+                this._wordRange.Text = meteringDataArr[i];
                 i++;
             }
 
-            _find = _wordApp.Selection.Find;
-            _find.Text = this._templateConfig.TemplateDateTagName;
-            _find.Replacement.Text = DateTime.Today.ToString("d");
-            _find.Execute
+            this._find = _wordApp.Selection.Find;
+            this._find.Text = this._templateConfig.TemplateDateTagName;
+            this._find.Replacement.Text = DateTime.Today.ToString("d");
+            this._find.Execute
                 (
-                FindText: Type.Missing,
-                MatchCase: false,
-                MatchWholeWord: false,
-                MatchWildcards: false,
-                MatchSoundsLike: _missingObj,
-                MatchAllWordForms: false,
-                Forward: true,
-                Wrap: Word.WdFindWrap.wdFindContinue,
-                Format: false,
-                ReplaceWith: _missingObj,
-                Replace: Word.WdReplace.wdReplaceAll
+                    FindText: Type.Missing,
+                    MatchCase: false,
+                    MatchWholeWord: false,
+                    MatchWildcards: false,
+                    MatchSoundsLike: this._missingObj,
+                    MatchAllWordForms: false,
+                    Forward: true,
+                    Wrap: Word.WdFindWrap.wdFindContinue,
+                    Format: false,
+                    ReplaceWith: this._missingObj,
+                    Replace: Word.WdReplace.wdReplaceAll
                 );
         }
+
+        /// <summary>
+        /// Метод формирует имя файла из текущих месяца и года (Пример: октябрь 2021 имеет вид 102021)
+        /// </summary>
+        /// <returns></returns>
+        private string CombineCurrentMonthAndYearForAttachmentFileName()
+            => new StringBuilder()
+                .Append(this._dataForFillTemplateDto.CurrentDate.Month)
+                .Append(this._dataForFillTemplateDto.CurrentDate.Year)
+                .ToString();
 
         /// <summary>
         /// Метод комбинирует путь к каталогу с Шаблоном
@@ -157,9 +173,12 @@ namespace UkSender.FrontEnd.Workers
         /// </summary>
         /// <param name="path">Путь для сохранения файла Word</param>
         /// <param name="combinedMonthYearDate">Подготовленное имя файла Word, состоящее из месяца и года</param>
-        private void SaveDoc(string path, int combinedMonthYearDate)
+        private void SaveAttachmentLegacy(string path, string combinedMonthYearDate)
         {
-            if ( File.Exists(path + combinedMonthYearDate + this._attachConfig.AttachmentExtension) )
+            var monthYearDate = combinedMonthYearDate;
+            var monthYearDateWithExtension = monthYearDate + this._attachConfig.AttachmentExtension;
+
+            if ( File.Exists(path + monthYearDateWithExtension) )
             {
                 this.IsFileExist = true;
                 // TODO Залогировать это сообщение - MessageBox.Show("Файл с показаниями за текущий месяц уже существует!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -169,39 +188,39 @@ namespace UkSender.FrontEnd.Workers
             {
                 IsFileExist = false;
                 Object pathToSaveObj = path + combinedMonthYearDate;
-                _wordDocument.SaveAs
+                this._wordDocument.SaveAs
                     (
-                    ref pathToSaveObj,
-                    Word.WdSaveFormat.wdFormatDocument,
-                    ref _missingObj,
-                    ref _missingObj,
-                    ref _missingObj,
-                    ref _missingObj,
-                    ref _missingObj,
-                    ref _missingObj,
-                    ref _missingObj,
-                    ref _missingObj,
-                    ref _missingObj,
-                    ref _missingObj,
-                    ref _missingObj,
-                    ref _missingObj,
-                    ref _missingObj,
-                    ref _missingObj
+                        ref pathToSaveObj,
+                        Word.WdSaveFormat.wdFormatDocument,
+                        ref this._missingObj,
+                        ref this._missingObj,
+                        ref this._missingObj,
+                        ref this._missingObj,
+                        ref this._missingObj,
+                        ref this._missingObj,
+                        ref this._missingObj,
+                        ref this._missingObj,
+                        ref this._missingObj,
+                        ref this._missingObj,
+                        ref this._missingObj,
+                        ref this._missingObj,
+                        ref this._missingObj,
+                        ref this._missingObj
                     );
             }
         }
 
-        private void ExitWord()
+        private void ExitWordLegacy()
         {
 
-            _wordApp.ActiveDocument.Close();
+            this._wordApp.ActiveDocument.Close();
             Object saveChanges = Word.WdSaveOptions.wdDoNotSaveChanges;
             Object originalFormat = Word.WdOriginalFormat.wdWordDocument;
             Object routeDocument = Type.Missing;
-            _wordApp.Quit(ref saveChanges,
+            this._wordApp.Quit(ref saveChanges,
                          ref originalFormat,
                          ref routeDocument);
-            _wordApp = null;
+            this._wordApp = null;
 
         }
 
