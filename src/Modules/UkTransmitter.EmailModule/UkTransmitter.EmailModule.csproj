@@ -72,10 +72,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Config\GmailStaticConfiguration.cs" />
+    <Compile Include="Config\GmailConfiguration.cs" />
     <Compile Include="Config\GoogleOAuth2StaticConfig.cs" />
-    <Compile Include="Models\GmailMessageModel.cs" />
     <Compile Include="Config\CustomJsonEmailSettings.cs" />
+    <Compile Include="Contracts\IEmailConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\EmailService.cs" />
     <Compile Include="Worker\GmailSender.cs" />
