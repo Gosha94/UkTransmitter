@@ -16,6 +16,9 @@ namespace UkSender.EmailAPI.Controllers
     /// </summary>
     internal sealed class GmailSender
     {
+
+        
+
         public static GmailService GetService()
         {
             UserCredential credential;

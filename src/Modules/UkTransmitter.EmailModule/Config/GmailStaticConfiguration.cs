@@ -1,4 +1,6 @@
-﻿namespace UkTransmitter.BackEnd.Configs.Email
+﻿using Google.Apis.Gmail.v1;
+
+namespace UkTransmitter.BackEnd.Configs.Email
 {
     /// <summary>
     /// Конфигурация почтовой службы
@@ -7,6 +9,6 @@
     {
         public static string HostAddress { get; private set; } = @" my email address";
         public static string GmailAttach { get; private set; } = @"D:\UkTransmitterConfig\GmailAPI\GmailAttachments\";
-        //public static string[] Scopes { get; private set; } = { GmailService.Scope.MailGoogleCom };
+        public static string[] Scopes { get; private set; } = { GmailService.Scope.MailGoogleCom };
     }
 }

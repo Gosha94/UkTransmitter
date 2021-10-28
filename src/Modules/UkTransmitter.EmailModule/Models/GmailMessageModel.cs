@@ -4,7 +4,7 @@ using System.Globalization;
 namespace UkSender.EmailAPI.Models
 {
     /// <summary>
-    /// Модель данных для отправки письма в УК через GmailApi
+    /// Модель данных для отправки письма в УК через Gmail API
     /// </summary>
     internal sealed class GmailMessageModel
     {
@@ -37,12 +37,12 @@ namespace UkSender.EmailAPI.Models
         /// <summary>
         /// Вложение
         /// </summary>
-        public static string Attachment   { get; private set; }
+        public static string Attachment { get; private set; }
         
         /// <summary>
         /// Id письма, выдается GmailApi после отправки
         /// </summary>
-        public static string MessageId    { get; private set; }
+        public static string MessageId { get; private set; }
 
     }
 }

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Data.Entity.Core;
-using System.Collections.Generic;
-using UkTransmitter.Core.CommonModels;
-using UkTransmitter.DataAccess.Contexts;
-
-namespace UkSender.DAL.DataAccess
+﻿namespace UkSender.DAL.DataAccess
 {
     public static class DbLoader
     {
