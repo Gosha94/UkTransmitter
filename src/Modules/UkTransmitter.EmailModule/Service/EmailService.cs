@@ -7,23 +7,37 @@ namespace UkTransmitter.EmailModule.Service
     /// </summary>
     public sealed class EmailService : IEmailService
     {
-        #region Private Methods
+
+        #region Private Fields
+
+
 
         #endregion
 
-        #region Public Methods
+        #region Public Properties
+
+        public ILogService LogService { get; private set; }
 
         #endregion
 
         #region Constructor
 
+        public EmailService()
+        {
+
+        }
+
         #endregion
 
         #region Public API
 
+
+
         #endregion
 
         #region Private Methods
+
+
 
         #endregion
 
