@@ -1,4 +1,6 @@
-﻿namespace UkTransmitter.Core.ModuleContracts
+﻿using System.Threading.Tasks;
+
+namespace UkTransmitter.Core.ModuleContracts
 {
     /// <summary>
     /// Интерфейс службы логирования для изолирования сторонних библиотек
@@ -7,10 +9,10 @@
     {
 
         /// <summary>
-        /// Запись сообщения об ошибке в Лог
+        /// Асинхронная запись сообщения об ошибке в Лог
         /// </summary>
         /// <param name="message">Сообщение</param>
-        void WriteIntoLog(string message);
+        Task WriteIntoLogAsync(string message);
 
     }
 }

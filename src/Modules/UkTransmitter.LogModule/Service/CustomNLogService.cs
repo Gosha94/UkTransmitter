@@ -1,6 +1,7 @@
 ﻿using NLog;
 using NLog.Config;
 using NLog.Targets;
+using System.Threading.Tasks;
 using UkTransmitter.Core.ModuleContracts;
 
 namespace UkTransmitter.LogModule.Service
@@ -40,6 +41,14 @@ namespace UkTransmitter.LogModule.Service
             */
         }
 
+        /// <summary>
+        /// Асинхронный метод записи сообщения в лог, без ожидания выполнения
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public Task WriteIntoLogAsync(string message)
+            => Task.Run( () => _loggerStaticInstance.Debug(message) );
+
         #endregion
 
         #region Private Methods
@@ -53,7 +62,7 @@ namespace UkTransmitter.LogModule.Service
 
             var fileTarget = new FileTarget("logfile")
             {
-                FileName = "file.txt"
+                FileName = "UkTransmitterLogs.txt"
             };
 
             var consoleTarget = new ConsoleTarget
@@ -71,4 +80,5 @@ namespace UkTransmitter.LogModule.Service
         #endregion
 
     }
+
 }

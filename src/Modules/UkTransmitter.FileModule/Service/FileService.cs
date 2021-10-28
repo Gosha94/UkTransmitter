@@ -74,26 +74,26 @@ namespace UkTransmitter.FileModule.Service
         /// Метод асинхронно создает файл вложения на диске
         /// </summary>
         public async Task<bool> CreateAttachmentAsync()
-            => await Task.Run( () => this.CreateAttachment() );
+            => await Task.Run( () => this._legacyWordSaver.CreateAttachmentWithMeteringData() );
 
         #endregion
 
         #region Private Methods
 
         /// <summary>
-        /// Метод-обработчик события существования вложения
+        /// Асинхронный метод-обработчик события существования вложения
         /// </summary>
         private void AttachmentExistHandler()
         {
-            this.LogService.WriteIntoLog($"Попытка повторно сохранить файл с показаниями за текущий месяц! Имя файла: {_dataForFillTemplateDto.CurrentDate.Month}{_dataForFillTemplateDto.CurrentDate.Year}");
+            this.LogService.WriteIntoLogAsync($"Попытка повторно сохранить файл с показаниями за текущий месяц! Имя файла: {_dataForFillTemplateDto.CurrentDate.Month}{_dataForFillTemplateDto.CurrentDate.Year}");
         }
 
         /// <summary>
-        /// Метод-обработчик события создания директории
+        /// Асинхронный метод-обработчик события создания директории
         /// </summary>
         private void DirectoryWasCreatedHandler()
         {
-            this.LogService.WriteIntoLog($"Первая передача показаний в текущем месяце, директория создана: {_dataForFillTemplateDto.CurrentDate.Month}{_dataForFillTemplateDto.CurrentDate.Year}");
+            this.LogService.WriteIntoLogAsync($"Первая передача показаний в текущем месяце, директория создана: {_dataForFillTemplateDto.CurrentDate.Month}{_dataForFillTemplateDto.CurrentDate.Year}");
         }
 
         #endregion

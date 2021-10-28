@@ -14,12 +14,15 @@ namespace UkTransmitter.AuthModule.Service
         
         private IReadOnlyRepository<InputUserAuthModel> _userDataRepository;
 
+        public ILogService LogService { get; private set; }
+
         #region Constructor
 
-        public AuthService(IReadOnlyRepository<InputUserAuthModel> customRepositoryFromDi, InputUserAuthModel inputUserModel)
+        public AuthService(IReadOnlyRepository<InputUserAuthModel> customRepositoryFromDi, ILogService logServiceFromDi, InputUserAuthModel inputUserModel)
         {
             this._inputUserData = inputUserModel;
             this._userDataRepository = customRepositoryFromDi;
+            this.LogService = logServiceFromDi;
         }
 
         #endregion
