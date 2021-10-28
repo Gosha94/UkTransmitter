@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UkTransmitter.FileModule.Models
+namespace UkTransmitter.Core.CommonModels.DTOs
 {
 
     /// <summary>

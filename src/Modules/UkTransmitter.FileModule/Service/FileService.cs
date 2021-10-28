@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using UkSender.FrontEnd.Workers;
+using UkTransmitter.Core.CommonModels.DTOs;
 using UkTransmitter.Core.Contracts;
 using UkTransmitter.Core.ModuleContracts;
-using UkTransmitter.FileModule.Models;
 
 namespace UkTransmitter.FileModule.Service
 {
@@ -30,7 +30,12 @@ namespace UkTransmitter.FileModule.Service
 
         #region Constructor
 
-        public FileService(IAttachmentConfiguration attachConfigFromDi, ITemplateConfiguration templateConfigurationFromDi, ILogService logServiceFromDi)
+        public FileService
+            (
+                IAttachmentConfiguration attachConfigFromDi,
+                ITemplateConfiguration templateConfigurationFromDi,
+                ILogService logServiceFromDi
+            )
         {
 
             #region Dependency Injection

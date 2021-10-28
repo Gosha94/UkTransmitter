@@ -2,8 +2,8 @@
 using System.IO;
 using System.Reflection;
 using System.Text;
+using UkTransmitter.Core.CommonModels.DTOs;
 using UkTransmitter.Core.Contracts;
-using UkTransmitter.FileModule.Models;
 using Word = Microsoft.Office.Interop.Word;
 
 namespace UkSender.FrontEnd.Workers
