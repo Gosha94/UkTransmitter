@@ -56,6 +56,18 @@ namespace UkSender.FrontEnd.Workers
             #endregion
 
             this._dataForFillTemplateDto = dataForFillTemplateDtofromOutside;
+        }
+
+        #endregion
+
+        #region Public Api
+
+        /// <summary>
+        /// Метод создает вложение на диске ПК
+        /// </summary>
+        public bool CreateAttachmentWithMeteringData()
+        {
+            var isFileSaved = false;
 
             CreateWordDirectory();
             FillingTemplateFromDtoLegacy();
@@ -66,6 +78,10 @@ namespace UkSender.FrontEnd.Workers
                 combinedMontYearFileName
             );
             ExitWordLegacy();
+            
+            isFileSaved = true;
+            
+            return isFileSaved;
         }
 
         #endregion
@@ -75,7 +91,6 @@ namespace UkSender.FrontEnd.Workers
         /// <summary>
         /// Метод создает директорию, если она отсутствует
         /// </summary>
-        /// <param name="isDirNotCreated"></param>
         private void CreateWordDirectory()
         {
             var pathForCreate = this._dataForFillTemplateDto.PathNewAttachmentFile;
