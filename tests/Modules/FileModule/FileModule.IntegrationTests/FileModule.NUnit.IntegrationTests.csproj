@@ -9,8 +9,8 @@
     <ProjectGuid>{B545A252-5313-40CE-85C8-89C40FC3C47E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FileModule.IntegrationTests</RootNamespace>
-    <AssemblyName>FileModule.IntegrationTests</AssemblyName>
+    <RootNamespace>FileModule.NUnit.IntegrationTests</RootNamespace>
+    <AssemblyName>FileModule.NUnit.IntegrationTests</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

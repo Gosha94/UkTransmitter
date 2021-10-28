@@ -1,4 +1,5 @@
-﻿using UkTransmitter.Core.Contracts;
+﻿using System.Threading.Tasks;
+using UkTransmitter.Core.Contracts;
 using UkTransmitter.Core.CommonModels;
 using UkTransmitter.Core.ModuleContracts;
 
@@ -29,8 +30,13 @@ namespace UkTransmitter.AuthModule.Service
 
         #region Public API
 
-        public bool IsUserCorrect()
-            => this._userDataRepository.FindEqualModelInDatabase(this._inputUserData);
+        public async Task<bool> IsUserCorrectAsync()
+            => await Task.Run( () =>
+            {
+                var isUserCorrect =  this._userDataRepository.FindEqualModelInDatabase(this._inputUserData);
+                this.LogService.WriteIntoLogAsync($"Наличие пользователя с логином: {this._inputUserData.InsertedLogin} в БД: {isUserCorrect} ");
+                return isUserCorrect;
+            });
 
         #endregion
 

@@ -27,12 +27,12 @@ namespace UkSender.EmailAPI.Models
         /// <summary>
         /// Кому, основной получатель
         /// </summary>
-        public static string To { get; private set; } = "larionov_zhora_94@mail.ru"; //9924107@mail.ru
+        public static string MainTo { get; private set; } = "larionov_zhora_94@mail.ru"; //9924107@mail.ru
 
         /// <summary>
         /// Копия, carbon copy, вторичный получатель письма
         /// </summary>
-        public static string СС { get; private set; } = "gerizch@rambler.ru";   //lik2193@gmail.com
+        public static string CopyTo { get; private set; } = "gerizch@rambler.ru";   //lik2193@gmail.com
 
         /// <summary>
         /// Вложение
@@ -42,6 +42,7 @@ namespace UkSender.EmailAPI.Models
         /// <summary>
         /// Id письма, выдается GmailApi после отправки
         /// </summary>
-        public static string MessageID    { get; private set; }
+        public static string MessageId    { get; private set; }
+
     }
 }

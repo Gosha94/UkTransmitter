@@ -45,7 +45,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UkTransmitter.Console.Wrapp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FileModule", "FileModule", "{19D1D38A-B105-4434-A52E-D02C9499651B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileModule.IntegrationTests", "tests\Modules\FileModule\FileModule.IntegrationTests\FileModule.IntegrationTests.csproj", "{B545A252-5313-40CE-85C8-89C40FC3C47E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileModule.NUnit.IntegrationTests", "tests\Modules\FileModule\FileModule.IntegrationTests\FileModule.NUnit.IntegrationTests.csproj", "{B545A252-5313-40CE-85C8-89C40FC3C47E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EmailModule", "EmailModule", "{53315985-1F04-4B21-A6B4-C409A9EC6CFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailModule.NUnit.IntegrationTests", "tests\Modules\EmailModule\EmailModule.NUnit.IntegrationTests\EmailModule.NUnit.IntegrationTests.csproj", "{FD46E562-2194-48CB-AAEC-490AB40CC1F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,6 +101,10 @@ Global
 		{B545A252-5313-40CE-85C8-89C40FC3C47E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B545A252-5313-40CE-85C8-89C40FC3C47E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B545A252-5313-40CE-85C8-89C40FC3C47E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD46E562-2194-48CB-AAEC-490AB40CC1F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD46E562-2194-48CB-AAEC-490AB40CC1F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD46E562-2194-48CB-AAEC-490AB40CC1F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD46E562-2194-48CB-AAEC-490AB40CC1F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -122,6 +130,8 @@ Global
 		{8491418C-FB72-4E3E-A2AC-9ACF9D860F19} = {F68A92BE-71C2-46BE-A123-E335890470A7}
 		{19D1D38A-B105-4434-A52E-D02C9499651B} = {FD110612-F113-4BD9-B40E-510AC937471B}
 		{B545A252-5313-40CE-85C8-89C40FC3C47E} = {19D1D38A-B105-4434-A52E-D02C9499651B}
+		{53315985-1F04-4B21-A6B4-C409A9EC6CFD} = {FD110612-F113-4BD9-B40E-510AC937471B}
+		{FD46E562-2194-48CB-AAEC-490AB40CC1F3} = {53315985-1F04-4B21-A6B4-C409A9EC6CFD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {192BCC2E-8384-4D04-9085-02695CC6B552}

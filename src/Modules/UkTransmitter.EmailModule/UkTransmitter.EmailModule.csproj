@@ -58,7 +58,6 @@
     <Compile Include="Service\EmailService.cs" />
     <Compile Include="Worker\GmailController.cs" />
     <Compile Include="Worker\GmailSender.cs" />
-    <Compile Include="Worker\EmailWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\UkTransmitter.Core\UkTransmitter.Core.csproj">

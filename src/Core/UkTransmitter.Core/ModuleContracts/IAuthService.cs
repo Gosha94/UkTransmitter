@@ -1,4 +1,6 @@
-﻿namespace UkTransmitter.Core.ModuleContracts
+﻿using System.Threading.Tasks;
+
+namespace UkTransmitter.Core.ModuleContracts
 {
 
     /// <summary>
@@ -13,10 +15,10 @@
         ILogService LogService { get; }
 
         /// <summary>
-        /// Метод проверки существования зарегистрированного пользователя
+        /// Асинхронный метод проверки существования зарегистрированного пользователя
         /// </summary>
         /// <returns></returns>
-        bool IsUserCorrect();
+        Task<bool> IsUserCorrectAsync();
         
     }
 }
