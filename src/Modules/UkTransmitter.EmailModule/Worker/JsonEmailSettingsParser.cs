@@ -19,7 +19,7 @@ namespace UkTransmitter.EmailModule.Worker
             this._emailConfiguration = emailConfigFromDi;
         }
 
-        public CustomJsonEmailSettings GetEmailSettingsFromJsonFile()
+        public CustomJsonEmailModel GetEmailSettingsFromJsonFile()
         {
             var jsonData = File.ReadAllText(this._emailConfiguration.PathToJsonSettingsFile);
             var myDeserializedClass = JsonConvert.DeserializeObject<Root>(jsonData);

@@ -11,6 +11,8 @@ using Google.Apis.Auth.OAuth2;
 using Google.Apis.Gmail.v1.Data;
 using UkTransmitter.BackEnd.Configs.Email;
 using UkTransmitter.EmailModule.Contracts;
+using UkTransmitter.Core.Contracts;
+using UkTransmitter.EmailModule.Config;
 
 namespace UkTransmitter.EmailModule.Worker
 {
@@ -24,6 +26,8 @@ namespace UkTransmitter.EmailModule.Worker
         #region Private Fields
 
         private GmailService _gmailService;
+        private IAttachmentData _attachmentData;
+        private CustomJsonEmailModel _emailSettings;
 
         #endregion
 
@@ -32,23 +36,29 @@ namespace UkTransmitter.EmailModule.Worker
         #endregion
 
         #region Constructor
-        
-        public GmailSender()
+
+        public GmailSender(IAttachmentData attachmentDataFromDi, CustomJsonEmailModel jsonEmailSettings)
         {
+            this._attachmentData = attachmentDataFromDi;
+            this._emailSettings = jsonEmailSettings;
+
             InitializeGmailService();
         }
-
+        
         #endregion
 
         #region Public API
 
         public bool SendEmailMessage()
         {
-
-            var tempMessage = CreateMimeMessage();
+            
+            var tempMessage = CreateMimeMessage(this._attachmentData.PathToNewAttachmentFile);
             var readyToSendMessage = ClearIncorrectSymbolsInMessage(tempMessage);
-
-            _gmailApiService.Users.Messages.Send(message, GmailStaticConfiguration.HostAddress).Execute();
+            
+            // TODO: Вынести константы в конфигу
+            _gmailService.Users.Messages.Send(readyToSendMessage, "Георгий").Execute();
+            
+            return true;
         }
 
         #endregion
@@ -61,29 +71,29 @@ namespace UkTransmitter.EmailModule.Worker
         private void InitializeGmailService()
         {
             UserCredential credential;
-            using (
-                FileStream stream = new FileStream(
-                    GoogleOAuth2Configuration.ClientInfo,
-                    FileMode.Open,
-                    FileAccess.Read
-                    )
-                )
+            
+            using ( FileStream stream = new FileStream(
+                                            GoogleOAuth2Configuration.ClientInfo,
+                                            FileMode.Open,
+                                            FileAccess.Read
+                                            )
+                  )
             {
-                String FolderPath = GoogleOAuth2Configuration.CredentialsInfo;
-                String FilePath = Path.Combine(FolderPath, "APITokenCredentials");
+                var folderPath = GoogleOAuth2Configuration.CredentialsInfo;
+                var filePath = Path.Combine(folderPath, "APITokenCredentials");
 
                 credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                     GoogleClientSecrets.FromStream(stream).Secrets,
                     GoogleOAuth2Configuration.Scopes,
                     "user",
                     CancellationToken.None,
-                    new FileDataStore(FilePath, true)).Result;
+                    new FileDataStore(filePath, true)).Result;
             }
             // Create Gmail API service.
             GmailService service = new GmailService(new BaseClientService.Initializer()
             {
                 HttpClientInitializer = credential,
-                ApplicationName = GmailStaticConfiguration.ApplicationName,
+                ApplicationName = GoogleOAuth2Configuration.ApplicationName,
             });
 
             this._gmailService = service;
@@ -93,19 +103,20 @@ namespace UkTransmitter.EmailModule.Worker
         /// Метод подготовки текста сообщения
         /// </summary>
         /// <returns>Закодированное сообщение со спец. символами</returns>
-        private MimeMessage CreateMimeMessage()
+        private MimeMessage CreateMimeMessage(string pathToAttachment)
         {
             MailMessage mail = new MailMessage();
-            mail.Subject = GmailMessageModel.Subject;
-            mail.From = new MailAddress(GmailMessageModel.From);
+            mail.Subject = this._emailSettings.Subject;
+            mail.From = new MailAddress(this._emailSettings.From);
             mail.BodyEncoding = Encoding.UTF8;
-            mail.Body = GmailMessageModel.Body;
+            mail.Body = this._emailSettings.Body;
             mail.IsBodyHtml = true;
-            string attImg = GmailStaticConfiguration.GmailAttach + "JonWick.jpg";
-
-            mail.Attachments.Add(new Attachment(attImg));
-            mail.To.Add(new MailAddress(GmailMessageModel.To));
-            mail.CC.Add(new MailAddress(GmailMessageModel.СС));
+            
+            string pathToAttach = pathToAttachment;
+            
+            mail.Attachments.Add(new Attachment(pathToAttach));
+            mail.To.Add(new MailAddress(this._emailSettings.MainTo));
+            mail.CC.Add(new MailAddress(this._emailSettings.CopyTo));
 
             var finalMessage = MimeMessage.CreateFromMailMessage(mail);
 

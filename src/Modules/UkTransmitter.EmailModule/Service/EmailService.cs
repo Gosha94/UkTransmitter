@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
-using UkTransmitter.EmailModule.Config;
 using UkTransmitter.EmailModule.Worker;
 using UkTransmitter.Core.ModuleContracts;
 using UkTransmitter.EmailModule.Contracts;
 using UkTransmitter.BackEnd.Configs.Email;
+using UkTransmitter.Core.Contracts;
 
 namespace UkTransmitter.EmailModule.Service
 {
@@ -15,10 +15,8 @@ namespace UkTransmitter.EmailModule.Service
 
         #region Private Fields
 
-        private IEmailConfiguration _emailConfig;
-        private IEmailSender _emailSender;
-        private JsonEmailSettingsParser _jsonParser;
-        private CustomJsonEmailSettings _emailSettings;
+        private readonly IEmailSender _emailSender;
+        private readonly IEmailConfiguration _emailConfig;
 
         #endregion
 
@@ -30,11 +28,21 @@ namespace UkTransmitter.EmailModule.Service
 
         #region Constructor
 
-        public EmailService()
+        public EmailService(IAttachmentData attachmentData)
         {
+
+            #region Dependency Injection
+
+            var attachData = attachmentData;
             this._emailConfig = new GmailConfiguration();
-            this._emailSender = new GmailSender();
-            this._jsonParser = new JsonEmailSettingsParser(this._emailConfig);
+
+            #endregion
+
+            var jsonEmailConfig = new JsonEmailSettingsParser(this._emailConfig)
+                                    .GetEmailSettingsFromJsonFile();
+            
+            this._emailSender = new GmailSender(attachData, jsonEmailConfig);
+
         }
 
         #endregion
@@ -46,9 +54,7 @@ namespace UkTransmitter.EmailModule.Service
         /// </summary>
         /// <returns></returns>
         public bool SendEmail()
-        {
-            this._emailSettings = this._jsonParser.GetEmailSettingsFromJsonFile();
-        }
+            => this._emailSender.SendEmailMessage();
 
         /// <summary>
         /// Асинхронный метод отправки Email сообщения
@@ -56,12 +62,6 @@ namespace UkTransmitter.EmailModule.Service
         /// <returns>Успех отправки письма</returns>
         public async Task<bool> SendEmailAsync()
             => await Task.Run(() => this.SendEmail());
-
-        #endregion
-
-        #region Private Methods
-
-
 
         #endregion
 

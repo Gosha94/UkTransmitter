@@ -74,7 +74,7 @@
   <ItemGroup>
     <Compile Include="Config\GmailConfiguration.cs" />
     <Compile Include="Config\GoogleOAuth2Configuration.cs" />
-    <Compile Include="Config\CustomJsonEmailSettings.cs" />
+    <Compile Include="Config\CustomJsonEmailModel.cs" />
     <Compile Include="Contracts\IEmailConfiguration.cs" />
     <Compile Include="Contracts\IEmailSender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -6,13 +6,13 @@
     /// </summary>
     public class Root
     {
-        public CustomJsonEmailSettings CustomJsonEmailSettings { get; set; }
+        public CustomJsonEmailModel CustomJsonEmailSettings { get; set; }
     }
 
     /// <summary>
     /// Класс описывает содержимое Json файла с настройками Email письма
     /// </summary>
-    public class CustomJsonEmailSettings
+    public class CustomJsonEmailModel
     {
         public string Subject { get; set; }
         public string Body { get; set; }
