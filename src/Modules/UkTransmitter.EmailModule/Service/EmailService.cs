@@ -4,6 +4,7 @@ using UkTransmitter.EmailModule.Worker;
 using UkTransmitter.Core.ModuleContracts;
 using UkTransmitter.EmailModule.Contracts;
 using UkTransmitter.BackEnd.Configs.Email;
+
 namespace UkTransmitter.EmailModule.Service
 {
     /// <summary>
@@ -15,6 +16,7 @@ namespace UkTransmitter.EmailModule.Service
         #region Private Fields
 
         private IEmailConfiguration _emailConfig;
+        private IEmailSender _emailSender;
         private JsonEmailSettingsParser _jsonParser;
         private CustomJsonEmailSettings _emailSettings;
 
@@ -31,6 +33,7 @@ namespace UkTransmitter.EmailModule.Service
         public EmailService()
         {
             this._emailConfig = new GmailConfiguration();
+            this._emailSender = new GmailSender();
             this._jsonParser = new JsonEmailSettingsParser(this._emailConfig);
         }
 
@@ -45,13 +48,12 @@ namespace UkTransmitter.EmailModule.Service
         public bool SendEmail()
         {
             this._emailSettings = this._jsonParser.GetEmailSettingsFromJsonFile();
-
         }
 
         /// <summary>
         /// Асинхронный метод отправки Email сообщения
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Успех отправки письма</returns>
         public async Task<bool> SendEmailAsync()
             => await Task.Run(() => this.SendEmail());
 
@@ -59,7 +61,7 @@ namespace UkTransmitter.EmailModule.Service
 
         #region Private Methods
 
-        private void 
+
 
         #endregion
 

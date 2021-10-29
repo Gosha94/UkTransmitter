@@ -1,5 +1,7 @@
 ﻿using System;
+using MimeKit;
 using System.IO;
+using System.Text;
 using System.Net.Mail;
 using System.Threading;
 using Google.Apis.Gmail.v1;
@@ -8,19 +10,55 @@ using Google.Apis.Util.Store;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Gmail.v1.Data;
 using UkTransmitter.BackEnd.Configs.Email;
+using UkTransmitter.EmailModule.Contracts;
 
-namespace UkSender.EmailAPI.Controllers
+namespace UkTransmitter.EmailModule.Worker
 {
 
     /// <summary>
     /// Класс описывает Отправлятор Писем при помощи Gmail API
     /// </summary>
-    internal sealed class GmailSender
+    internal sealed class GmailSender : IEmailSender
     {
 
-        
+        #region Private Fields
 
-        public GmailService GetService()
+        private GmailService _gmailService;
+
+        #endregion
+
+        #region Public Properties
+
+        #endregion
+
+        #region Constructor
+        
+        public GmailSender()
+        {
+            InitializeGmailService();
+        }
+
+        #endregion
+
+        #region Public API
+
+        public bool SendEmailMessage()
+        {
+
+            var tempMessage = CreateMimeMessage();
+            var readyToSendMessage = ClearIncorrectSymbolsInMessage(tempMessage);
+
+            _gmailApiService.Users.Messages.Send(message, GmailStaticConfiguration.HostAddress).Execute();
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        /// <summary>
+        /// Метод инициализирует службу Google Mail
+        /// </summary>
+        private void InitializeGmailService()
         {
             UserCredential credential;
             using (
@@ -47,10 +85,15 @@ namespace UkSender.EmailAPI.Controllers
                 HttpClientInitializer = credential,
                 ApplicationName = GmailStaticConfiguration.ApplicationName,
             });
-            return service;
+
+            this._gmailService = service;
         }
 
-        public static MimeKit.MimeMessage CreateMimeMessage()
+        /// <summary>
+        /// Метод подготовки текста сообщения
+        /// </summary>
+        /// <returns>Закодированное сообщение со спец. символами</returns>
+        private MimeMessage CreateMimeMessage()
         {
             MailMessage mail = new MailMessage();
             mail.Subject = GmailMessageModel.Subject;
@@ -64,34 +107,23 @@ namespace UkSender.EmailAPI.Controllers
             mail.To.Add(new MailAddress(GmailMessageModel.To));
             mail.CC.Add(new MailAddress(GmailMessageModel.СС));
 
-            var finalMessage = MimeKit.MimeMessage.CreateFromMailMessage(mail);
+            var finalMessage = MimeMessage.CreateFromMailMessage(mail);
 
             return finalMessage;
         }
 
-
-        private Action _sendEmailAction;
-        private EmailService _gmailApiService;
-
-        public GmailSender()
+        /// <summary>
+        /// Метод заменяет особые символы кодировки в сообщении, сохраняя его читабельный формат
+        /// </summary>
+        private Message ClearIncorrectSymbolsInMessage(MimeMessage messageToReplace)
         {
-            _gmailApiService = GmailController.GetService();
-            _sendEmailAction = SendMessageAction;
-        }
+            
+            var dirtyMessage = messageToReplace;
+            var clearMessage = new Message();
 
-        public void SendMessageAsync()
-        {
-            Task.Run(_sendEmailAction);
-        }
-
-        private void SendMessageAction()
-        {
-            Message message = new Message();
-            var tempMail = GmailController.CreateMimeMessage();
-
-            using (var stream = new MemoryStream())
+            using ( var stream = new MemoryStream() )
             {
-                tempMail.WriteTo(stream);
+                dirtyMessage.WriteTo(stream);
 
                 var buffer = stream.ToArray();
                 var base64 = Convert.ToBase64String(buffer)
@@ -99,11 +131,13 @@ namespace UkSender.EmailAPI.Controllers
                     .Replace('/', '_')
                     .Replace("=", "");
 
-                message.Raw = base64;
+                clearMessage.Raw = base64;
             }
 
-            _gmailApiService.Users.Messages.Send(message, GmailStaticConfiguration.HostAddress).Execute();
+            return clearMessage;
         }
+
+        #endregion
 
     }
 }
