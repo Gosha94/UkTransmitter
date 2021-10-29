@@ -7,6 +7,7 @@ using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Gmail.v1.Data;
+using UkTransmitter.BackEnd.Configs.Email;
 
 namespace UkSender.EmailAPI.Controllers
 {
@@ -19,23 +20,23 @@ namespace UkSender.EmailAPI.Controllers
 
         
 
-        public static GmailService GetService()
+        public GmailService GetService()
         {
             UserCredential credential;
             using (
                 FileStream stream = new FileStream(
-                    GmailStaticConfiguration.ClientInfo,
+                    GoogleOAuth2Configuration.ClientInfo,
                     FileMode.Open,
                     FileAccess.Read
                     )
                 )
             {
-                String FolderPath = GmailStaticConfiguration.CredentialsInfo;
+                String FolderPath = GoogleOAuth2Configuration.CredentialsInfo;
                 String FilePath = Path.Combine(FolderPath, "APITokenCredentials");
 
                 credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                     GoogleClientSecrets.FromStream(stream).Secrets,
-                    GmailStaticConfiguration.Scopes,
+                    GoogleOAuth2Configuration.Scopes,
                     "user",
                     CancellationToken.None,
                     new FileDataStore(FilePath, true)).Result;

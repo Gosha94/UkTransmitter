@@ -1,9 +1,9 @@
-﻿using UkTransmitter.EmailModule.Worker;
+﻿using System.Threading.Tasks;
+using UkTransmitter.EmailModule.Config;
+using UkTransmitter.EmailModule.Worker;
 using UkTransmitter.Core.ModuleContracts;
 using UkTransmitter.EmailModule.Contracts;
 using UkTransmitter.BackEnd.Configs.Email;
-using System.Threading.Tasks;
-
 namespace UkTransmitter.EmailModule.Service
 {
     /// <summary>
@@ -16,7 +16,8 @@ namespace UkTransmitter.EmailModule.Service
 
         private IEmailConfiguration _emailConfig;
         private JsonEmailSettingsParser _jsonParser;
-        
+        private CustomJsonEmailSettings _emailSettings;
+
         #endregion
 
         #region Public Properties
@@ -43,6 +44,7 @@ namespace UkTransmitter.EmailModule.Service
         /// <returns></returns>
         public bool SendEmail()
         {
+            this._emailSettings = this._jsonParser.GetEmailSettingsFromJsonFile();
 
         }
 
@@ -53,13 +55,11 @@ namespace UkTransmitter.EmailModule.Service
         public async Task<bool> SendEmailAsync()
             => await Task.Run(() => this.SendEmail());
 
-        var result = this._jsonParser.GetEmailSettingsFromJsonFile();
-
         #endregion
 
         #region Private Methods
 
-
+        private void 
 
         #endregion
 

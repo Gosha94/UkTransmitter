@@ -9,6 +9,12 @@ namespace UkTransmitter.Core.ModuleContracts
     {
 
         /// <summary>
+        /// Запись сообщения об ошибке в Лог
+        /// </summary>
+        /// <param name="message">Сообщение</param>
+        void WriteIntoLog(string message);
+
+        /// <summary>
         /// Асинхронная запись сообщения об ошибке в Лог
         /// </summary>
         /// <param name="message">Сообщение</param>

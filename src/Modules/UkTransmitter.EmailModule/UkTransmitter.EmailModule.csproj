@@ -73,7 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config\GmailConfiguration.cs" />
-    <Compile Include="Config\GoogleOAuth2StaticConfig.cs" />
+    <Compile Include="Config\GoogleOAuth2Configuration.cs" />
     <Compile Include="Config\CustomJsonEmailSettings.cs" />
     <Compile Include="Contracts\IEmailConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
