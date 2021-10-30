@@ -4,7 +4,7 @@
     /// <summary>
     /// Класс описывает корневой элемент Json файла
     /// </summary>
-    public class Root
+    internal sealed class Root
     {
         public CustomJsonEmailModel CustomJsonEmailSettings { get; set; }
     }
@@ -12,7 +12,7 @@
     /// <summary>
     /// Класс описывает содержимое Json файла с настройками Email письма
     /// </summary>
-    public class CustomJsonEmailModel
+    internal sealed class CustomJsonEmailModel
     {
         public string Subject { get; set; }
         public string Body { get; set; }

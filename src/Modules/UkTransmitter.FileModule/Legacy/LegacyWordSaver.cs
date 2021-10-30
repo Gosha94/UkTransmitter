@@ -1,12 +1,11 @@
 ﻿using System;
 using System.IO;
-using System.Reflection;
 using System.Text;
-using UkTransmitter.Core.CommonModels.DTOs;
+using System.Reflection;
 using UkTransmitter.Core.Contracts;
 using Word = Microsoft.Office.Interop.Word;
 
-namespace UkSender.FrontEnd.Workers
+namespace UkTransmitter.FileModule.Legacy
 {
 
     /// <summary>
@@ -24,7 +23,7 @@ namespace UkSender.FrontEnd.Workers
         private Word.Find _find;
         private Object _missingObj = Missing.Value;
 
-        private DataForFillTemplateDto _dataForFillTemplateDto;
+        private IDtoForFillAttachment _dataForFillTemplateDto;
         private ITemplateConfiguration _templateConfig;
         private IAttachmentConfiguration _attachConfig;
 
@@ -42,7 +41,7 @@ namespace UkSender.FrontEnd.Workers
 
         public LegacyWordSaver
             (
-                DataForFillTemplateDto dataForFillTemplateDtofromOutside,
+                IDtoForFillAttachment dataForFillTemplateDtoFromDi,
                 ITemplateConfiguration templateConfigFromDi,
                 IAttachmentConfiguration attachConfigFromDi
             )
@@ -55,7 +54,7 @@ namespace UkSender.FrontEnd.Workers
 
             #endregion
 
-            this._dataForFillTemplateDto = dataForFillTemplateDtofromOutside;
+            this._dataForFillTemplateDto = dataForFillTemplateDtoFromDi;
         }
 
         #endregion

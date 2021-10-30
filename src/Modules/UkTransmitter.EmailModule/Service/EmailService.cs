@@ -1,9 +1,11 @@
 ﻿using System.Threading.Tasks;
 using UkTransmitter.Core.Contracts;
 using UkTransmitter.EmailModule.Worker;
+using UkTransmitter.EmailModule.Configs;
 using UkTransmitter.Core.ModuleContracts;
-using UkTransmitter.BackEnd.Configs.Email;
 using UkTransmitter.EmailModule.Contracts;
+using UkTransmitter.EmailModule.Config;
+using UkTransmitter.EmailModule.Workers;
 
 namespace UkTransmitter.EmailModule.Service
 {
@@ -28,20 +30,24 @@ namespace UkTransmitter.EmailModule.Service
 
         #region Constructor
 
-        public EmailService(IAttachmentData attachmentData)
+        public EmailService
+        (
+            IDtoForFillAttachment attachmentDataFromDi,
+            ILogService logServiceFromDi
+        )
         {
 
             #region Dependency Injection
 
-            var attachData = attachmentData;
+            var attachmentData = attachmentDataFromDi;
             this._emailConfig = new GmailConfiguration();
 
             #endregion
 
             var jsonEmailConfig = new JsonEmailSettingsParser(this._emailConfig)
                                     .GetEmailSettingsFromJsonFile();
-            
-            this._emailSender = new GmailSender(attachData, jsonEmailConfig);
+
+            this._emailSender = new GmailSender(attachmentData, jsonEmailConfig);
 
         }
 

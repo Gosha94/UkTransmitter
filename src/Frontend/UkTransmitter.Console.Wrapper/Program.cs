@@ -1,12 +1,20 @@
 ﻿using System.Threading.Tasks;
+
 using UkTransmitter.Core.Contracts;
-using UkTransmitter.DataAccess.Repos;
 using UkTransmitter.Core.CommonModels;
-using UkTransmitter.LogModule.Service;
-using UkTransmitter.FileModule.Config;
-using UkTransmitter.AuthModule.Service;
-using UkTransmitter.FileModule.Service;
 using UkTransmitter.Core.ModuleContracts;
+
+using UkTransmitter.DataAccess.Repos;
+
+using UkTransmitter.AuthModule.Service;
+
+using UkTransmitter.FileModule.Config;
+using UkTransmitter.FileModule.Service;
+
+using UkTransmitter.EmailModule.Service;
+
+using UkTransmitter.LogModule.Service;
+using UkTransmitter.Core.CommonModels.DTOs;
 
 namespace UkTransmitter.Console.Wrapper
 {
@@ -28,16 +36,25 @@ namespace UkTransmitter.Console.Wrapper
 
             IAuthService customAuthService = new AuthService(repos, inputTestModel, testLogService);
 
-            IAttachmentConfiguration attachmentConfig = new AttachmentConfiguration();
-            ITemplateConfiguration templateConfig = new TemplateConfiguration();
+            IAttachmentConfiguration testAttachmentConfig = new AttachmentConfiguration();
+            ITemplateConfiguration testTemplateConfig = new TemplateConfiguration();
+            
+            IDtoForFillAttachment testAttachmentData = new DataForFillTemplateDto()
+            {
+                PathToNewAttachmentFile = testAttachmentConfig.PathToAttachmentsCatalog,
+                ReceivedFromUserMeteringDataArray = new string[] { "1_2_3", "4_5_6", "7_8_9", "10_11_12" }
+            };
 
             IFileService testFileService =
                 new FileService
                 (
-                    attachmentConfig,
-                    templateConfig,
+                    testAttachmentConfig,
+                    testTemplateConfig,
+                    testAttachmentData,
                     testLogService
                 );
+
+            IEmailService testEmailService = new EmailService(testAttachmentData, testLogService);
 
             #endregion
 
@@ -61,7 +78,7 @@ namespace UkTransmitter.Console.Wrapper
 
             #region Test Email Service
 
-
+            AsyncCheckEmailServiceStub(testEmailService);
 
             #endregion
 

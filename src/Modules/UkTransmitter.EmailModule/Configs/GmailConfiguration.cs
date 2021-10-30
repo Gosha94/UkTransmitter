@@ -1,7 +1,8 @@
 ﻿using UkTransmitter.EmailModule.Contracts;
 
-namespace UkTransmitter.BackEnd.Configs.Email
+namespace UkTransmitter.EmailModule.Configs
 {
+
     /// <summary>
     /// Конфигурация для работы с почтой Gmail
     /// </summary>

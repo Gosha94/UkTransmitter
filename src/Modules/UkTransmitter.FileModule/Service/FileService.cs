@@ -1,8 +1,7 @@
 ﻿using System.Threading.Tasks;
-using UkSender.FrontEnd.Workers;
 using UkTransmitter.Core.Contracts;
+using UkTransmitter.FileModule.Legacy;
 using UkTransmitter.Core.ModuleContracts;
-using UkTransmitter.Core.CommonModels.DTOs;
 
 namespace UkTransmitter.FileModule.Service
 {
@@ -16,7 +15,6 @@ namespace UkTransmitter.FileModule.Service
         #region Private Fields
 
         private LegacyWordSaver _legacyWordSaver;
-        private DataForFillTemplateDto _dataForFillTemplateDtoStub;
 
         #endregion
 
@@ -24,6 +22,7 @@ namespace UkTransmitter.FileModule.Service
 
         public IAttachmentConfiguration AttachmentConfiguration { get; private set; }
         public ITemplateConfiguration TemplateConfiguration { get; private set; }
+        public IDtoForFillAttachment DtoForFillAttachment { get; private set; }
         public ILogService LogService { get; private set; }
 
         #endregion
@@ -34,6 +33,7 @@ namespace UkTransmitter.FileModule.Service
             (
                 IAttachmentConfiguration attachConfigFromDi,
                 ITemplateConfiguration templateConfigurationFromDi,
+                IDtoForFillAttachment dtoForFillAttachmentFromDi,
                 ILogService logServiceFromDi
             )
         {
@@ -44,19 +44,15 @@ namespace UkTransmitter.FileModule.Service
 
             this.TemplateConfiguration = templateConfigurationFromDi;
 
+            this.DtoForFillAttachment = dtoForFillAttachmentFromDi;
+
             this.LogService = logServiceFromDi;
 
             #endregion
 
-            this._dataForFillTemplateDtoStub = new DataForFillTemplateDto()
-            {
-                PathToNewAttachmentFile = this.AttachmentConfiguration.PathToAttachmentsCatalog,
-                ReceivedFromUserMeteringDataArray = new string[] {"1_2_3","4_5_6","7_8_9","10_11_12"}
-            };
+            this._legacyWordSaver = new LegacyWordSaver(this.DtoForFillAttachment, this.TemplateConfiguration, this.AttachmentConfiguration);
 
-            this._legacyWordSaver = new LegacyWordSaver(this._dataForFillTemplateDtoStub, this.TemplateConfiguration, this.AttachmentConfiguration);
-
-            #region Subscribe On File Events
+            #region Subscribe On Legacy Word Saver Events
 
             this._legacyWordSaver.AttachmentAlredyExistEvent += AttachmentExistHandler;
             this._legacyWordSaver.DirectoryWasCreatedEvent += DirectoryWasCreatedHandler;
@@ -84,7 +80,7 @@ namespace UkTransmitter.FileModule.Service
         /// </summary>
         private void AttachmentExistHandler()
         {
-            this.LogService.WriteIntoLogAsync($"Попытка повторно сохранить файл с показаниями за текущий месяц! Имя файла: {_dataForFillTemplateDtoStub.CurrentDate.Month}{_dataForFillTemplateDtoStub.CurrentDate.Year}");
+            this.LogService.WriteIntoLogAsync($"Попытка повторно сохранить файл с показаниями за текущий месяц! Имя файла: {DtoForFillAttachment.CurrentDate.Month}{DtoForFillAttachment.CurrentDate.Year}");
         }
 
         /// <summary>
@@ -92,7 +88,7 @@ namespace UkTransmitter.FileModule.Service
         /// </summary>
         private void DirectoryWasCreatedHandler()
         {
-            this.LogService.WriteIntoLogAsync($"Первая передача показаний в текущем месяце, директория создана: {_dataForFillTemplateDtoStub.CurrentDate.Month}{_dataForFillTemplateDtoStub.CurrentDate.Year}");
+            this.LogService.WriteIntoLogAsync($"Первая передача показаний в текущем месяце, директория создана: {DtoForFillAttachment.CurrentDate.Month}{DtoForFillAttachment.CurrentDate.Year}");
         }
 
         #endregion

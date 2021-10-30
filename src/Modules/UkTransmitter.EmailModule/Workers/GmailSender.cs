@@ -9,12 +9,12 @@ using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Gmail.v1.Data;
-using UkTransmitter.BackEnd.Configs.Email;
-using UkTransmitter.EmailModule.Contracts;
 using UkTransmitter.Core.Contracts;
 using UkTransmitter.EmailModule.Config;
+using UkTransmitter.BackEnd.Configs.Email;
+using UkTransmitter.EmailModule.Contracts;
 
-namespace UkTransmitter.EmailModule.Worker
+namespace UkTransmitter.EmailModule.Workers
 {
 
     /// <summary>
@@ -26,7 +26,7 @@ namespace UkTransmitter.EmailModule.Worker
         #region Private Fields
 
         private GmailService _gmailService;
-        private IAttachmentData _attachmentData;
+        private IDtoForFillAttachment _attachmentData;
         private CustomJsonEmailModel _emailSettings;
 
         #endregion
@@ -37,7 +37,7 @@ namespace UkTransmitter.EmailModule.Worker
 
         #region Constructor
 
-        public GmailSender(IAttachmentData attachmentDataFromDi, CustomJsonEmailModel jsonEmailSettings)
+        public GmailSender(IDtoForFillAttachment attachmentDataFromDi, CustomJsonEmailModel jsonEmailSettings)
         {
             this._attachmentData = attachmentDataFromDi;
             this._emailSettings = jsonEmailSettings;
