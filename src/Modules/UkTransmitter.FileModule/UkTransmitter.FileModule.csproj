@@ -53,7 +53,9 @@
     <Compile Include="Legacy\LegacyWordSaver.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Templates\AttachmentTemplate.dot" />
+    <None Include="Templates\AttachmentTemplate.dot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="OfficeApiLibs\Microsoft.Office.Interop.Word.dll" />

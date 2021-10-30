@@ -7,7 +7,7 @@ namespace UkTransmitter.FileModule.Config
     /// <summary>
     /// Класс-конфигурация файла для отправки в УК
     /// </summary>
-    internal sealed class AttachmentConfiguration : IAttachmentConfiguration
+    public sealed class AttachmentConfiguration : IAttachmentConfiguration
     {
 
         private string _applicationStartDirectory;

@@ -5,6 +5,8 @@ using UkTransmitter.AuthModule.Service;
 using UkTransmitter.Core.ModuleContracts;
 using UkTransmitter.LogModule.Service;
 using System.Threading.Tasks;
+using UkTransmitter.FileModule.Service;
+using UkTransmitter.FileModule.Config;
 
 namespace UkTransmitter.Console.Wrapper
 {
@@ -16,7 +18,7 @@ namespace UkTransmitter.Console.Wrapper
             #region Dependency Injection
 
             // D:\Projects\_NET\WPF\UkTransmitter\src\Frontend\UkTransmitter.Console.Wrapper\bin\Debug\UkTransmitterLogs.txt
-            ILogService testLogger = new CustomNLogService();
+            ILogService testLogService = new CustomNLogService();
             IReadOnlyRepository<InputUserAuthModel> repos = new UserAuthRepository();
             InputUserAuthModel inputTestModel = new InputUserAuthModel()
             {
@@ -24,25 +26,36 @@ namespace UkTransmitter.Console.Wrapper
                 InsertedPwd = "1111"
             };
 
-            IAuthService customAuthService = new AuthService(repos, inputTestModel, testLogger);
+            IAuthService customAuthService = new AuthService(repos, inputTestModel, testLogService);
+
+            IAttachmentConfiguration attachmentConfig = new AttachmentConfiguration();
+            ITemplateConfiguration templateConfig = new TemplateConfiguration();
+
+            IFileService testFileService =
+                new FileService
+                (
+                    attachmentConfig,
+                    templateConfig,
+                    testLogService
+                );
 
             #endregion
 
             #region Test Auth Service
 
-            AsyncCheckAuthService(customAuthService);
+            AsyncCheckAuthServiceStub(customAuthService);
 
             #endregion
 
             #region Test File Service
 
-
+            AsyncCheckFileServiceStub(testFileService);
 
             #endregion
 
             #region Test Log Service
 
-            AsyncCheckLogService(testLogger);
+            AsyncCheckLogServiceStub(testLogService);
 
             #endregion
 
@@ -58,7 +71,7 @@ namespace UkTransmitter.Console.Wrapper
 
         }
 
-        private static async void AsyncCheckAuthService(IAuthService authService)
+        private static async void AsyncCheckAuthServiceStub(IAuthService authService)
         {
             var isUserExist = await authService.IsUserCorrectAsync();
 
@@ -66,14 +79,28 @@ namespace UkTransmitter.Console.Wrapper
             {
                 System.Console.WriteLine("Auth Service Working Correct! Access Granted!");
             }
+            else
+            {
+                System.Console.WriteLine("Auth Service Working Correct! Access Denied! User Incorrect!");
+            }
+
         }
 
-        private static async void AsyncCheckFileService(IFileService fileService)
+        private static async void AsyncCheckFileServiceStub(IFileService fileService)
         {
+            var isAttachmentWasCreated = await fileService.CreateAttachmentAsync();
             
+            if (isAttachmentWasCreated)
+            {
+                System.Console.WriteLine("File Service Working Correct! Attachment Was Created!");
+            }
+            else
+            {
+                System.Console.WriteLine("Auth Service is Broken! Error occured! Attachment not creted!");
+            }
         }
 
-        private static async void AsyncCheckLogService(ILogService logService)
+        private static async void AsyncCheckLogServiceStub(ILogService logService)
         {
             await Task.Run(() =>
             {
@@ -82,7 +109,7 @@ namespace UkTransmitter.Console.Wrapper
             });
         }
 
-        private static async void AsyncCheckEmailService(IEmailService emailService)
+        private static async void AsyncCheckEmailServiceStub(IEmailService emailService)
         {
 
         }

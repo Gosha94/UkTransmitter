@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using UkSender.FrontEnd.Workers;
-using UkTransmitter.Core.CommonModels.DTOs;
 using UkTransmitter.Core.Contracts;
 using UkTransmitter.Core.ModuleContracts;
+using UkTransmitter.Core.CommonModels.DTOs;
 
 namespace UkTransmitter.FileModule.Service
 {
@@ -16,7 +16,7 @@ namespace UkTransmitter.FileModule.Service
         #region Private Fields
 
         private LegacyWordSaver _legacyWordSaver;
-        private DataForFillTemplateDto _dataForFillTemplateDto;
+        private DataForFillTemplateDto _dataForFillTemplateDtoStub;
 
         #endregion
 
@@ -48,13 +48,13 @@ namespace UkTransmitter.FileModule.Service
 
             #endregion
 
-            this._dataForFillTemplateDto = new DataForFillTemplateDto()
+            this._dataForFillTemplateDtoStub = new DataForFillTemplateDto()
             {
-                PathNewAttachmentFile = this.AttachmentConfiguration.PathToAttachmentsCatalog,
+                PathToNewAttachmentFile = this.AttachmentConfiguration.PathToAttachmentsCatalog,
                 ReceivedFromUserMeteringDataArray = new string[] {"1_2_3","4_5_6","7_8_9","10_11_12"}
             };
 
-            this._legacyWordSaver = new LegacyWordSaver(this._dataForFillTemplateDto, this.TemplateConfiguration, this.AttachmentConfiguration);
+            this._legacyWordSaver = new LegacyWordSaver(this._dataForFillTemplateDtoStub, this.TemplateConfiguration, this.AttachmentConfiguration);
 
             #region Subscribe On File Events
 
@@ -68,16 +68,10 @@ namespace UkTransmitter.FileModule.Service
         #endregion
 
         #region Public API
-
-        /// <summary>
-        /// Метод создает файл вложения на диске
-        /// </summary>
+        
         public bool CreateAttachment()
             => this._legacyWordSaver.CreateAttachmentWithMeteringData();
-
-        /// <summary>
-        /// Метод асинхронно создает файл вложения на диске
-        /// </summary>
+        
         public async Task<bool> CreateAttachmentAsync()
             => await Task.Run( () => this._legacyWordSaver.CreateAttachmentWithMeteringData() );
 
@@ -90,7 +84,7 @@ namespace UkTransmitter.FileModule.Service
         /// </summary>
         private void AttachmentExistHandler()
         {
-            this.LogService.WriteIntoLogAsync($"Попытка повторно сохранить файл с показаниями за текущий месяц! Имя файла: {_dataForFillTemplateDto.CurrentDate.Month}{_dataForFillTemplateDto.CurrentDate.Year}");
+            this.LogService.WriteIntoLogAsync($"Попытка повторно сохранить файл с показаниями за текущий месяц! Имя файла: {_dataForFillTemplateDtoStub.CurrentDate.Month}{_dataForFillTemplateDtoStub.CurrentDate.Year}");
         }
 
         /// <summary>
@@ -98,7 +92,7 @@ namespace UkTransmitter.FileModule.Service
         /// </summary>
         private void DirectoryWasCreatedHandler()
         {
-            this.LogService.WriteIntoLogAsync($"Первая передача показаний в текущем месяце, директория создана: {_dataForFillTemplateDto.CurrentDate.Month}{_dataForFillTemplateDto.CurrentDate.Year}");
+            this.LogService.WriteIntoLogAsync($"Первая передача показаний в текущем месяце, директория создана: {_dataForFillTemplateDtoStub.CurrentDate.Month}{_dataForFillTemplateDtoStub.CurrentDate.Year}");
         }
 
         #endregion

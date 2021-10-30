@@ -3,7 +3,7 @@
 namespace UkTransmitter.FileModule.Config
 {
     
-    internal sealed class TemplateConfiguration : ITemplateConfiguration
+    public sealed class TemplateConfiguration : ITemplateConfiguration
     {
 
         private readonly string _templateFileName = "AttachmentTemplate.dot";

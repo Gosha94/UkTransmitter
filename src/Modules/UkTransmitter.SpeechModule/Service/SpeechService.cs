@@ -164,7 +164,7 @@ namespace UkTransmitter.SpeechModule.Service
         //        waveFile = null;
         //    }
         //}
-
+        public ILogService LogService => throw new System.NotImplementedException();
     }
 
 }

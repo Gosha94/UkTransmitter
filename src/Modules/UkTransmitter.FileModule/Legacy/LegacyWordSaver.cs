@@ -74,7 +74,7 @@ namespace UkSender.FrontEnd.Workers
             var combinedMontYearFileName = CombineCurrentMonthAndYearForAttachmentFileName();
             SaveAttachmentLegacy
             (
-                this._dataForFillTemplateDto.PathNewAttachmentFile,
+                this._dataForFillTemplateDto.PathToNewAttachmentFile,
                 combinedMontYearFileName
             );
             ExitWordLegacy();
@@ -93,7 +93,7 @@ namespace UkSender.FrontEnd.Workers
         /// </summary>
         private void CreateWordDirectory()
         {
-            var pathForCreate = this._dataForFillTemplateDto.PathNewAttachmentFile;
+            var pathForCreate = this._dataForFillTemplateDto.PathToNewAttachmentFile;
 
             if ( CheckExistingDirectory() )
             {
@@ -106,14 +106,14 @@ namespace UkSender.FrontEnd.Workers
         ///  Метод проверяет наличие созданной директории на диске
         /// </summary>
         private bool CheckExistingDirectory()
-            => !Directory.Exists(this._dataForFillTemplateDto.PathNewAttachmentFile);
+            => !Directory.Exists(this._dataForFillTemplateDto.PathToNewAttachmentFile);
 
         /// <summary>
         /// Метод заполняет Шаблон Word данными из Dto объекта
         /// </summary>
         private void FillingTemplateFromDtoLegacy()
         {
-            var pathNewFile         = this._dataForFillTemplateDto.PathNewAttachmentFile;
+            var pathNewFile         = this._dataForFillTemplateDto.PathToNewAttachmentFile;
             var month               = this._dataForFillTemplateDto.CurrentDate.Month;
             var year                = this._dataForFillTemplateDto.CurrentDate.Year;
             var meteringDataArr     = this._dataForFillTemplateDto.ReceivedFromUserMeteringDataArray;

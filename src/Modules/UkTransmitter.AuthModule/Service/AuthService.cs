@@ -30,13 +30,15 @@ namespace UkTransmitter.AuthModule.Service
 
         #region Public API
 
+        public bool IsUserCorrect()
+        {
+            var isUserCorrect = this._userDataRepository.FindEqualModelInDatabase(this._inputUserData);
+            this.LogService.WriteIntoLogAsync($"Наличие пользователя с логином: {this._inputUserData.InsertedLogin} в БД: {isUserCorrect} ");
+            return isUserCorrect;
+        }
+
         public async Task<bool> IsUserCorrectAsync()
-            => await Task.Run( () =>
-            {
-                var isUserCorrect =  this._userDataRepository.FindEqualModelInDatabase(this._inputUserData);
-                this.LogService.WriteIntoLogAsync($"Наличие пользователя с логином: {this._inputUserData.InsertedLogin} в БД: {isUserCorrect} ");
-                return isUserCorrect;
-            });
+            => await Task.Run(() => IsUserCorrect());
 
         #endregion
 

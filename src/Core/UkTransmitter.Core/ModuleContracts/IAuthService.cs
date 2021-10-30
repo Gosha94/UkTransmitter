@@ -15,6 +15,12 @@ namespace UkTransmitter.Core.ModuleContracts
         ILogService LogService { get; }
 
         /// <summary>
+        /// Метод проверки существования зарегистрированного пользователя
+        /// </summary>
+        /// <returns></returns>
+        bool IsUserCorrect();
+
+        /// <summary>
         /// Асинхронный метод проверки существования зарегистрированного пользователя
         /// </summary>
         /// <returns></returns>

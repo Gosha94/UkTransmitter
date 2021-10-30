@@ -59,6 +59,10 @@
       <Project>{BC22221A-9EEE-42C0-BB75-6958F6863F51}</Project>
       <Name>UkTransmitter.AuthModule</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Modules\UkTransmitter.FileModule\UkTransmitter.FileModule.csproj">
+      <Project>{66FB9A78-CAA0-49BB-A377-3D7D348578E7}</Project>
+      <Name>UkTransmitter.FileModule</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Modules\UkTransmitter.LogModule\UkTransmitter.LogModule.csproj">
       <Project>{1D860FA0-574B-4DE7-9929-EB1DA26D7C7C}</Project>
       <Name>UkTransmitter.LogModule</Name>
