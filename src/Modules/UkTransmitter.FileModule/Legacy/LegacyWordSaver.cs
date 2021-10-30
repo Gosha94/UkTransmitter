@@ -72,11 +72,13 @@ namespace UkSender.FrontEnd.Workers
             CreateWordDirectory();
             FillingTemplateFromDtoLegacy();
             var combinedMontYearFileName = CombineCurrentMonthAndYearForAttachmentFileName();
+            
             SaveAttachmentLegacy
             (
                 this._dataForFillTemplateDto.PathToNewAttachmentFile,
                 combinedMontYearFileName
             );
+            
             ExitWordLegacy();
             
             isFileSaved = true;
@@ -151,19 +153,19 @@ namespace UkSender.FrontEnd.Workers
             this._find.Text = this._templateConfig.TemplateDateTagName;
             this._find.Replacement.Text = DateTime.Today.ToString("d");
             this._find.Execute
-                (
-                    FindText: Type.Missing,
-                    MatchCase: false,
-                    MatchWholeWord: false,
-                    MatchWildcards: false,
-                    MatchSoundsLike: this._missingObj,
-                    MatchAllWordForms: false,
-                    Forward: true,
-                    Wrap: Word.WdFindWrap.wdFindContinue,
-                    Format: false,
-                    ReplaceWith: this._missingObj,
-                    Replace: Word.WdReplace.wdReplaceAll
-                );
+            (
+                FindText: Type.Missing,
+                MatchCase: false,
+                MatchWholeWord: false,
+                MatchWildcards: false,
+                MatchSoundsLike: this._missingObj,
+                MatchAllWordForms: false,
+                Forward: true,
+                Wrap: Word.WdFindWrap.wdFindContinue,
+                Format: false,
+                ReplaceWith: this._missingObj,
+                Replace: Word.WdReplace.wdReplaceAll
+            );
         }
 
         /// <summary>

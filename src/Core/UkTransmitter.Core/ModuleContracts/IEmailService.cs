@@ -1,4 +1,6 @@
-﻿namespace UkTransmitter.Core.ModuleContracts
+﻿using System.Threading.Tasks;
+
+namespace UkTransmitter.Core.ModuleContracts
 {
     /// <summary>
     /// Интерфейс почтовой службы для изоляции сторонних библиотек
@@ -10,6 +12,18 @@
         /// Подключаемая служба логирования
         /// </summary>
         ILogService LogService { get; }
+
+        /// <summary>
+        /// Метод отправки Email сообщения
+        /// </summary>
+        /// <returns></returns>
+        bool SendEmail();
+
+        /// <summary>
+        /// Асинхронный метод отправки Email сообщения
+        /// </summary>
+        /// <returns>Успех отправки письма</returns>
+        Task<bool> SendEmailAsync();
 
     }
 }

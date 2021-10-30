@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
+using UkTransmitter.Core.Contracts;
 using UkTransmitter.EmailModule.Worker;
 using UkTransmitter.Core.ModuleContracts;
-using UkTransmitter.EmailModule.Contracts;
 using UkTransmitter.BackEnd.Configs.Email;
-using UkTransmitter.Core.Contracts;
+using UkTransmitter.EmailModule.Contracts;
 
 namespace UkTransmitter.EmailModule.Service
 {
@@ -48,18 +48,10 @@ namespace UkTransmitter.EmailModule.Service
         #endregion
 
         #region Public API
-
-        /// <summary>
-        /// Метод отправки Email сообщения
-        /// </summary>
-        /// <returns></returns>
+        
         public bool SendEmail()
             => this._emailSender.SendEmailMessage();
-
-        /// <summary>
-        /// Асинхронный метод отправки Email сообщения
-        /// </summary>
-        /// <returns>Успех отправки письма</returns>
+        
         public async Task<bool> SendEmailAsync()
             => await Task.Run(() => this.SendEmail());
 

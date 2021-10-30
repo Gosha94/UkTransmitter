@@ -1,12 +1,12 @@
-﻿using UkTransmitter.Core.Contracts;
+﻿using System.Threading.Tasks;
+using UkTransmitter.Core.Contracts;
 using UkTransmitter.DataAccess.Repos;
 using UkTransmitter.Core.CommonModels;
-using UkTransmitter.AuthModule.Service;
-using UkTransmitter.Core.ModuleContracts;
 using UkTransmitter.LogModule.Service;
-using System.Threading.Tasks;
-using UkTransmitter.FileModule.Service;
 using UkTransmitter.FileModule.Config;
+using UkTransmitter.AuthModule.Service;
+using UkTransmitter.FileModule.Service;
+using UkTransmitter.Core.ModuleContracts;
 
 namespace UkTransmitter.Console.Wrapper
 {
