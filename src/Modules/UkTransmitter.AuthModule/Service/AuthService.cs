@@ -19,10 +19,10 @@ namespace UkTransmitter.AuthModule.Service
 
         #region Constructor
 
-        public AuthService(IReadOnlyRepository<InputUserAuthModel> customRepositoryFromDi, ILogService logServiceFromDi, InputUserAuthModel inputUserModel)
+        public AuthService(IReadOnlyRepository<InputUserAuthModel> customRepositoryFromDi, InputUserAuthModel inputUserModel, ILogService logServiceFromDi)
         {
-            this._inputUserData = inputUserModel;
             this._userDataRepository = customRepositoryFromDi;
+            this._inputUserData = inputUserModel;
             this.LogService = logServiceFromDi;
         }
 
