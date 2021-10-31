@@ -1,13 +1,10 @@
-﻿
-using UkTransmitter.EmailModule.Contracts;
-
-namespace UkTransmitter.EmailModule.Models
+﻿namespace UkTransmitter.EmailModule.Models
 {
 
     /// <summary>
     /// Класс описывает содержимое Json файла с настройками Email письма
     /// </summary>
-    internal sealed class CustomJsonEmailModel
+    internal sealed class CommonEmailSettings
     {
         public string Subject { get; set; }
         public string Body { get; set; }

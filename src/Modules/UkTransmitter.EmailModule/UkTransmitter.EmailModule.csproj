@@ -75,9 +75,10 @@
     <Compile Include="Configs\ElasticEmailConfiguration.cs" />
     <Compile Include="Configs\CommonEmailConfiguration.cs" />
     <Compile Include="Configs\GoogleOAuth2Configuration.cs" />
-    <Compile Include="Models\CustomJsonEmailModel.cs" />
+    <Compile Include="Models\CommonEmailSettings.cs" />
     <Compile Include="Contracts\IEmailSender.cs" />
-    <Compile Include="Models\JsonRootElementModel.cs" />
+    <Compile Include="Models\CommonConfigRootModel.cs" />
+    <Compile Include="Models\ElasticApiConfigRootModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\EmailService.cs" />
     <Compile Include="Converters\ConcreteTypeConverter.cs" />

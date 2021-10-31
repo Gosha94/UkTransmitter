@@ -1,13 +1,11 @@
-﻿using UkTransmitter.EmailModule.Contracts;
-
-namespace UkTransmitter.EmailModule.Configs
+﻿namespace UkTransmitter.EmailModule.Configs
 {
 
     /// <summary>
     /// Конфигурация для работы с почтовым API Elastic Email (https://help.elasticemail.com)
     /// </summary>
-    internal sealed class ElasticEmailConfiguration : IEmailConfiguration
+    internal sealed class ElasticEmailConfiguration
     {
-        public string PathToJsonEmailSettingsFile { get; private set; } = @"D:\UkTransmitterConfig\EmailSettings\UserSettings\CustomEmailSettings.json";
+        public string PathToEmailApiSettings { get; private set; } = @"D:\UkTransmitterConfig\EmailSettings\ElasticEmailAPI\ClientCredentials\ElasticApiSettings.json";
     }
 }

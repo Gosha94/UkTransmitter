@@ -8,6 +8,6 @@ namespace UkTransmitter.EmailModule.Configs
     /// </summary>
     internal sealed class CommonEmailConfiguration
     {
-        public string PathToJsonEmailSettingsFile { get; private set; } = @"D:\UkTransmitterConfig\EmailSettings\UserSettings\CustomEmailSettings.json";
+        public string PathToJsonEmailSettingsFile { get; private set; } = @"D:\UkTransmitterConfig\EmailSettings\UserSettings\CommonEmailSettings.json";
     }
 }
