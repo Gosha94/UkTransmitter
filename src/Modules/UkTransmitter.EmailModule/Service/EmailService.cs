@@ -39,7 +39,7 @@ namespace UkTransmitter.EmailModule.Service
             #region Dependency Injection
 
             var attachmentData = attachmentDataFromDi;
-            this._emailConfig = new GmailConfiguration();
+            this._emailConfig = new CommonEmailConfiguration();
 
             #endregion
 

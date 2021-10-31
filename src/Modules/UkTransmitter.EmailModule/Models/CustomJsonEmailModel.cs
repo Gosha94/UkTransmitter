@@ -1,15 +1,8 @@
-﻿using UkTransmitter.EmailModule.Contracts;
+﻿
+using UkTransmitter.EmailModule.Contracts;
 
-namespace UkTransmitter.EmailModule.Configs
+namespace UkTransmitter.EmailModule.Models
 {
-
-    /// <summary>
-    /// Класс описывает корневой элемент Json файла
-    /// </summary>
-    internal sealed class EmailDataRoot : IRootConfigurationElement<CustomJsonEmailModel>
-    {
-        public CustomJsonEmailModel CustomEmailSettings { get; set; }
-    }
 
     /// <summary>
     /// Класс описывает содержимое Json файла с настройками Email письма

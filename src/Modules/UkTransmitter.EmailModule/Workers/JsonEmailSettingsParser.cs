@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Newtonsoft.Json;
-using UkTransmitter.EmailModule.Configs;
 using UkTransmitter.EmailModule.Contracts;
+using UkTransmitter.EmailModule.Models;
 
 namespace UkTransmitter.EmailModule.Worker
 {
@@ -19,11 +19,11 @@ namespace UkTransmitter.EmailModule.Worker
             this._emailConfiguration = emailConfigFromDi;
         }
 
-        public IChildrenConfigurationElement GetEmailSettingsFromJsonFile(IRootConfigurationElement rootConfigurationElement)
+        public CustomJsonEmailModel GetEmailSettingsFromJsonFile()
         {
             
-            var jsonData = File.ReadAllText(this._emailConfiguration.PathToJsonSettingsFile);
-            var myDeserializedClass = JsonConvert.DeserializeObject<>(jsonData);
+            var jsonData = File.ReadAllText(this._emailConfiguration.PathToJsonEmailSettingsFile);
+            var myDeserializedClass = ()JsonConvert.DeserializeObject(jsonData, typeof(T));
             return myDeserializedClass.CustomEmailSettings;
         }
 
