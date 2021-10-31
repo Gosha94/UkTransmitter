@@ -65,11 +65,11 @@ namespace UkTransmitter.FileModule.Service
 
         #region Public API
         
-        public bool CreateAttachment()
+        public string CreateAttachment()
             => this._legacyWordSaver.CreateAttachmentWithMeteringData();
         
-        public async Task<bool> CreateAttachmentAsync()
-            => await Task.Run( () => this._legacyWordSaver.CreateAttachmentWithMeteringData() );
+        public async Task<string> CreateAttachmentAsync()
+            => await Task.Run( () => CreateAttachment() );
 
         #endregion
 

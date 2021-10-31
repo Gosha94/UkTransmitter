@@ -64,25 +64,23 @@ namespace UkTransmitter.FileModule.Legacy
         /// <summary>
         /// Метод создает вложение на диске ПК
         /// </summary>
-        public bool CreateAttachmentWithMeteringData()
+        public string CreateAttachmentWithMeteringData()
         {
-            var isFileSaved = false;
+            var pathOfSavedAttach = String.Empty;
 
             CreateWordDirectory();
             FillingTemplateFromDtoLegacy();
             var combinedMontYearFileName = CombineCurrentMonthAndYearForAttachmentFileName();
-            
-            SaveAttachmentLegacy
+
+            pathOfSavedAttach = SaveAttachmentLegacy
             (
                 this._dataForFillTemplateDto.PathToNewAttachmentFile,
                 combinedMontYearFileName
             );
             
             ExitWordLegacy();
-            
-            isFileSaved = true;
-            
-            return isFileSaved;
+
+            return pathOfSavedAttach;
         }
 
         #endregion
@@ -189,11 +187,13 @@ namespace UkTransmitter.FileModule.Legacy
         /// </summary>
         /// <param name="path">Путь для сохранения файла Word</param>
         /// <param name="combinedMonthYearDate">Подготовленное имя файла Word, состоящее из месяца и года</param>
-        private void SaveAttachmentLegacy(string path, string combinedMonthYearDate)
+        private string SaveAttachmentLegacy(string path, string combinedMonthYearDate)
         {
+            
             var monthYearDate = combinedMonthYearDate;
             var monthYearDateWithExtension = monthYearDate + this._attachConfig.AttachmentExtension;
             var finalFilePath = path + monthYearDateWithExtension;
+            
             if ( File.Exists(finalFilePath) )
             {
                 this.IsFileExist = true;
@@ -225,7 +225,7 @@ namespace UkTransmitter.FileModule.Legacy
                     );
             }
 
-            this._dataForFillTemplateDto.PathToNewAttachmentFile = finalFilePath;
+            return finalFilePath;
         }
         
 

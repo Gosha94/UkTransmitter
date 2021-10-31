@@ -28,12 +28,12 @@ namespace UkTransmitter.Core.ModuleContracts
         /// <summary>
         /// Метод создает файл вложения на диске
         /// </summary>
-        bool CreateAttachment();
+        string CreateAttachment();
 
         /// <summary>
         /// Метод асинхронно создает файл вложения на диске
         /// </summary>
-        Task<bool> CreateAttachmentAsync();
+        Task<string> CreateAttachmentAsync();
 
     }
 }

@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using UkTransmitter.Core.Contracts;
+using UkTransmitter.EmailModule.Models;
 using UkTransmitter.EmailModule.Worker;
 using UkTransmitter.EmailModule.Configs;
 using UkTransmitter.EmailModule.Workers;
@@ -15,10 +15,10 @@ namespace UkTransmitter.EmailModule.Service
     {
 
         #region Private Fields
-
-        private readonly IEmailSender _emailSender;
-        private readonly IEmailSettings _emailConfig;
-
+        
+        private readonly IEmailSettings _emailSettings;
+        private readonly IEmailApiSettings _emailApiSettings;
+        private string _attachmentPath;
         #endregion
 
         #region Public Properties
@@ -31,22 +31,16 @@ namespace UkTransmitter.EmailModule.Service
 
         public EmailService
         (
-            IDtoForFillAttachment attachmentDataFromDi,
             ILogService logServiceFromDi
         )
         {
 
             #region Dependency Injection
-
-            var attachmentData = attachmentDataFromDi;
-            this._emailConfig = new CommonEmailConfiguration();
+            
+            this._emailSettings = new CommonEmailConfiguration();
+            this._emailApiSettings = new ElasticEmailConfiguration();
 
             #endregion
-
-            var jsonEmailConfig = new CustomJsonParser(this._emailConfig)
-                                    .GetEmailSettingsFromJsonFile();
-
-            this._emailSender = new GmailSender(attachmentData, jsonEmailConfig);
 
         }
 
@@ -54,11 +48,35 @@ namespace UkTransmitter.EmailModule.Service
 
         #region Public API
         
-        public bool SendEmail()
-            => this._emailSender.SendEmailMessage();
+        public bool SendEmail(string attachmentPath)
+        {
+
+            this._attachmentPath = attachmentPath;
+
+            var jsonParserInstance = new CustomJsonParser(this._emailSettings, this._emailApiSettings);
+
+            var jsonEmailConfig = jsonParserInstance.GetEmailSettingsFromJsonFile();
+            var jsonApiConfig = jsonParserInstance.GetEmailApiSettingsFromJsonFile();
+
+            return GetEmailSenderInstance
+                (
+                    this._attachmentPath,
+                    jsonEmailConfig,
+                    jsonApiConfig
+                )
+                .SendEmailMessage();
+        }
+
         
-        public async Task<bool> SendEmailAsync()
-            => await Task.Run(() => this.SendEmail());
+        public async Task<bool> SendEmailAsync(string attachmentPath)
+            => await Task.Run(() => this.SendEmail(attachmentPath));
+
+        #endregion
+
+        #region Private Methods
+
+        private ElasticEmailSender GetEmailSenderInstance(string attachmentPath, CommonEmailSettings emailSettings, ElasticApiSettings apiSettings)
+            => new ElasticEmailSender(attachmentPath, emailSettings, apiSettings);
 
         #endregion
 

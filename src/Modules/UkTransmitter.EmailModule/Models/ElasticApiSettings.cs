@@ -6,7 +6,7 @@
     /// </summary>
     internal sealed class ElasticApiSettings
     {
-        internal string ApiUri { get; set; }
-        internal string ApiKey { get; set; }
+        public string ApiUri { get; set; }
+        public string ApiKey { get; set; }
     }
 }

@@ -6,6 +6,6 @@
     /// </summary>
     internal sealed class CommonConfigRootModel
     {
-        internal CommonEmailSettings CommonEmailSettings { get; set; }
+        public CommonEmailSettings CommonEmailSettings { get; set; }
     }
 }

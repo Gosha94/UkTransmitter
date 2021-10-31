@@ -12,13 +12,10 @@ using UkTransmitter.FileModule.Service;
 using UkTransmitter.LogModule.Service;
 using UkTransmitter.Core.CommonModels.DTOs;
 using System.Collections.Generic;
-
-using System.Net;
-using System.Collections.Specialized;
-using System.Text;
+using UkTransmitter.EmailModule.Service;
 using System;
-
-using System.Web;
+using UkTransmitter.AuthModule.Service;
+using UkTransmitter.DataAccess.Repos;
 
 namespace UkTransmitter.Console.Wrapper
 {
@@ -26,10 +23,11 @@ namespace UkTransmitter.Console.Wrapper
     {
 
         private static List<Task> _taskList;
-
+        private static string _attachmentPath;
         static void Main(string[] args)
         {
             _taskList = new List<Task>();
+            _attachmentPath = String.Empty;
 
             #region Dependency Injection
 
@@ -62,31 +60,15 @@ namespace UkTransmitter.Console.Wrapper
                     testLogService
                 );
 
-            //IEmailService testEmailService = new EmailService(testAttachmentData, testLogService);
+            IEmailService testEmailService = new EmailService(testLogService);
 
             #endregion
 
             try
             {
                 #region Elastic Email Test
-                
-                //NameValueCollection values = new NameValueCollection();
-                //values.Add("apikey", "3BC0FD1E8FE08A5973889A9F10D4E463B398FBE99B1B22E2308E37A7C572DCD552ACB5EAA49A3AF6ACD0B50A21ED07C6");
-                //values.Add("from", "igeorg70@gmail.com");
-                //values.Add("fromName", "Your Company Name");
-                //values.Add("to", "gerizch@rambler.ru");
-                //values.Add("to", "igeorg70@gmail.com");
-                //values.Add("subject", "Your Subject");
-                //values.Add("bodyText", "Text Body");
-                //values.Add("bodyHtml", "<h1>Html Body</h1>");
-                //values.Add("isTransactional", "true");
-                
-                //string address = "https://api.elasticemail.com/v2/email/send";
 
-                //string response = SyncronSendThrougthWebClient(address, values);
 
-                //System.Console.WriteLine(response);
-                System.Console.WriteLine();
                 #endregion
 
                 #region Test Auth Service
@@ -97,19 +79,19 @@ namespace UkTransmitter.Console.Wrapper
 
                 #region Test File Service
 
-                //TaskCheckFileServiceStub(testFileService);
+                AsyncCheckFileServiceStub(testFileService);
 
                 #endregion
 
                 #region Test Log Service
 
-                //AsyncCheckLogServiceStub(testLogService);
+                AsyncCheckLogServiceStub(testLogService);
 
                 #endregion
 
                 #region Test Email Service
-
-                //AsyncCheckEmailServiceStub(testEmailService);
+                
+                AsyncCheckEmailServiceStub(testEmailService);
 
                 #endregion
 
@@ -121,58 +103,6 @@ namespace UkTransmitter.Console.Wrapper
                 testLogService.WriteIntoLog(ex.Message);
             }
 
-        }
-
-
-        private static string SyncronSendThrougthWebClient(string address, NameValueCollection values)
-        {
-            using (WebClient client = new WebClient())
-            {
-                try
-                {
-                    byte[] apiResponse = client.UploadValues(address, values);
-                    return Encoding.UTF8.GetString(apiResponse);
-
-                }
-                catch (Exception ex)
-                {
-                    return "Exception caught: " + ex.Message + "\n" + ex.StackTrace;
-                }
-            }
-        }
-
-        private static async Task AsyncSendThrougthHttpClient(string address, NameValueCollection values)
-        {
-
-
-            var apiUri = "https://api.elasticemail.com/v2/email/send";
-            var uriBuilder = new UriBuilder(apiUri);
-            var queryString = HttpUtility.ParseQueryString(uriBuilder.Query);
-
-            queryString.Add("apikey", "3BC0FD1E8FE08A5973889A9F10D4E463B398FBE99B1B22E2308E37A7C572DCD552ACB5EAA49A3AF6ACD0B50A21ED07C6");
-            queryString.Add("from", "igeorg70@gmail.com");
-            queryString.Add("fromName", "Your Company Name");
-            queryString.Add("to", "gerizch@rambler.ru");
-            queryString.Add("subject", "Your Subject");
-            queryString.Add("bodyText", "Text Body");
-            queryString.Add("bodyHtml", "<h1>Html Body</h1>");
-            queryString.Add("isTransactional", "true");
-
-            //var filepath = "C:\\example\\helloWorld.txt";
-            //var file = File.OpenRead(filepath);
-
-            //var filesStream = new Stream[] { file };
-            //var filenames = new string[] { "filenameForInbox.txt" };
-
-            uriBuilder.Query = queryString.ToString();
-            apiUri = uriBuilder.ToString();
-
-
-            //using (var asyncClient = new HttpClient())
-            //{
-            //    HttpContent c = new HttpContent().;
-            //    var result = await asyncClient.PostAsync()
-            //}
         }
 
 
@@ -201,24 +131,26 @@ namespace UkTransmitter.Console.Wrapper
             });
         }
 
-        private static void TaskCheckFileServiceStub(IFileService fileService)
+        private static void AsyncCheckFileServiceStub(IFileService fileService)
         {
-            _taskList.Add(
-               Task.Run(
-                  async () =>
-                  {
-                      var isAttachmentWasCreated = await fileService.CreateAttachmentAsync();
+           _taskList.Add(Task.Run(
+                async () =>
+               {
+                   var attachmentPath = await fileService.CreateAttachmentAsync();
 
-                      if (isAttachmentWasCreated)
-                      {
-                          System.Console.WriteLine("File Service Working Correct! Attachment Was Created!");
-                      }
-                      else
-                      {
-                          System.Console.WriteLine("File Service is Broken! Error occured! Attachment not created!");
-                      }
-                  })
-               );
+                   if (!String.IsNullOrEmpty(attachmentPath))
+                   {
+                       System.Console.WriteLine($"File Service Working Correct! Attachment Was Created! \n Path: {attachmentPath}");
+                   }
+                   else
+                   {
+                       System.Console.WriteLine("File Service is Broken! Error occured! Attachment not created!");
+                   }
+
+                   _attachmentPath = attachmentPath;
+
+               })
+            );
         }
 
         private static async void AsyncCheckEmailServiceStub(IEmailService emailService)
@@ -229,7 +161,7 @@ namespace UkTransmitter.Console.Wrapper
 
             if (finalTask.Status == TaskStatus.RanToCompletion)
             {
-                var isEmailWasSended = await emailService.SendEmailAsync();
+                var isEmailWasSended = await emailService.SendEmailAsync(_attachmentPath);
 
                 if (isEmailWasSended)
                 {

@@ -30,7 +30,7 @@ namespace UkTransmitter.EmailModule.Worker
 
         public ElasticApiSettings GetEmailApiSettingsFromJsonFile()
         {
-            var jsonData = File.ReadAllText(this._emailSettings.PathToJsonEmailSettingsFile);
+            var jsonData = File.ReadAllText(this._emailApiSettings.PathToJsonEmailApiSettings);
             var myDeserializedClass = (ElasticApiConfigRootModel)JsonConvert.DeserializeObject(jsonData, typeof(ElasticApiConfigRootModel));
             return myDeserializedClass.ElasticApiSettings;
         }

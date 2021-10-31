@@ -6,6 +6,6 @@
     /// </summary>
     internal sealed class ElasticApiConfigRootModel
     {
-        internal ElasticApiSettings ElasticApiSettings { get; set; }
+        public ElasticApiSettings ElasticApiSettings { get; set; }
     }
 }
