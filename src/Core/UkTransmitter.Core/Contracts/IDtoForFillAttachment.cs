@@ -12,7 +12,7 @@ namespace UkTransmitter.Core.Contracts
         /// <summary>
         /// Свойство определяет путь к вновь создаваемому файлу вложения
         /// </summary>
-        string PathToNewAttachmentFile { get; }
+        string PathToNewAttachmentFile { get; set; }
 
         /// <summary>
         /// Свойство определяет текущую дату

@@ -4,7 +4,7 @@ using UkTransmitter.Core.Contracts;
 using UkTransmitter.Core.CommonModels;
 using UkTransmitter.Core.ModuleContracts;
 
-using UkTransmitter.DataAccess.Repos;
+//using UkTransmitter.DataAccess.Repos;
 
 using UkTransmitter.AuthModule.Service;
 
@@ -15,26 +15,37 @@ using UkTransmitter.EmailModule.Service;
 
 using UkTransmitter.LogModule.Service;
 using UkTransmitter.Core.CommonModels.DTOs;
+using System.Collections.Generic;
+using ElasticEmail.Client;
+using ElasticEmail.Api;
+using System.Net;
+using System.Collections.Specialized;
+using System.Text;
+using System;
 
 namespace UkTransmitter.Console.Wrapper
 {
     class Program
     {
+
+        private static List<Task> _taskList;
+
         static void Main(string[] args)
         {
+            _taskList = new List<Task>();
 
             #region Dependency Injection
 
             // D:\Projects\_NET\WPF\UkTransmitter\src\Frontend\UkTransmitter.Console.Wrapper\bin\Debug\UkTransmitterLogs.txt
             ILogService testLogService = new CustomNLogService();
-            IReadOnlyRepository<InputUserAuthModel> repos = new UserAuthRepository();
+            //IReadOnlyRepository<InputUserAuthModel> repos = new UserAuthRepository();
             InputUserAuthModel inputTestModel = new InputUserAuthModel()
             {
                 InsertedLogin = "Gosha",
                 InsertedPwd = "1111"
             };
 
-            IAuthService customAuthService = new AuthService(repos, inputTestModel, testLogService);
+            //IAuthService customAuthService = new AuthService(repos, inputTestModel, testLogService);
 
             IAttachmentConfiguration testAttachmentConfig = new AttachmentConfiguration();
             ITemplateConfiguration testTemplateConfig = new TemplateConfiguration();
@@ -54,42 +65,87 @@ namespace UkTransmitter.Console.Wrapper
                     testLogService
                 );
 
-            IEmailService testEmailService = new EmailService(testAttachmentData, testLogService);
+            //IEmailService testEmailService = new EmailService(testAttachmentData, testLogService);
 
             #endregion
 
-            #region Test Auth Service
+            try
+            {
+                #region Elastic Email Test
+                NameValueCollection values = new NameValueCollection();
+                values.Add("apikey", "3BC0FD1E8FE08A5973889A9F10D4E463B398FBE99B1B22E2308E37A7C572DCD552ACB5EAA49A3AF6ACD0B50A21ED07C6");
+                values.Add("from", "igeorg70@gmail.com");
+                values.Add("fromName", "Your Company Name");
+                values.Add("to", "gerizch@rambler.ru");
+                values.Add("to", "igeorg70@gmail.com");
+                values.Add("subject", "Your Subject");
+                values.Add("bodyText", "Text Body");
+                values.Add("bodyHtml", "<h1>Html Body</h1>");
+                values.Add("isTransactional", "true");
+                var keys = values.AllKeys;
+                string address = "https://api.elasticemail.com/v2/email/send";
 
-            AsyncCheckAuthServiceStub(customAuthService);
+                string response = Send(address, values);
 
-            #endregion
+                //System.Console.WriteLine(response);
 
-            #region Test File Service
+                #endregion
 
-            AsyncCheckFileServiceStub(testFileService);
+                #region Test Auth Service
 
-            #endregion
+                //AsyncCheckAuthServiceStub(customAuthService);
 
-            #region Test Log Service
+                #endregion
 
-            AsyncCheckLogServiceStub(testLogService);
+                #region Test File Service
 
-            #endregion
+                //TaskCheckFileServiceStub(testFileService);
 
-            #region Test Email Service
+                #endregion
 
-            AsyncCheckEmailServiceStub(testEmailService);
+                #region Test Log Service
 
-            #endregion
+                //AsyncCheckLogServiceStub(testLogService);
 
-            var input = System.Console.ReadLine();
+                #endregion
 
-            System.Console.ReadLine();
+                #region Test Email Service
 
+                //AsyncCheckEmailServiceStub(testEmailService);
+
+                #endregion
+
+                var input = System.Console.ReadLine();
+
+            }
+            catch (System.Exception ex)
+            {
+                testLogService.WriteIntoLog(ex.Message);
+            }
+
+        }
+
+
+        private static string Send(string address, NameValueCollection values)
+        {
+            using (WebClient client = new WebClient())
+            {
+                try
+                {
+                    byte[] apiResponse = client.UploadValues(address, values);
+                    return Encoding.UTF8.GetString(apiResponse);
+
+                }
+                catch (Exception ex)
+                {
+                    return "Exception caught: " + ex.Message + "\n" + ex.StackTrace;
+                }
+            }
         }
 
         private static async void AsyncCheckAuthServiceStub(IAuthService authService)
         {
+
             var isUserExist = await authService.IsUserCorrectAsync();
 
             if (isUserExist)
@@ -103,20 +159,6 @@ namespace UkTransmitter.Console.Wrapper
 
         }
 
-        private static async void AsyncCheckFileServiceStub(IFileService fileService)
-        {
-            var isAttachmentWasCreated = await fileService.CreateAttachmentAsync();
-            
-            if (isAttachmentWasCreated)
-            {
-                System.Console.WriteLine("File Service Working Correct! Attachment Was Created!");
-            }
-            else
-            {
-                System.Console.WriteLine("Auth Service is Broken! Error occured! Attachment not creted!");
-            }
-        }
-
         private static async void AsyncCheckLogServiceStub(ILogService logService)
         {
             await Task.Run(() =>
@@ -126,9 +168,45 @@ namespace UkTransmitter.Console.Wrapper
             });
         }
 
+        private static void TaskCheckFileServiceStub(IFileService fileService)
+        {
+            _taskList.Add(
+               Task.Run(
+                  async () =>
+                  {
+                      var isAttachmentWasCreated = await fileService.CreateAttachmentAsync();
+
+                      if (isAttachmentWasCreated)
+                      {
+                          System.Console.WriteLine("File Service Working Correct! Attachment Was Created!");
+                      }
+                      else
+                      {
+                          System.Console.WriteLine("File Service is Broken! Error occured! Attachment not created!");
+                      }
+                  })
+               );
+        }
+
         private static async void AsyncCheckEmailServiceStub(IEmailService emailService)
         {
+            var finalTask = Task.WhenAll(_taskList);
 
+            finalTask.Wait();
+
+            if (finalTask.Status == TaskStatus.RanToCompletion)
+            {
+                var isEmailWasSended = await emailService.SendEmailAsync();
+
+                if (isEmailWasSended)
+                {
+                    System.Console.WriteLine("Email Service Working Correct! Email Was Sended!");
+                }
+                else
+                {
+                    System.Console.WriteLine("Email Service is Broken! Error occured! Email not Sended!");
+                }
+            }
         }
 
     }

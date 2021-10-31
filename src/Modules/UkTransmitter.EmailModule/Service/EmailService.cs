@@ -2,10 +2,9 @@
 using UkTransmitter.Core.Contracts;
 using UkTransmitter.EmailModule.Worker;
 using UkTransmitter.EmailModule.Configs;
+using UkTransmitter.EmailModule.Workers;
 using UkTransmitter.Core.ModuleContracts;
 using UkTransmitter.EmailModule.Contracts;
-using UkTransmitter.EmailModule.Config;
-using UkTransmitter.EmailModule.Workers;
 
 namespace UkTransmitter.EmailModule.Service
 {

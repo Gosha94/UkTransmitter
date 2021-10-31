@@ -193,8 +193,8 @@ namespace UkTransmitter.FileModule.Legacy
         {
             var monthYearDate = combinedMonthYearDate;
             var monthYearDateWithExtension = monthYearDate + this._attachConfig.AttachmentExtension;
-
-            if ( File.Exists(path + monthYearDateWithExtension) )
+            var finalFilePath = path + monthYearDateWithExtension;
+            if ( File.Exists(finalFilePath) )
             {
                 this.IsFileExist = true;
                 // TODO Залогировать это сообщение - MessageBox.Show("Файл с показаниями за текущий месяц уже существует!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -224,7 +224,10 @@ namespace UkTransmitter.FileModule.Legacy
                         ref this._missingObj
                     );
             }
+
+            this._dataForFillTemplateDto.PathToNewAttachmentFile = finalFilePath;
         }
+        
 
         private void ExitWordLegacy()
         {
