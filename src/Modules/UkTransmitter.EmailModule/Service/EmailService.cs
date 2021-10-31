@@ -17,7 +17,7 @@ namespace UkTransmitter.EmailModule.Service
         #region Private Fields
 
         private readonly IEmailSender _emailSender;
-        private readonly IEmailConfiguration _emailConfig;
+        private readonly IEmailSettings _emailConfig;
 
         #endregion
 
@@ -43,7 +43,7 @@ namespace UkTransmitter.EmailModule.Service
 
             #endregion
 
-            var jsonEmailConfig = new JsonEmailSettingsParser(this._emailConfig)
+            var jsonEmailConfig = new CustomJsonParser(this._emailConfig)
                                     .GetEmailSettingsFromJsonFile();
 
             this._emailSender = new GmailSender(attachmentData, jsonEmailConfig);
