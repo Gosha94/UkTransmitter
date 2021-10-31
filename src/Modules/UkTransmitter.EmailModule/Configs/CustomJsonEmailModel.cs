@@ -1,12 +1,14 @@
-﻿namespace UkTransmitter.EmailModule.Config
+﻿using UkTransmitter.EmailModule.Contracts;
+
+namespace UkTransmitter.EmailModule.Configs
 {
 
     /// <summary>
     /// Класс описывает корневой элемент Json файла
     /// </summary>
-    internal sealed class Root
+    internal sealed class EmailDataRoot : IRootConfigurationElement<CustomJsonEmailModel>
     {
-        public CustomJsonEmailModel CustomJsonEmailSettings { get; set; }
+        public CustomJsonEmailModel CustomEmailSettings { get; set; }
     }
 
     /// <summary>
