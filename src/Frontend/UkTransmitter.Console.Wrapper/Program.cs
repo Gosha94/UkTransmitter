@@ -1,20 +1,21 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 using UkTransmitter.Core.Contracts;
 using UkTransmitter.Core.CommonModels;
 using UkTransmitter.Core.ModuleContracts;
-
-//using UkTransmitter.DataAccess.Repos;
+using UkTransmitter.Core.CommonModels.DTOs;
 
 using UkTransmitter.FileModule.Config;
 using UkTransmitter.FileModule.Service;
 
 using UkTransmitter.LogModule.Service;
-using UkTransmitter.Core.CommonModels.DTOs;
-using System.Collections.Generic;
+
 using UkTransmitter.EmailModule.Service;
-using System;
+
 using UkTransmitter.AuthModule.Service;
+
 using UkTransmitter.DataAccess.Repos;
 
 namespace UkTransmitter.Console.Wrapper
@@ -24,84 +25,88 @@ namespace UkTransmitter.Console.Wrapper
 
         private static List<Task> _taskList;
         private static string _attachmentPath;
+        private static bool _isUserCorrect;
+
         static void Main(string[] args)
         {
             _taskList = new List<Task>();
-            _attachmentPath = String.Empty;
-
-            #region Dependency Injection
+            _attachmentPath = String.Empty;           
 
             // D:\Projects\_NET\WPF\UkTransmitter\src\Frontend\UkTransmitter.Console.Wrapper\bin\Debug\UkTransmitterLogs.txt
             ILogService testLogService = new CustomNLogService();
-            //IReadOnlyRepository<InputUserAuthModel> repos = new UserAuthRepository();
-            InputUserAuthModel inputTestModel = new InputUserAuthModel()
-            {
-                InsertedLogin = "Gosha",
-                InsertedPwd = "1111"
-            };
-
-            //IAuthService customAuthService = new AuthService(repos, inputTestModel, testLogService);
-
-            IAttachmentConfiguration testAttachmentConfig = new AttachmentConfiguration();
-            ITemplateConfiguration testTemplateConfig = new TemplateConfiguration();
-            
-            IDtoForFillAttachment testAttachmentData = new DataForFillTemplateDto()
-            {
-                PathToNewAttachmentFile = testAttachmentConfig.PathToAttachmentsCatalog,
-                ReceivedFromUserMeteringDataArray = new string[] { "1_2_3", "4_5_6", "7_8_9", "10_11_12" }
-            };
-
-            IFileService testFileService =
-                new FileService
-                (
-                    testAttachmentConfig,
-                    testTemplateConfig,
-                    testAttachmentData,
-                    testLogService
-                );
 
             IEmailService testEmailService = new EmailService(testLogService);
 
+            #region UserInput
+
+            InputUserAuthModel inputTestModelFromUser = new InputUserAuthModel();
+
+            System.Console.WriteLine("Добро пожаловать в приложение UkTransmitter!");
+            System.Console.WriteLine("Введите имя пользователя:");
+            inputTestModelFromUser.InsertedLogin = System.Console.ReadLine();
+            System.Console.WriteLine("Введите пароль:");
+            inputTestModelFromUser.InsertedPwd = System.Console.ReadLine();
+
             #endregion
 
-            try
+            #region Auth Service
+
+            IReadOnlyRepository<InputUserAuthModel> testRepos = new UserAuthRepository();
+            IAuthService customAuthService = new AuthService(testRepos, inputTestModelFromUser, testLogService);
+            AsyncCheckAuthServiceStub(customAuthService);
+
+            #endregion
+
+            if (_isUserCorrect)
             {
-                #region Elastic Email Test
 
+                #region File Service
 
-                #endregion
+                IAttachmentConfiguration testAttachmentConfig = new AttachmentConfiguration();
+                ITemplateConfiguration testTemplateConfig = new TemplateConfiguration();
+                
+                List<string> inputMeteringDataFromUser = new List<string>();
 
-                #region Test Auth Service
+                System.Console.ForegroundColor = ConsoleColor.Gray;
 
-                //AsyncCheckAuthServiceStub(customAuthService);
+                System.Console.WriteLine("Хол. вода:");
+                inputMeteringDataFromUser.Add(System.Console.ReadLine());                
+                System.Console.WriteLine("Гор. вода:");
+                inputMeteringDataFromUser.Add(System.Console.ReadLine());
+                System.Console.WriteLine("Отопление:");
+                inputMeteringDataFromUser.Add(System.Console.ReadLine());
+                System.Console.WriteLine("Эл-во:");
+                inputMeteringDataFromUser.Add(System.Console.ReadLine());
 
-                #endregion
+                IDtoForFillAttachment testAttachmentData = new DataForFillTemplateDto()
+                {
+                    PathToNewAttachmentFile = testAttachmentConfig.PathToAttachmentsCatalog,
+                    ReceivedFromUserMeteringDataArray = inputMeteringDataFromUser.ToArray(),
+                };
 
-                #region Test File Service
+                IFileService testFileService =
+                    new FileService
+                    (
+                        testAttachmentConfig,
+                        testTemplateConfig,
+                        testAttachmentData,
+                        testLogService
+                    );
 
                 AsyncCheckFileServiceStub(testFileService);
 
                 #endregion
 
-                #region Test Log Service
+                #region Email Service
 
-                AsyncCheckLogServiceStub(testLogService);
-
-                #endregion
-
-                #region Test Email Service
-                
-                AsyncCheckEmailServiceStub(testEmailService);
+                //AsyncCheckEmailServiceStub(testEmailService);
 
                 #endregion
-
-                var input = System.Console.ReadLine();
-
             }
-            catch (System.Exception ex)
-            {
-                testLogService.WriteIntoLog(ex.Message);
-            }
+
+            System.Console.ForegroundColor = ConsoleColor.Gray;
+            System.Console.WriteLine("Для выхода из приложения нажмите Enter...");
+            System.Console.ReadLine();
 
         }
 
@@ -109,15 +114,17 @@ namespace UkTransmitter.Console.Wrapper
         private static async void AsyncCheckAuthServiceStub(IAuthService authService)
         {
 
-            var isUserExist = await authService.IsUserCorrectAsync();
+            _isUserCorrect = authService.IsUserCorrect();
 
-            if (isUserExist)
+            if (_isUserCorrect)
             {
-                System.Console.WriteLine("Auth Service Working Correct! Access Granted!");
+                System.Console.ForegroundColor = ConsoleColor.Green;
+                System.Console.WriteLine("Async Access Granted from Auth Service!");
             }
             else
             {
-                System.Console.WriteLine("Auth Service Working Correct! Access Denied! User Incorrect!");
+                System.Console.ForegroundColor = ConsoleColor.Red;
+                System.Console.WriteLine("Async Access Denied from Auth Service! User Incorrect!");
             }
 
         }
@@ -140,10 +147,12 @@ namespace UkTransmitter.Console.Wrapper
 
                    if (!String.IsNullOrEmpty(attachmentPath))
                    {
+                       System.Console.ForegroundColor = ConsoleColor.Green;
                        System.Console.WriteLine($"File Service Working Correct! Attachment Was Created! \n Path: {attachmentPath}");
                    }
                    else
                    {
+                       System.Console.ForegroundColor = ConsoleColor.Red;
                        System.Console.WriteLine("File Service is Broken! Error occured! Attachment not created!");
                    }
 
@@ -153,6 +162,7 @@ namespace UkTransmitter.Console.Wrapper
             );
         }
 
+        // TODO: Почтовая Служба должна проверить: была ли отправка в этом месяце, если была, оповестить и не отправлять более писем!!!
         private static async void AsyncCheckEmailServiceStub(IEmailService emailService)
         {
             var finalTask = Task.WhenAll(_taskList);
