@@ -1,17 +1,13 @@
 ﻿using System.Threading.Tasks;
 
-namespace UkTransmitter.Core.ModuleContracts
+namespace UkTransmitter.Core.Contracts.Services
 {
+
     /// <summary>
-    /// Интерфейс почтовой службы для изоляции сторонних библиотек
+    /// Интерфейс почтовой службы
     /// </summary>
     public interface IEmailService
     {
-
-        /// <summary>
-        /// Подключаемая служба логирования
-        /// </summary>
-        ILogService LogService { get; }
 
         /// <summary>
         /// Метод отправки Email сообщения

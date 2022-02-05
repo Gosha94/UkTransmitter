@@ -12,7 +12,7 @@ namespace UkTransmitter.DataAccess.Repos
     /// <summary>
     /// Репозиторий обрабатывает пользовательские данные
     /// </summary>
-    public class UserAuthRepository : IReadOnlyRepository<InputUserAuthModel>
+    public class UserAuthRepository : IUsersRepository<InputUserAuthModel>
     {
         private readonly UserAuthContext _dbaseAuthContext;
         private readonly MsSqlConnectionService _connectionService;
@@ -34,7 +34,7 @@ namespace UkTransmitter.DataAccess.Repos
         /// </summary>
         /// <param name="inputUserModel"></param>
         /// <returns></returns>
-        public bool FindEqualModelInDatabase(InputUserAuthModel inputUserModel)
+        public bool FindUserByModel(InputUserAuthModel inputUserModel)
         {
             this._inputDataModel = inputUserModel;
             return CheckModelExistingInDataBase();

@@ -1,18 +1,13 @@
 ﻿using System.Threading.Tasks;
 
-namespace UkTransmitter.Core.ModuleContracts
+namespace UkTransmitter.Core.Contracts.Services
 {
 
     /// <summary>
-    /// Интерфейс службы аутентификации для изоляции сторонних библиотек
+    /// Интерфейс службы аутентификации
     /// </summary>
     public interface IAuthService
     {
-
-        /// <summary>
-        /// Подключаемая служба логирования
-        /// </summary>
-        ILogService LogService { get; }
 
         /// <summary>
         /// Метод проверки существования зарегистрированного пользователя

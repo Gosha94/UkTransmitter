@@ -1,11 +1,10 @@
 ﻿using System.Threading.Tasks;
-using UkTransmitter.Core.Contracts;
 
-namespace UkTransmitter.Core.ModuleContracts
+namespace UkTransmitter.Core.Contracts.Services
 {
 
     /// <summary>
-    /// Интерфейс файловой службы для изолирования сторонних библиотек
+    /// Интерфейс файловой службы
     /// </summary>
     public interface IFileService
     {
@@ -19,11 +18,6 @@ namespace UkTransmitter.Core.ModuleContracts
         /// Конфигурация Шаблона вложения 
         /// </summary>
         ITemplateConfiguration TemplateConfiguration { get; }
-
-        /// <summary>
-        /// Подключаемая служба логирования
-        /// </summary>
-        ILogService LogService { get; }
 
         /// <summary>
         /// Метод создает файл вложения на диске

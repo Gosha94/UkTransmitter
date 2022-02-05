@@ -13,13 +13,13 @@ namespace UkTransmitter.AuthModule.Service
         
         private InputUserAuthModel _inputUserData;
         
-        private IReadOnlyRepository<InputUserAuthModel> _userDataRepository;
+        private IUsersRepository<InputUserAuthModel> _userDataRepository;
 
         public ILogService LogService { get; private set; }
 
         #region Constructor
 
-        public AuthService(IReadOnlyRepository<InputUserAuthModel> customRepositoryFromDi, InputUserAuthModel inputUserModel, ILogService logServiceFromDi)
+        public AuthService(IUsersRepository<InputUserAuthModel> customRepositoryFromDi, InputUserAuthModel inputUserModel, ILogService logServiceFromDi)
         {
             this._userDataRepository = customRepositoryFromDi;
             this._inputUserData = inputUserModel;
@@ -32,7 +32,7 @@ namespace UkTransmitter.AuthModule.Service
 
         public bool IsUserCorrect()
         {
-            var isUserCorrect = this._userDataRepository.FindEqualModelInDatabase(this._inputUserData);
+            var isUserCorrect = this._userDataRepository.FindUserByModel(this._inputUserData);
             this.LogService.WriteIntoLogAsync($"Наличие пользователя с логином: {this._inputUserData.InsertedLogin} в БД: {isUserCorrect} ");
             return isUserCorrect;
         }

@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 
-namespace UkTransmitter.Core.ModuleContracts
+namespace UkTransmitter.Core.Contracts.Services
 {
     /// <summary>
-    /// Интерфейс службы логирования для изолирования сторонних библиотек
+    /// Интерфейс службы логирования
     /// </summary>
     public interface ILogService
     {

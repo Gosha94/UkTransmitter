@@ -51,7 +51,7 @@ namespace UkTransmitter.Console.Wrapper
 
             #region Auth Service
 
-            IReadOnlyRepository<InputUserAuthModel> testRepos = new UserAuthRepository();
+            IUsersRepository<InputUserAuthModel> testRepos = new UserAuthRepository();
             IAuthService customAuthService = new AuthService(testRepos, inputTestModelFromUser, testLogService);
             AsyncCheckAuthServiceStub(customAuthService);
 

@@ -50,14 +50,14 @@
     <Compile Include="CommonModels\ReadableUserAuthorizeModel.cs" />
     <Compile Include="Contracts\IAttachmentConfiguration.cs" />
     <Compile Include="Contracts\IDtoForFillAttachment.cs" />
-    <Compile Include="Contracts\IReadOnlyRepository.cs" />
+    <Compile Include="Contracts\IUsersRepository.cs" />
     <Compile Include="Contracts\ITemplateConfiguration.cs" />
-    <Compile Include="Contracts\IWritableRepository.cs" />
-    <Compile Include="ModuleContracts\IAuthService.cs" />
-    <Compile Include="ModuleContracts\IEmailService.cs" />
-    <Compile Include="ModuleContracts\IFileService.cs" />
-    <Compile Include="ModuleContracts\ILogService.cs" />
-    <Compile Include="ModuleContracts\ISpeechService.cs" />
+    <Compile Include="Contracts\IMeteringDataRepository.cs" />
+    <Compile Include="Contracts\Services\IAuthService.cs" />
+    <Compile Include="Contracts\Services\IEmailService.cs" />
+    <Compile Include="Contracts\Services\IFileService.cs" />
+    <Compile Include="Contracts\Services\ILogService.cs" />
+    <Compile Include="Contracts\Services\ISpeechService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

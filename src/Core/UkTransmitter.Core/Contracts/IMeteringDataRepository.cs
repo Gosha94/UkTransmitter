@@ -6,28 +6,21 @@ namespace UkTransmitter.Core.Contracts
     /// <summary>
     /// Интерфейс описывает репозиторий с возможностью CRUD операций над данными в БД
     /// </summary>
-    public interface IWritableRepository<T> : IDisposable
-        where T : class
+    public interface IMeteringDataRepository<TModel> : IDisposable
+        where TModel : class
     {
-
-        /// <summary>
-        /// Метод получения модели из БД по Id
-        /// </summary>
-        /// <param name="id">Идентификатор модели в БД</param>
-        /// <returns>Модель данных</returns>
-        T GetConcreteModelById(int id);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="item"></param>
-        void Create(T item);
+        void Create(TModel item);
 
         /// <summary>
         /// Метод обновления данных в конкретной модели
         /// </summary>
         /// <param name="item">Модель данных для обновления</param>
-        void Update(T item);
+        void Update(TModel item);
 
         /// <summary>
         /// Метод удаления данных в конкретной модели
