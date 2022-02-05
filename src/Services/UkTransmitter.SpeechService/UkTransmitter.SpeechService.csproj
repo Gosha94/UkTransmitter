@@ -4,14 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BC22221A-9EEE-42C0-BB75-6958F6863F51}</ProjectGuid>
+    <ProjectGuid>{B83D7098-58E9-4D70-9345-D9EE0C23A7A1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UkTransmitter.AuthModule</RootNamespace>
-    <AssemblyName>UkTransmitter.AuthModule</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <RootNamespace>UkTransmitter.SpeechService</RootNamespace>
+    <AssemblyName>UkTransmitter.SpeechService</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,10 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\AuthService.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
+    <Compile Include="Service\SpeechService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\UkTransmitter.Core\UkTransmitter.Core.csproj">

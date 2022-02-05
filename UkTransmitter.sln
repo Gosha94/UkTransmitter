@@ -31,19 +31,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BusinessDomain", "BusinessD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UkTransmitter.Domain", "src\BusinessDomain\UkTransmitter.Domain\UkTransmitter.Domain.csproj", "{64770741-245B-4D9B-9BFC-DECED719186C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UkTransmitter.AuthModule", "src\Services\UkTransmitter.AuthService\UkTransmitter.AuthModule.csproj", "{BC22221A-9EEE-42C0-BB75-6958F6863F51}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UkTransmitter.AuthService", "src\Services\UkTransmitter.AuthService\UkTransmitter.AuthService.csproj", "{BC22221A-9EEE-42C0-BB75-6958F6863F51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UkTransmitter.EmailModule", "src\Services\UkTransmitter.EmailService\UkTransmitter.EmailModule.csproj", "{F4486F19-D545-4B40-B8C9-8A20323EB1FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UkTransmitter.EmailService", "src\Services\UkTransmitter.EmailService\UkTransmitter.EmailService.csproj", "{F4486F19-D545-4B40-B8C9-8A20323EB1FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UkTransmitter.FileModule", "src\Services\UkTransmitter.FileService\UkTransmitter.FileModule.csproj", "{66FB9A78-CAA0-49BB-A377-3D7D348578E7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UkTransmitter.FileService", "src\Services\UkTransmitter.FileService\UkTransmitter.FileService.csproj", "{66FB9A78-CAA0-49BB-A377-3D7D348578E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UkTransmitter.LogModule", "src\Services\UkTransmitter.LogService\UkTransmitter.LogModule.csproj", "{1D860FA0-574B-4DE7-9929-EB1DA26D7C7C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UkTransmitter.LogService", "src\Services\UkTransmitter.LogService\UkTransmitter.LogService.csproj", "{1D860FA0-574B-4DE7-9929-EB1DA26D7C7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UkTransmitter.SpeechModule", "src\Services\UkTransmitter.SpeechService\UkTransmitter.SpeechModule.csproj", "{B83D7098-58E9-4D70-9345-D9EE0C23A7A1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UkTransmitter.SpeechService", "src\Services\UkTransmitter.SpeechService\UkTransmitter.SpeechService.csproj", "{B83D7098-58E9-4D70-9345-D9EE0C23A7A1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UkTransmitter.Services.UnitTests", "tests\UkTransmitter.Services.UnitTests\UkTransmitter.Services.UnitTests.csproj", "{944EBB60-25E7-46A8-B7E0-2C078B76C645}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UkTransmitter.Workflows.BehaviourTests", "tests\UkTransmitter.Workflows.BehaviourTests\UkTransmitter.Workflows.BehaviourTests.csproj", "{69EF23CA-EF27-4859-B4D6-3F57257665C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UkTransmitter.Tests.Core", "tests\UkTransmitter.Tests.Core\UkTransmitter.Tests.Core.csproj", "{5068C346-6BA2-4950-9C70-BB5CD4147B38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -103,6 +105,10 @@ Global
 		{69EF23CA-EF27-4859-B4D6-3F57257665C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69EF23CA-EF27-4859-B4D6-3F57257665C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69EF23CA-EF27-4859-B4D6-3F57257665C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5068C346-6BA2-4950-9C70-BB5CD4147B38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5068C346-6BA2-4950-9C70-BB5CD4147B38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5068C346-6BA2-4950-9C70-BB5CD4147B38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5068C346-6BA2-4950-9C70-BB5CD4147B38}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -127,6 +133,7 @@ Global
 		{B83D7098-58E9-4D70-9345-D9EE0C23A7A1} = {482DECEB-ADE5-47D5-9369-F26A0A4FA82A}
 		{944EBB60-25E7-46A8-B7E0-2C078B76C645} = {9DABAB36-369A-431E-B344-DF71B49C706A}
 		{69EF23CA-EF27-4859-B4D6-3F57257665C8} = {9DABAB36-369A-431E-B344-DF71B49C706A}
+		{5068C346-6BA2-4950-9C70-BB5CD4147B38} = {9DABAB36-369A-431E-B344-DF71B49C706A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {192BCC2E-8384-4D04-9085-02695CC6B552}

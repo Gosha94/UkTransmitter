@@ -7,11 +7,12 @@
     <ProjectGuid>{F4486F19-D545-4B40-B8C9-8A20323EB1FA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UkTransmitter.EmailModule</RootNamespace>
-    <AssemblyName>UkTransmitter.EmailModule</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <RootNamespace>UkTransmitter.EmailService</RootNamespace>
+    <AssemblyName>UkTransmitter.EmailService</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
