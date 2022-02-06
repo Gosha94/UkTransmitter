@@ -44,10 +44,11 @@
   <ItemGroup>
     <Compile Include="CommonModels\DTOs\DataForFillTemplateDto.cs" />
     <Compile Include="CommonModels\DataForUkModel.cs" />
+    <Compile Include="CommonModels\DTOs\UserUnderAuthDTO.cs" />
     <Compile Include="CommonModels\InputUserAuthModel.cs" />
     <Compile Include="CommonModels\ReadableEmailModel.cs" />
     <Compile Include="CommonModels\WriteableMeteringDataModel.cs" />
-    <Compile Include="CommonModels\ReadableUserAuthorizeModel.cs" />
+    <Compile Include="CommonModels\MeteringUserModel.cs" />
     <Compile Include="Contracts\IAttachmentConfiguration.cs" />
     <Compile Include="Contracts\IDtoForFillAttachment.cs" />
     <Compile Include="Contracts\IUsersRepository.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Contracts\Services\IFileService.cs" />
     <Compile Include="Contracts\Services\ILogService.cs" />
     <Compile Include="Contracts\Services\ISpeechService.cs" />
+    <Compile Include="Enums\AuthState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

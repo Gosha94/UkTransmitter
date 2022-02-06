@@ -8,7 +8,7 @@ namespace UkTransmitter.Core.CommonModels
     /// Модель данных авторизации пользователей в БД
     /// </summary>
     [Table("tUsers", Schema = "dataUk")]
-    public class ReadableUserAuthorizeModel
+    public class MeteringUserModel
     {
 
         [Key]

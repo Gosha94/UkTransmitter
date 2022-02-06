@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using UkTransmitter.Core.CommonModels.DTOs;
 
 namespace UkTransmitter.Core.Contracts.Services
 {
@@ -13,13 +14,13 @@ namespace UkTransmitter.Core.Contracts.Services
         /// Метод проверки существования зарегистрированного пользователя
         /// </summary>
         /// <returns></returns>
-        bool IsUserCorrect();
+        UserUnderAuthDTO Authentificate(UserUnderAuthDTO userForPassAuth);
 
         /// <summary>
         /// Асинхронный метод проверки существования зарегистрированного пользователя
         /// </summary>
         /// <returns></returns>
-        Task<bool> IsUserCorrectAsync();
+        Task<UserUnderAuthDTO> AuthentificateAsync(UserUnderAuthDTO userForPassAuth);
         
     }
 }

@@ -11,7 +11,7 @@ namespace UkTransmitter.DataAccess.Contexts
         /// <summary>
         /// Строки с данными авторизации пользователя в БД
         /// </summary>
-        public DbSet<ReadableUserAuthorizeModel> UserAuthorizeDataRows { get; set; }
+        public DbSet<MeteringUserModel> UserAuthorizeDataRows { get; set; }
 
     }
 }
