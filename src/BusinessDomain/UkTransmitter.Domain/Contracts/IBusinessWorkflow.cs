@@ -12,12 +12,12 @@ namespace UkTransmitter.Domain.Contracts
         /// <summary>
         /// Старт работы процесса
         /// </summary>
-        void StartWorkflow();
+        Task StartWorkflow();
 
         /// <summary>
         /// Остановка работы процесса
         /// </summary>
-        void StopWorkflow();
+        Task StopWorkflow();
 
     }
 }

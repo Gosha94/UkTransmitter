@@ -1,5 +1,12 @@
-﻿using UkTransmitter.Core.Contracts.Services;
+﻿using System;
+using System.Threading.Tasks;
+using UkTransmitter.Core.Enums;
+using UkTransmitter.Core.Contracts;
 using UkTransmitter.Domain.Contracts;
+using UkTransmitter.Core.CommonModels.DTOs;
+using UkTransmitter.Core.Contracts.Services;
+using System.Text;
+using Newtonsoft.Json;
 
 namespace UkTransmitter.Domain.Workflows
 {
@@ -12,21 +19,43 @@ namespace UkTransmitter.Domain.Workflows
 
         private readonly ILogService _logService;
         private readonly IAuthService _authService;
+        private readonly IMessageBusClient _messageBusClient;
 
-        public UserAuthorizationWorkflow(IAuthService authService, ILogService logger)
+        public UserAuthorizationWorkflow(IAuthService authServiceFromDi, ILogService logServiceFromDi, IMessageBusClient busClientFromDi)
         {
+            _logService = logServiceFromDi;
+            _authService = authServiceFromDi;
+            _messageBusClient = busClientFromDi;
+        }
+
+        public async Task StartWorkflow()
+        {
+
+            var userDto = DeserializeUserDataFromMessageBus(_messageBusClient.Consume("AuthExchange"));
+            
+            if (userDto == null)
+            {
+                _logService.WriteLogAsync($"ERROR_{DateTime.Now}_incorrect auth user data consume from MessageBus");
+            }
+            
+            _authService.Authentificate(ref userDto);
+
+            if (userDto.AuthState != AuthState.AuthorizedState)
+            {
+                _logService.WriteLogAsync($"ERROR_{DateTime.Now}_incorrect name or pass - {userDto.UserName}, Authentificate Failed!");
+            }
+
+            _messageBusClient.Publish("SuccessAuth",SerializeUserDataForMessageBus(userDto));
 
         }
 
-        public void StartWorkflow()
+        public async Task StopWorkflow()
         {
-            _logService.WriteIntoLogAsync($"Наличие пользователя с логином: {this._inputUserData.InsertedLogin} в БД: {isUserCorrect} ");
+            _logService.WriteLogAsync($"INFO_{DateTime.Now}_UserAuthWorkflow Stopped!");
         }
 
-        public void StopWorkflow()
-        {
-            throw new System.NotImplementedException();
-        }
+        public UserUnderAuthDTO DeserializeUserDataFromMessageBus(byte[] userDataArray) => JsonConvert.DeserializeObject<UserUnderAuthDTO>(Encoding.UTF8.GetString(userDataArray));
+        public byte[] SerializeUserDataForMessageBus(UserUnderAuthDTO userDto) => Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(userDto));
 
     }
 }

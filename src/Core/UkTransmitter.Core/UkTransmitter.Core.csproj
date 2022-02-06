@@ -51,6 +51,7 @@
     <Compile Include="CommonModels\MeteringUserModel.cs" />
     <Compile Include="Contracts\IAttachmentConfiguration.cs" />
     <Compile Include="Contracts\IDtoForFillAttachment.cs" />
+    <Compile Include="Contracts\IMessageBusClient.cs" />
     <Compile Include="Contracts\IUsersRepository.cs" />
     <Compile Include="Contracts\ITemplateConfiguration.cs" />
     <Compile Include="Contracts\IMeteringDataRepository.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Contracts\Services\IEmailService.cs" />
     <Compile Include="Contracts\Services\IFileService.cs" />
     <Compile Include="Contracts\Services\ILogService.cs" />
+    <Compile Include="Contracts\Services\IMessageBusService.cs" />
     <Compile Include="Contracts\Services\ISpeechService.cs" />
     <Compile Include="Enums\AuthState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -12,13 +12,13 @@ namespace UkTransmitter.Core.Contracts.Services
         /// Запись сообщения об ошибке в Лог
         /// </summary>
         /// <param name="message">Сообщение</param>
-        void WriteIntoLog(string message);
+        void WriteLog(string message);
 
         /// <summary>
         /// Асинхронная запись сообщения об ошибке в Лог
         /// </summary>
         /// <param name="message">Сообщение</param>
-        Task WriteIntoLogAsync(string message);
+        Task WriteLogAsync(string message);
 
     }
 }

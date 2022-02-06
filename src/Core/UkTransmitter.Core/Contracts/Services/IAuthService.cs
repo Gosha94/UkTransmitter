@@ -14,13 +14,13 @@ namespace UkTransmitter.Core.Contracts.Services
         /// Метод проверки существования зарегистрированного пользователя
         /// </summary>
         /// <returns></returns>
-        UserUnderAuthDTO Authentificate(UserUnderAuthDTO userForPassAuth);
+        void Authentificate(ref UserUnderAuthDTO userForPassAuth);
 
         /// <summary>
         /// Асинхронный метод проверки существования зарегистрированного пользователя
         /// </summary>
         /// <returns></returns>
-        Task<UserUnderAuthDTO> AuthentificateAsync(UserUnderAuthDTO userForPassAuth);
+        Task AuthentificateAsync(ref UserUnderAuthDTO userForPassAuth);
         
     }
 }
