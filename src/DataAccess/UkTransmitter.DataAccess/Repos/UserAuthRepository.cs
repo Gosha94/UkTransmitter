@@ -2,22 +2,21 @@
 using System.Linq;
 using AesCryptoLib.Api.PublicApi;
 using UkTransmitter.Core.Contracts;
-using UkTransmitter.Core.CommonModels;
 using UkTransmitter.DataAccess.Contexts;
 using UkTransmitter.DataAccess.Services;
+using UkTransmitter.Core.CommonModels.DTOs;
 
 namespace UkTransmitter.DataAccess.Repos
 {
 
     /// <summary>
-    /// Репозиторий обрабатывает пользовательские данные
+    /// Репозиторий работает с пользовательскими данными
     /// </summary>
-    public class UserAuthRepository : IUsersRepository<InputUserAuthModel>
+    public class UserAuthRepository : IUsersRepository<UserUnderAuthDTO,int>
     {
         private readonly UserAuthContext _dbaseAuthContext;
         private readonly MsSqlConnectionService _connectionService;
-
-        private InputUserAuthModel _inputDataModel;
+        
         private CryptoApiController _cryptoController;
 
         public UserAuthRepository()
@@ -28,35 +27,31 @@ namespace UkTransmitter.DataAccess.Repos
             var connString = this._connectionService.GetConnectionString();
             this._dbaseAuthContext = new UserAuthContext(connString);
         }
+        
+        public UserUnderAuthDTO GetUserById(int id)
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// Метод производит поиск совпадений модели вводимых пользователем данных с данными в БД
         /// </summary>
-        /// <param name="inputUserModel"></param>
+        /// <param name="userModel">Модель пользователя для авторизации</param>
         /// <returns></returns>
-        public bool FindUserByModel(InputUserAuthModel inputUserModel)
+        public bool FindUserByModel(UserUnderAuthDTO userModel)
         {
-            this._inputDataModel = inputUserModel;
-            return CheckModelExistingInDataBase();
-        }
-
-        #region Private Methods
-
-        private bool CheckModelExistingInDataBase()
-        {
-            // TODO Здесь принимаем ириски того, что таблица с данными авторизации небольшая, пока будем перебирать ее полностью,
+            // TODO Здесь принимаем риски того, что таблица с данными авторизации небольшая, пока будем перебирать ее полностью,
             // затем дешифровать, далее необходимо Переделать на хранение ХЕШ-СУММЫ и сравнивать, вот же дурная башка !!!
-            var userDataListFromDbase = this._dbaseAuthContext.UserAuthorizeDataRows.ToList();
-            
+            var userDataListFromDbase = _dbaseAuthContext.UserAuthorizeDataRows.ToList();
+
             bool resultOfCheck = false;
 
             foreach (var item in userDataListFromDbase)
             {
-
                 var clearLogin = this._cryptoController.GetDeclassifiedData(item.Login);
                 var clearPwd = this._cryptoController.GetDeclassifiedData(item.Pwd);
 
-                if (clearLogin == this._inputDataModel.InsertedLogin && clearPwd == this._inputDataModel.InsertedPwd)
+                if (clearLogin == userModel.UserName && clearPwd == userModel.Pwd)
                 {
                     resultOfCheck = true;
                     break;
@@ -65,9 +60,6 @@ namespace UkTransmitter.DataAccess.Repos
 
             return resultOfCheck;
         }
-
-        #endregion
-
 
         #region IDisposable Implementation
 

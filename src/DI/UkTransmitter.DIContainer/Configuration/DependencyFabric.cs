@@ -1,11 +1,10 @@
-﻿using Castle.Windsor;
-using Castle.MicroKernel.Registration;
-using UkTransmitter.LogModule.Service;
-using UkTransmitter.AuthModule.Service;
-using UkTransmitter.FileModule.Service;
-using UkTransmitter.SpeechModule.Service;
-using UkTransmitter.EmailModule.Service;
-using UkTransmitter.Core.ModuleContracts;
+﻿using Services.UkTransmitter.LogService;
+using Services.UkTransmitter.FileService;
+using Services.UkTransmitter.AuthService;
+using Services.UkTransmitter.EmailService;
+using Services.UkTransmitter.SpeechService;
+using UkTransmitter.Core.Contracts.Services;
+using Autofac;
 
 namespace UkTransmitter.DIContainer.Configuration
 {
@@ -15,14 +14,15 @@ namespace UkTransmitter.DIContainer.Configuration
     /// </summary>
     public sealed class DependencyFabric
     {
-        private WindsorContainer _dependencyContainer;
+        
+        private ContainerBuilder _dependencyContainerBuilder;
 
         /// <summary>
         /// Конструктор по умолчанию
         /// </summary>
         public DependencyFabric()
         {
-            this._dependencyContainer = new WindsorContainer();
+            this._dependencyContainerBuilder = new ContainerBuilder();
         }
 
         #region Scopes Registrator
@@ -32,11 +32,11 @@ namespace UkTransmitter.DIContainer.Configuration
         /// </summary>
         public void RegisterAllScopesInApp()
         {
-            this._dependencyContainer.Register(Component.For<IAuthService>().ImplementedBy<AuthService>());
-            this._dependencyContainer.Register(Component.For<IEmailService>().ImplementedBy<EmailService>());
-            this._dependencyContainer.Register(Component.For<IFileService>().ImplementedBy<FileService>());
-            this._dependencyContainer.Register(Component.For<ILogService>().ImplementedBy<CustomNLogService>());
-            this._dependencyContainer.Register(Component.For<ISpeechService>().ImplementedBy<SpeechService>());
+            _dependencyContainerBuilder.RegisterType<CustomAuthService>().As<IAuthService>();
+            _dependencyContainerBuilder.RegisterType<CustomEmailService>().As<IEmailService>();
+            _dependencyContainerBuilder.RegisterType<CustomFileService>().As<IFileService>();
+            _dependencyContainerBuilder.RegisterType<CustomNLogService>().As<ILogService>();
+            _dependencyContainerBuilder.RegisterType<SpeechService>().As<ISpeechService>();
         }
 
         #endregion
@@ -47,39 +47,39 @@ namespace UkTransmitter.DIContainer.Configuration
         /// Метод получения экземпляра службы аутентификации
         /// </summary>
         /// <returns></returns>
-        public IAuthService GetAuthService()
-            => this._dependencyContainer.Resolve<IAuthService>();
+        //public IAuthService GetAuthService()
+        //    => this._dependencyContainerBuilder.Resolve<IAuthService>();
 
 
         /// <summary>
         /// Метод получения экземпляра почтовой службы
         /// </summary>
         /// <returns></returns>
-        public IEmailService GetEmailService()
-            => this._dependencyContainer.Resolve<IEmailService>();
+        //public IEmailService GetEmailService()
+        //    => this._dependencyContainerBuilder.Resolve<IEmailService>();
 
         /// <summary>
         /// Метод получения экземпляра файловой службы
         /// </summary>
         /// <returns></returns>
-        public IFileService GetFileService()
-            => this._dependencyContainer.Resolve<IFileService>();
+        //public IFileService GetFileService()
+        //    => this._dependencyContainerBuilder.Resolve<IFileService>();
 
 
         /// <summary>
         /// Метод получения экземпляра службы логирования
         /// </summary>
         /// <returns></returns>
-        public ILogService GetLogService()
-            => this._dependencyContainer.Resolve<ILogService>();
+        //public ILogService GetLogService()
+        //    => this._dependencyContainerBuilder.Resolve<ILogService>();
 
 
         /// <summary>
         /// Метод получения экземпляра голосовой службы
         /// </summary>
         /// <returns></returns>
-        public ISpeechService GetSpeechService()
-            => this._dependencyContainer.Resolve<ISpeechService>();
+        //public ISpeechService GetSpeechService()
+        //    => this._dependencyContainerBuilder.Resolve<ISpeechService>();
 
         #endregion
 

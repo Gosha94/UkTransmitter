@@ -10,11 +10,10 @@ using Google.Apis.Util.Store;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Gmail.v1.Data;
 using UkTransmitter.Core.Contracts;
-using UkTransmitter.EmailModule.Models;
-using UkTransmitter.BackEnd.Configs.Email;
-using UkTransmitter.EmailModule.Contracts;
+using UkTransmitter.EmailService.Models;
+using UkTransmitter.EmailService.Contracts;
 
-namespace UkTransmitter.EmailModule.Workers
+namespace UkTransmitter.EmailService.Workers
 {
 
     /// <summary>

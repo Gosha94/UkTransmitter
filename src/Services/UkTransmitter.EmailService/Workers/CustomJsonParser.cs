@@ -1,9 +1,9 @@
 ﻿using System.IO;
 using Newtonsoft.Json;
-using UkTransmitter.EmailModule.Models;
-using UkTransmitter.EmailModule.Contracts;
+using UkTransmitter.EmailService.Models;
+using UkTransmitter.EmailService.Contracts;
 
-namespace UkTransmitter.EmailModule.Worker
+namespace UkTransmitter.EmailService.Workers
 {
 
     /// <summary>

@@ -1,4 +1,4 @@
-﻿namespace UkTransmitter.Core.ModuleContracts
+﻿namespace UkTransmitter.Core.Contracts.Services
 {
 
     /// <summary>

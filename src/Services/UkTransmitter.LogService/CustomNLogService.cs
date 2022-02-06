@@ -2,9 +2,9 @@
 using NLog.Config;
 using NLog.Targets;
 using System.Threading.Tasks;
-using UkTransmitter.Core.ModuleContracts;
+using UkTransmitter.Core.Contracts.Services;
 
-namespace UkTransmitter.LogModule.Service
+namespace Services.UkTransmitter.LogService
 {
 
     /// <summary>
@@ -25,11 +25,7 @@ namespace UkTransmitter.LogModule.Service
 
         #region Public API
 
-        public void WriteIntoLog(string message)
-        {
-            _loggerStaticInstance.Debug(message);
-
-            /* TODO Ситуации для логирования
+        /* TODO Ситуации для логирования
                 LogWriter.LogWrite("Структура модели БД изменена, просьба проверить поля таблиц, сущности в коде.", "log.txt");
                 LogWriter.LogWrite(" Данные для отправки email получены из БД.", "log.txt");
                 LogWriter.LogWrite("Ошибка выполнения запроса в MSSQL, просьба проверить поля таблиц, сущности в коде.", "log.txt");
@@ -39,15 +35,14 @@ namespace UkTransmitter.LogModule.Service
                 LogWriter.LogWrite("Показания счетчиков для графиков получены из БД.", "log.txt");
                 LogWriter.LogWrite("Дата сдачи показаний счетчиков считана из БД.", "log.txt");
             */
-        }
+        public void WriteLog(string message) => _loggerStaticInstance.Debug(message);
 
         /// <summary>
         /// Асинхронный метод записи сообщения в лог, без ожидания выполнения
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
-        public Task WriteIntoLogAsync(string message)
-            => Task.Run( () => _loggerStaticInstance.Debug(message) );
+        public Task WriteLogAsync(string message) => Task.Run(() => WriteLog(message));
 
         #endregion
 

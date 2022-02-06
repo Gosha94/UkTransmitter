@@ -1,13 +1,12 @@
-﻿using UkTransmitter.Core.Contracts;
-using UkTransmitter.EmailModule.Models;
-using UkTransmitter.EmailModule.Contracts;
+﻿using UkTransmitter.EmailService.Models;
+using UkTransmitter.EmailService.Contracts;
 using System;
 using System.IO;
 using System.Collections.Specialized;
 using System.Net.Http;
 using System.Collections.Generic;
 
-namespace UkTransmitter.EmailModule.Workers
+namespace UkTransmitter.EmailService.Workers
 {
 
     /// <summary>

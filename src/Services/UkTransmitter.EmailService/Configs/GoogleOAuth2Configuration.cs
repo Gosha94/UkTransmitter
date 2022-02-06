@@ -1,6 +1,6 @@
 ﻿using Google.Apis.Gmail.v1;
 
-namespace UkTransmitter.BackEnd.Configs.Email
+namespace UkTransmitter.EmailService.Models
 {
     internal static class GoogleOAuth2Configuration
     {

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
+using UkTransmitter.DIContainer.Configuration;
 using UkTransmitter.Wpf.FrontEnd.Infrastructure;
 using UkTransmitter.Wpf.FrontEnd.PageManager.Enum;
 using UkTransmitter.Wpf.FrontEnd.ApplicationPages.Auth;
 using UkTransmitter.Wpf.FrontEnd.ApplicationPages.Graph;
 using UkTransmitter.Wpf.FrontEnd.ApplicationPages.SendData;
-using UkTransmitter.DIContainer.Configuration;
 
 namespace UkTransmitter.Wpf.FrontEnd.PageManager.PageFabric
 {
@@ -36,9 +36,9 @@ namespace UkTransmitter.Wpf.FrontEnd.PageManager.PageFabric
         {
             var preparedVmDictionary = new Dictionary<ApplicationPage, ICustomViewModel>();
 
-            preparedVmDictionary.Add( ApplicationPage.Auth,     new AuthPageViewModel(_dependencyFabric) );
-            preparedVmDictionary.Add( ApplicationPage.SendData, new SendDataPageViewModel() );
-            preparedVmDictionary.Add( ApplicationPage.Graph,    new GraphPageViewModel()    );
+            preparedVmDictionary.Add(ApplicationPage.Auth, new AuthPageViewModel());
+            preparedVmDictionary.Add(ApplicationPage.SendData, new SendDataPageViewModel());
+            preparedVmDictionary.Add(ApplicationPage.Graph, new GraphPageViewModel());
 
             var resultDict = preparedVmDictionary;
 

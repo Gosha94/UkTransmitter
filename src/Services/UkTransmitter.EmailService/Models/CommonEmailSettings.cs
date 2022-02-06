@@ -1,4 +1,4 @@
-﻿namespace UkTransmitter.EmailModule.Models
+﻿namespace UkTransmitter.EmailService.Models
 {
 
     /// <summary>

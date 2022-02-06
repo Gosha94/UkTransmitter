@@ -37,15 +37,13 @@ namespace UkTransmitter.Domain.Workflows
             {
                 _logService.WriteLogAsync($"ERROR_{DateTime.Now}_incorrect auth user data consume from MessageBus");
             }
-            
-            _authService.Authentificate(ref userDto);
 
-            if (userDto.AuthState != AuthState.AuthorizedState)
+            if (!_authService.TryAuthentificate(userDto))
             {
                 _logService.WriteLogAsync($"ERROR_{DateTime.Now}_incorrect name or pass - {userDto.UserName}, Authentificate Failed!");
             }
 
-            _messageBusClient.Publish("SuccessAuth",SerializeUserDataForMessageBus(userDto));
+            _messageBusClient.Publish("SuccessAuth", SerializeUserDataForMessageBus(userDto));
 
         }
 

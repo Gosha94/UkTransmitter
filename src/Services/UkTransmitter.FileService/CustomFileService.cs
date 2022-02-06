@@ -1,15 +1,15 @@
 ﻿using System.Threading.Tasks;
 using UkTransmitter.Core.Contracts;
-using UkTransmitter.FileModule.Legacy;
-using UkTransmitter.Core.ModuleContracts;
+using UkTransmitter.FileService.Legacy;
+using UkTransmitter.Core.Contracts.Services;
 
-namespace UkTransmitter.FileModule.Service
+namespace Services.UkTransmitter.FileService
 {
 
     /// <summary>
     /// Служба по работе с файловой системой
     /// </summary>
-    public sealed class FileService : IFileService
+    public sealed class CustomFileService : IFileService
     {
 
         #region Private Fields
@@ -29,7 +29,7 @@ namespace UkTransmitter.FileModule.Service
 
         #region Constructor
 
-        public FileService
+        public CustomFileService
             (
                 IAttachmentConfiguration attachConfigFromDi,
                 ITemplateConfiguration templateConfigurationFromDi,
@@ -40,22 +40,22 @@ namespace UkTransmitter.FileModule.Service
 
             #region Dependency Injection
 
-            this.AttachmentConfiguration = attachConfigFromDi;
+            AttachmentConfiguration = attachConfigFromDi;
 
-            this.TemplateConfiguration = templateConfigurationFromDi;
+            TemplateConfiguration = templateConfigurationFromDi;
 
-            this.DtoForFillAttachment = dtoForFillAttachmentFromDi;
+            DtoForFillAttachment = dtoForFillAttachmentFromDi;
 
-            this.LogService = logServiceFromDi;
+            LogService = logServiceFromDi;
 
             #endregion
 
-            this._legacyWordSaver = new LegacyWordSaver(this.DtoForFillAttachment, this.TemplateConfiguration, this.AttachmentConfiguration);
+            _legacyWordSaver = new LegacyWordSaver(DtoForFillAttachment, TemplateConfiguration, AttachmentConfiguration);
 
             #region Subscribe On Legacy Word Saver Events
 
-            this._legacyWordSaver.AttachmentAlredyExistEvent += AttachmentExistHandler;
-            this._legacyWordSaver.DirectoryWasCreatedEvent += DirectoryWasCreatedHandler;
+            _legacyWordSaver.AttachmentAlredyExistEvent += AttachmentExistHandler;
+            _legacyWordSaver.DirectoryWasCreatedEvent += DirectoryWasCreatedHandler;
 
             #endregion
 
@@ -80,7 +80,7 @@ namespace UkTransmitter.FileModule.Service
         /// </summary>
         private void AttachmentExistHandler()
         {
-            this.LogService.WriteIntoLogAsync($"Попытка повторно сохранить файл с показаниями за текущий месяц! Имя файла: {DtoForFillAttachment.CurrentDate.Month}{DtoForFillAttachment.CurrentDate.Year}");
+            LogService.WriteLogAsync($"Попытка повторно сохранить файл с показаниями за текущий месяц! Имя файла: {DtoForFillAttachment.CurrentDate.Month}{DtoForFillAttachment.CurrentDate.Year}");
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace UkTransmitter.FileModule.Service
         /// </summary>
         private void DirectoryWasCreatedHandler()
         {
-            this.LogService.WriteIntoLogAsync($"Первая передача показаний в текущем месяце, директория создана: {DtoForFillAttachment.CurrentDate.Month}{DtoForFillAttachment.CurrentDate.Year}");
+            LogService.WriteLog($"Первая передача показаний в текущем месяце, директория создана: {DtoForFillAttachment.CurrentDate.Month}{DtoForFillAttachment.CurrentDate.Year}");
         }
 
         #endregion

@@ -1,6 +1,6 @@
-﻿using UkTransmitter.Core.ModuleContracts;
+﻿using UkTransmitter.Core.Contracts.Services;
 
-namespace UkTransmitter.SpeechModule.Service
+namespace Services.UkTransmitter.SpeechService
 {
 
     /// <summary>
@@ -164,7 +164,6 @@ namespace UkTransmitter.SpeechModule.Service
         //        waveFile = null;
         //    }
         //}
-        public ILogService LogService => throw new System.NotImplementedException();
     }
 
 }

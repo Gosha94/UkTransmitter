@@ -1,6 +1,6 @@
-﻿using UkTransmitter.EmailModule.Contracts;
+﻿using UkTransmitter.EmailService.Contracts;
 
-namespace UkTransmitter.EmailModule.Configs
+namespace UkTransmitter.EmailService.Configs
 {
 
     /// <summary>

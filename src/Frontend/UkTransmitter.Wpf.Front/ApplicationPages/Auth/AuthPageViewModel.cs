@@ -1,5 +1,5 @@
 ﻿using System.Windows.Input;
-using UkTransmitter.Core.ModuleContracts;
+using UkTransmitter.Core.Contracts.Services;
 using UkTransmitter.DIContainer.Configuration;
 using UkTransmitter.Wpf.FrontEnd.Infrastructure;
 
@@ -11,13 +11,13 @@ namespace UkTransmitter.Wpf.FrontEnd.ApplicationPages.Auth
     internal sealed class AuthPageViewModel : BaseViewModel, ICustomViewModel
     {
 
-        private readonly IAuthService   _authService;
-        private readonly ILogService    _logService;
+        private readonly ILogService _logService;
+        private readonly IAuthService _authService;
 
-        public AuthPageViewModel(DependencyFabric _dependencyFabric)
+        public AuthPageViewModel()
         {
-            _authService =  _dependencyFabric.GetAuthService();
-            _logService  =  _dependencyFabric.GetLogService();
+            //_authService = authServFromDi;
+            //_logService = logServFromDi;
         }
 
         private void CallAuthService()

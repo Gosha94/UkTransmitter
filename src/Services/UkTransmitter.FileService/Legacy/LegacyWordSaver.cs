@@ -5,7 +5,7 @@ using System.Reflection;
 using UkTransmitter.Core.Contracts;
 using Word = Microsoft.Office.Interop.Word;
 
-namespace UkTransmitter.FileModule.Legacy
+namespace UkTransmitter.FileService.Legacy
 {
 
     /// <summary>

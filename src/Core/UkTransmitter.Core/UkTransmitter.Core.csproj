@@ -45,7 +45,6 @@
     <Compile Include="CommonModels\DTOs\DataForFillTemplateDto.cs" />
     <Compile Include="CommonModels\DataForUkModel.cs" />
     <Compile Include="CommonModels\DTOs\UserUnderAuthDTO.cs" />
-    <Compile Include="CommonModels\InputUserAuthModel.cs" />
     <Compile Include="CommonModels\ReadableEmailModel.cs" />
     <Compile Include="CommonModels\WriteableMeteringDataModel.cs" />
     <Compile Include="CommonModels\MeteringUserModel.cs" />

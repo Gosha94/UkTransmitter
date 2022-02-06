@@ -1,4 +1,4 @@
-﻿namespace UkTransmitter.EmailModule.Contracts
+﻿namespace UkTransmitter.EmailService.Contracts
 {
 
     /// <summary>

@@ -1,22 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-
 using UkTransmitter.Core.Contracts;
-using UkTransmitter.Core.CommonModels;
-using UkTransmitter.Core.ModuleContracts;
-using UkTransmitter.Core.CommonModels.DTOs;
-
-using UkTransmitter.FileModule.Config;
-using UkTransmitter.FileModule.Service;
-
-using UkTransmitter.LogModule.Service;
-
-using UkTransmitter.EmailModule.Service;
-
-using UkTransmitter.AuthModule.Service;
-
 using UkTransmitter.DataAccess.Repos;
+using UkTransmitter.Core.CommonModels.DTOs;
+using UkTransmitter.Core.Contracts.Services;
 
 namespace UkTransmitter.Console.Wrapper
 {
@@ -29,84 +17,83 @@ namespace UkTransmitter.Console.Wrapper
 
         static void Main(string[] args)
         {
-            _taskList = new List<Task>();
-            _attachmentPath = String.Empty;           
+        //    _taskList = new List<Task>();
+        //    _attachmentPath = String.Empty;           
 
-            // D:\Projects\_NET\WPF\UkTransmitter\src\Frontend\UkTransmitter.Console.Wrapper\bin\Debug\UkTransmitterLogs.txt
-            ILogService testLogService = new CustomNLogService();
+        //    // D:\Projects\_NET\WPF\UkTransmitter\src\Frontend\UkTransmitter.Console.Wrapper\bin\Debug\UkTransmitterLogs.txt
+        //    ILogService testLogService = new CustomNLogService();
 
-            IEmailService testEmailService = new EmailService(testLogService);
+        //    IEmailService testEmailService = new EmailService(testLogService);
 
-            #region UserInput
+        //    #region UserInput
 
-            InputUserAuthModel inputTestModelFromUser = new InputUserAuthModel();
+        //    InputUserAuthModel inputTestModelFromUser = new InputUserAuthModel();
+        //    System.Console.WriteLine("Добро пожаловать в приложение UkTransmitter!");
+        //    System.Console.WriteLine("Введите имя пользователя:");
+        //    inputTestModelFromUser.InsertedLogin = System.Console.ReadLine();
+        //    System.Console.WriteLine("Введите пароль:");
+        //    inputTestModelFromUser.InsertedPwd = System.Console.ReadLine();
 
-            System.Console.WriteLine("Добро пожаловать в приложение UkTransmitter!");
-            System.Console.WriteLine("Введите имя пользователя:");
-            inputTestModelFromUser.InsertedLogin = System.Console.ReadLine();
-            System.Console.WriteLine("Введите пароль:");
-            inputTestModelFromUser.InsertedPwd = System.Console.ReadLine();
+        //    #endregion
 
-            #endregion
+        //    #region Auth Service
 
-            #region Auth Service
+        //    IUsersRepository<InputUserAuthModel> testRepos = new UserAuthRepository();
+        //    IAuthService customAuthService = new AuthService(testRepos, inputTestModelFromUser, testLogService);
+        //    AsyncCheckAuthServiceStub(customAuthService);
 
-            IUsersRepository<InputUserAuthModel> testRepos = new UserAuthRepository();
-            IAuthService customAuthService = new AuthService(testRepos, inputTestModelFromUser, testLogService);
-            AsyncCheckAuthServiceStub(customAuthService);
+        //    #endregion
 
-            #endregion
+        //    if (_isUserCorrect)
+        //    {
 
-            if (_isUserCorrect)
-            {
+        //        #region File Service
 
-                #region File Service
-
-                IAttachmentConfiguration testAttachmentConfig = new AttachmentConfiguration();
-                ITemplateConfiguration testTemplateConfig = new TemplateConfiguration();
+        //        IAttachmentConfiguration testAttachmentConfig = new AttachmentConfiguration();
+        //        ITemplateConfiguration testTemplateConfig = new TemplateConfiguration();
                 
-                List<string> inputMeteringDataFromUser = new List<string>();
+        //        List<string> inputMeteringDataFromUser = new List<string>();
 
-                System.Console.ForegroundColor = ConsoleColor.Gray;
+        //        System.Console.ForegroundColor = ConsoleColor.Gray;
 
-                System.Console.WriteLine("Хол. вода:");
-                inputMeteringDataFromUser.Add(System.Console.ReadLine());                
-                System.Console.WriteLine("Гор. вода:");
-                inputMeteringDataFromUser.Add(System.Console.ReadLine());
-                System.Console.WriteLine("Отопление:");
-                inputMeteringDataFromUser.Add(System.Console.ReadLine());
-                System.Console.WriteLine("Эл-во:");
-                inputMeteringDataFromUser.Add(System.Console.ReadLine());
+        //        System.Console.WriteLine("Хол. вода:");
+        //        inputMeteringDataFromUser.Add(System.Console.ReadLine());                
+        //        System.Console.WriteLine("Гор. вода:");
+        //        inputMeteringDataFromUser.Add(System.Console.ReadLine());
+        //        System.Console.WriteLine("Отопление:");
+        //        inputMeteringDataFromUser.Add(System.Console.ReadLine());
+        //        System.Console.WriteLine("Эл-во:");
+        //        inputMeteringDataFromUser.Add(System.Console.ReadLine());
 
-                IDtoForFillAttachment testAttachmentData = new DataForFillTemplateDto()
-                {
-                    PathToNewAttachmentFile = testAttachmentConfig.PathToAttachmentsCatalog,
-                    ReceivedFromUserMeteringDataArray = inputMeteringDataFromUser.ToArray(),
-                };
+        //        IDtoForFillAttachment testAttachmentData = new DataForFillTemplateDto()
+        //        {
+        //            PathToNewAttachmentFile = testAttachmentConfig.PathToAttachmentsCatalog,
+        //            ReceivedFromUserMeteringDataArray = inputMeteringDataFromUser.ToArray(),
+        //        };
 
-                IFileService testFileService =
-                    new FileService
-                    (
-                        testAttachmentConfig,
-                        testTemplateConfig,
-                        testAttachmentData,
-                        testLogService
-                    );
+        //        IFileService testFileService =
+        //            new FileService
+        //            (
+        //                testAttachmentConfig,
+        //                testTemplateConfig,
+        //                testAttachmentData,
+        //                testLogService
+        //            );
 
-                AsyncCheckFileServiceStub(testFileService);
+        //        AsyncCheckFileServiceStub(testFileService);
 
-                #endregion
+        //        #endregion
 
-                #region Email Service
+        //        #region Email Service
 
-                //AsyncCheckEmailServiceStub(testEmailService);
+        //        //AsyncCheckEmailServiceStub(testEmailService);
 
-                #endregion
-            }
+        //        #endregion
+        //    }
 
-            System.Console.ForegroundColor = ConsoleColor.Gray;
-            System.Console.WriteLine("Для выхода из приложения нажмите Enter...");
-            System.Console.ReadLine();
+        //    System.Console.ForegroundColor = ConsoleColor.Gray;
+        //    System.Console.WriteLine("Для выхода из приложения нажмите Enter...");
+        //    System.Console.ReadLine();
 
         }
 
@@ -114,7 +101,7 @@ namespace UkTransmitter.Console.Wrapper
         private static async void AsyncCheckAuthServiceStub(IAuthService authService)
         {
 
-            _isUserCorrect = authService.IsUserCorrect();
+            _isUserCorrect = authService.TryAuthentificate(new UserUnderAuthDTO());
 
             if (_isUserCorrect)
             {
@@ -133,7 +120,7 @@ namespace UkTransmitter.Console.Wrapper
         {
             await Task.Run(() =>
             {
-                logService.WriteIntoLogAsync("This is test logged message from Wrapper!!!");
+                logService.WriteLogAsync("This is test logged message from Wrapper!!!");
                 System.Console.WriteLine("Log Service Working Correct!");
             });
         }

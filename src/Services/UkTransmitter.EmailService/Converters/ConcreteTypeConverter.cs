@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace UkTransmitter.EmailModule.Converters
+namespace UkTransmitter.EmailService.Converters
 {
     internal sealed class ConcreteTypeConverter<T> : JsonConverter
     {

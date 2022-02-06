@@ -51,7 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\CustomNLogService.cs" />
+    <Compile Include="CustomNLogService.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -1,35 +1,34 @@
 ﻿using System.Threading.Tasks;
-using UkTransmitter.EmailModule.Models;
-using UkTransmitter.EmailModule.Worker;
-using UkTransmitter.EmailModule.Configs;
-using UkTransmitter.EmailModule.Workers;
-using UkTransmitter.Core.ModuleContracts;
-using UkTransmitter.EmailModule.Contracts;
+using UkTransmitter.EmailService.Models;
+using UkTransmitter.EmailService.Configs;
+using UkTransmitter.EmailService.Contracts;
+using UkTransmitter.Core.Contracts.Services;
+using UkTransmitter.EmailService.Workers;
 
-namespace UkTransmitter.EmailModule.Service
+namespace Services.UkTransmitter.EmailService
 {
     /// <summary>
     /// Служба по работе с Email почтой
     /// </summary>
-    public sealed class EmailService : IEmailService
+    public sealed class CustomEmailService : IEmailService
     {
 
         #region Private Fields
         
         private readonly IEmailSettings _emailSettings;
         private readonly IEmailApiSettings _emailApiSettings;
+
         private string _attachmentPath;
+
         #endregion
 
         #region Public Properties
-
-        public ILogService LogService { get; private set; }
 
         #endregion
 
         #region Constructor
 
-        public EmailService
+        public CustomEmailService
         (
             ILogService logServiceFromDi
         )
